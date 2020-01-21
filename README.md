@@ -1,6 +1,9 @@
 # Kakuro
 Single Player logic puzzle game that referred to as a mathematical transliteration of the crossword
 
+## Language of Programming 
+Java and Swing GUI widget toolkit
+
 ## Team Member of PJ-C
 * Bryan Chen
 * Ivan Ivachenko
