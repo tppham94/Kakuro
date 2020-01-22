@@ -16,5 +16,4 @@ Java and Swing GUI widget toolkit
 * Wenbo Zhong 
 
 ## How to play: 
-
 The goal of this game is to fill all empty squares using numbers from 1 to 9. The sum of number must correspond to the sum horizontally and vertically. Numbers in the same block can only be used once and not more than that. 
