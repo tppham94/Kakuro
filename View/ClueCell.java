@@ -38,7 +38,7 @@ public class ClueCell extends JPanel {
 	}
 
 	/**
-	 * this methods add components to the J-panel components are being aligned
+	 * This methods add components to the J-panel components are being aligned
 	 */
 	public void addUIComponentsToPanel() {
 
@@ -58,9 +58,10 @@ public class ClueCell extends JPanel {
 		this.add(downLabel);
 
 	}
-/**
- * This method sets the visual configuration of J-panel and other UI components within J-panel 
- */
+	
+	/**
+	 * This method sets the visual layout of J-panel and other UI components within J-panel 
+	 */
 	public void setVisualConfiguration() {
 		rightLabel.setHorizontalAlignment(JLabel.CENTER);
 		rightLabel.setForeground(Color.white);

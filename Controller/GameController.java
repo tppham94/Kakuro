@@ -15,15 +15,18 @@ import View.TextCell;
 public class GameController implements ActionListener, FocusListener {
 
 	JComponent[] gameComponent;
-	
-	//This action is performed when validation button is clicked 
+
+	// This action is performed when validation button is clicked
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		boolean flag = false;
 		for (int i = 0; i < gameComponent.length; i++) {
+
 			if (gameComponent[i] instanceof TextCell) {
+
 				TextCell textCell = (TextCell) gameComponent[i];
-				if (textCell.getText().equals(textCell.getExpectedValue())) {
+
+				if (textCell.validateText(textCell.getText())) {
 					textCell.setBackground(Color.GREEN);
 					continue;
 				} else {
@@ -32,11 +35,15 @@ public class GameController implements ActionListener, FocusListener {
 				}
 			}
 		}
+
 		if (flag == true) {
+
 			((JButton) e.getSource()).setBackground(Color.RED);
 			JOptionPane.showMessageDialog(null, "Try Again!");
 			((JButton) e.getSource()).setBackground(new JButton().getBackground());
+
 		} else {
+
 			((JButton) e.getSource()).setBackground(Color.GREEN);
 			JOptionPane.showMessageDialog(null, "Well Played!");
 		}
@@ -73,7 +80,7 @@ public class GameController implements ActionListener, FocusListener {
 			promptValidationError(e, "Value should be a digit.");
 			return;
 		}
-		//Validation between 1-9
+		// Validation between 1-9
 		if (value < 1 || value > 9) {
 			promptValidationError(e, "Value should be between 1 and 9.");
 			return;
@@ -82,9 +89,12 @@ public class GameController implements ActionListener, FocusListener {
 
 	// Displays/Pop the error message
 	private void promptValidationError(FocusEvent e, String errorMessage) {
+
 		TextCell cell = ((TextCell) e.getSource());
 		cell.setBackground(Color.red);
+
 		JOptionPane.showMessageDialog(null, errorMessage);
+
 		cell.setBackground(Color.white);
 		cell.setText("");
 	}

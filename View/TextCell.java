@@ -12,16 +12,16 @@ public class TextCell extends JTextField {
 
 	private String expectedValue;
 
+	//Constructor
 	public TextCell(GameController gameController, String expectedValue) {
 		this.expectedValue = expectedValue;
 		this.addFocusListener(gameController);
 		setVisualConfiguration();
 	}
 
-	public String getExpectedValue() {
-		return expectedValue;
-	}
-
+	/**
+	 * This method sets the visual Layout of the TextCell
+	 */
 	public void setVisualConfiguration() {
 		super.setOpaque(true);
 		super.setBackground(Color.WHITE);
@@ -30,7 +30,19 @@ public class TextCell extends JTextField {
 		this.setHorizontalAlignment(JTextField.CENTER);
 	}
 
-	public char[] getvalue() {
-		return null;
+	/**
+	 * This method Validates if the value entered by user matches the expected value
+	 * @param userInputValue
+	 * @return
+	 */
+	public boolean validateText(String userInputValue) {
+		return expectedValue.equals(userInputValue);
 	}
+	
+	// Getters and Setters
+	
+	public String getExpectedValue() {
+		return expectedValue;
+	}
+
 }
