@@ -1,12 +1,10 @@
 package kakuro;
 
-
 import javax.swing.SwingUtilities;
 
 import View.Board;
 
 public class GameDriver {
-
 	 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

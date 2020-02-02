@@ -10,7 +10,6 @@ public class ClueCellModel {
 	 * @param downLabelValue
 	 */
 	public ClueCellModel(String rightLabelValue, String downLabelValue) {
-		super();
 		this.rightLabelValue = rightLabelValue;
 		this.downLabelValue = downLabelValue;
 	}
@@ -31,5 +30,4 @@ public class ClueCellModel {
 	public void setDownLabelValue(String downLabelValue) {
 		this.downLabelValue = downLabelValue;
 	}
-
 }

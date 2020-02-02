@@ -1,27 +1,28 @@
 package View;
 
 import java.awt.Color;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Controller.GameController;
 
-public class TextCell extends JTextField implements Square {
+@SuppressWarnings("serial")
+public class TextCell extends JTextField {
 
-	private String cellValue;
+	private String expectedValue;
 
-	public TextCell(GameController gameController) {
-
+	public TextCell(GameController gameController, String expectedValue) {
+		this.expectedValue = expectedValue;
 		this.addFocusListener(gameController);
-		draw();
+		setVisualConfiguration();
 	}
 
-	@Override
-	public void draw() {
+	public String getExpectedValue() {
+		return expectedValue;
+	}
+
+	public void setVisualConfiguration() {
 		super.setOpaque(true);
 		super.setBackground(Color.WHITE);
 		super.setForeground(Color.BLACK);
