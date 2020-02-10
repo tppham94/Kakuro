@@ -20,7 +20,7 @@ public class GameController implements ActionListener, FocusListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (validateGame(e)) {
+		if (validateGame()) {
 
 			((JButton) e.getSource()).setBackground(Color.GREEN);
 			JOptionPane.showMessageDialog(null, "Well Played!");
@@ -124,10 +124,10 @@ public class GameController implements ActionListener, FocusListener {
 	 * This method validates the game by making sure all cells value matches the
 	 * expected value
 	 * 
-	 * @param ActionEvent
+	 * @param 
 	 * @return true if the game is validated. False when game is not validated.
 	 */
-	public boolean validateGame(ActionEvent e) {
+	public boolean validateGame() {
 
 		boolean cellValidation = true;
 
