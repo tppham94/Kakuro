@@ -10,11 +10,23 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
+import Model.CellModel;
+import View.CellView;
 import View.TextCell;
 
 public class GameController implements ActionListener, FocusListener {
-
+	
+	CellModel model1 = new CellModel ();
+	CellView view1 = model1.getCellView();
+	
 	JComponent[] gameComponents;
+	
+	
+	
+	public GameController () {
+		view1.setController(this);
+	}
+	
 
 	// This action is performed when validation button is clicked
 	@Override
@@ -159,5 +171,10 @@ public class GameController implements ActionListener, FocusListener {
 
 		cell.setBackground(Color.white);
 		cell.setText("");
+	}
+	
+	
+	public void sendToCellModel(String str) { //to update the model based on the views event method triggered in view class
+		model1.update(str);
 	}
 }
