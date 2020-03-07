@@ -23,7 +23,7 @@ public class CellModel {
 			userNumber = Integer.parseInt(str);
 			setViewsText();
 			if(isSignleDigit(str)) {
-				if(isCorrectNumber(userNumber,correctNumber)) {
+				if(isCorrectNumber(userNumber)) {
 					setCorrect(true);
 				}
 				else {
@@ -49,8 +49,8 @@ public class CellModel {
 		else return false;
 	}
 	
-	public boolean isCorrectNumber (int userValue, int correctValue) { //method to check if it is a correct number
-		if (userValue==correctValue) {
+	public boolean isCorrectNumber (int userValue) { //method to check if it is a correct number
+		if (userValue==correctNumber) {
 			setCorrect(true);
 			return true;
 			}

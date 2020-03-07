@@ -7,11 +7,14 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import Controller.GameController;
+import Controller.TrainingController;
 import Model.ClueCellModel;
 
 public class Board {
 
 	GameController controller;
+	TrainingController trainingController;
+	
 	JButton validateButton;
 	JComponent[] gameComponents;
 	JFrame jf;
@@ -21,6 +24,21 @@ public class Board {
 		controller = new GameController();
 		jf = new JFrame("Kakuro");
 		gameComponents = new JComponent[100];
+		
+		initializeGameComponents();
+		// Binding components with the controller
+		controller.bindTextCells(gameComponents);
+		
+		addComponentsToJFrame();
+		setVisualLayout();
+		addValidateButton();
+		validateButton.addActionListener(controller);
+	}
+	
+	public Board(int size) {
+		controller = new GameController();
+		jf = new JFrame("Kakuro");
+		gameComponents = new JComponent[size];
 		
 		initializeGameComponents();
 		// Binding components with the controller
@@ -44,6 +62,15 @@ public class Board {
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setSize(600, 600);
 		jf.setLayout(new GridLayout(11, 10));
+		jf.setVisible(true);
+
+	}
+	
+	// Adding visual layout to jframe
+	private void setVisualLayout(int sizex, int sizey) {
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.setSize(600, 600);
+		jf.setLayout(new GridLayout(sizex,sizey));
 		jf.setVisible(true);
 
 	}
