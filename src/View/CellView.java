@@ -1,7 +1,7 @@
 package View;
 
 import java.awt.Color;
-
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -12,15 +12,43 @@ import javax.swing.text.Document;
 
 import Controller.GameController;
 import Model.CellModel;
+import Model.WordModel;
 
 public class CellView extends JTextField {
 	int number;
 	boolean valid;
 	GameController gameController;
-	
+	ArrayList <CellModel> observerList = new ArrayList<CellModel> (1);
+
 	public CellView () {
 		
 		
+		this.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) { //sends text to controller on  inuput
+				// TODO Auto-generated method stub
+				sendToController();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {//sends text to controller on  inuput
+				// TODO Auto-generated method stub
+				sendToController();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {//sends text to controller on  inuput
+				// TODO Auto-generated method stub
+				sendToController();
+			}
+			
+		});
+	}
+	
+	public CellView (GameController gbc) { //cellView with controller
+		this.gameController = gbc;
 		
 		this.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -46,8 +74,9 @@ public class CellView extends JTextField {
 		});
 	}
 	
-	public void sendToController() {
-		gameController.sendToCellModel(this.getText());
+	
+	public void sendToController() { //send the number as a string to the controller which will send the updated number to its observers
+		gameController.sendToCellModel(this.getText(), this);
 	}
 
 	
@@ -66,6 +95,10 @@ public class CellView extends JTextField {
 	
 	public void setValid (boolean valid) {
 		this.valid = valid;
+	}
+	
+	public void setValidTraining (boolean valid) {
+		this.valid = valid;
 		setBackgroundColor();
 	}
 	
@@ -79,4 +112,14 @@ public class CellView extends JTextField {
 		}
 		else this.setBackground(Color.RED);
 	}
+	
+	public void addModelToObserverList (CellModel cellModel) {
+		observerList.add(cellModel);
+	}
+	
+	
+	public ArrayList<CellModel> getObserverList() {
+		return observerList;
+	}
+	
 }

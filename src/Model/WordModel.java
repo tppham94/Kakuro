@@ -3,13 +3,16 @@ package Model;
 public class WordModel {
 
 	CellModel CellModelArray[];
+	GameBoardModel gbm;
 	int correctTotalForWord;
-	
+	boolean wordIsValid;
+
 	public WordModel () { //def constructor
+		gbm = new GameBoardModel();
 		CellModelArray = new CellModel [10];
 	}
 
-	public WordModel (int size) { //constructor with a set for of text elements for htat word
+	public WordModel (int size) { //constructor with a set for of text elements for that word
 		CellModelArray = new CellModel [size];
 	}
 	
@@ -33,8 +36,9 @@ public class WordModel {
 	public void updateValueAtIndex(int index, String number) {  //mutator to set the value entered by user in the cellModel
 		CellModelArray [index].update(number);
 	}
+	
 	public boolean validateWord () { //method to validate the whole word
-		boolean wordIsValid= true;
+		wordIsValid= true;
 		for (int i=0;i<CellModelArray.length;i++) {
 			if (!CellModelArray[i].getIsCorrect()) {
 				wordIsValid = false;
@@ -50,6 +54,14 @@ public class WordModel {
 
 	public void setTotalForWord(int totalForWord) { // mutator for word correctness
 		this.correctTotalForWord = totalForWord;
+	}
+	
+	public boolean isWordIsValid() {
+		return wordIsValid;
+	}
+
+	public void setWordIsValid(boolean wordIsValid) {
+		this.wordIsValid = wordIsValid;
 	}
 	
 }

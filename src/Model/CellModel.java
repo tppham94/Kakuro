@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 import Controller.GameController;
 import View.CellView;
 
@@ -8,7 +10,8 @@ public class CellModel {
 	int userNumber;
 	boolean isCorrect;
 	CellView view = new CellView();
-	
+	ArrayList <WordModel> wordObserverlist = new ArrayList <WordModel> (1);
+
 	public CellModel() {
 		isCorrect = false;
 	}
@@ -16,6 +19,21 @@ public class CellModel {
 	public CellModel(int correct) {
 		correctNumber = correct;
 		isCorrect = false;
+	}
+	
+	public CellModel(int correct, WordModel wordModel1) {
+		correctNumber = correct;
+		isCorrect = false;
+		
+		wordObserverlist.add(wordModel1);
+	}
+	
+	public CellModel(int correct, WordModel wordModel1,WordModel wordModel2 ) {
+		correctNumber = correct;
+		isCorrect = false;
+		
+		wordObserverlist.add(wordModel1);
+		wordObserverlist.add(wordModel2);
 	}
 	
 	public boolean update(String str) { //method to update model which will be used by controller
@@ -65,6 +83,10 @@ public class CellModel {
 		isCorrect = correct;
 	}
 	
+	public boolean getIsCorrect () { //setter for correct
+		return isCorrect;
+	}
+	
 	public CellView getCellView () { //method to return the view, this will be used by the controller to have the same reference
 		return view;
 	}
@@ -74,8 +96,16 @@ public class CellModel {
 		setViewsValidity();
 	}
 	
+	public void setViewsValidityTraining () { //method to update the views background coller
+		view.setValid(isCorrect);
+	}
+	
 	public void setViewsValidity () { //method to update the views background coller
 		view.setValid(isCorrect);
+	}
+	
+	public ArrayList<WordModel> getWordObserverlist() {
+		return wordObserverlist;
 	}
 	
 }

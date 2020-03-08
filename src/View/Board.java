@@ -66,7 +66,7 @@ public class Board {
 
 	}
 	
-	// Adding visual layout to jframe
+	// Adding visual layout to jframe with size as param
 	private void setVisualLayout(int sizex, int sizey) {
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setSize(600, 600);

@@ -1,14 +1,19 @@
 package Model;
 
+import View.ClueCell;
+
 public class ClueCellModel {
 
 	private String rightLabelValue;
 	private String downLabelValue;
+	private ClueCell clueCellView;
 	
-	/**
-	 * @param rightLabelValue
-	 * @param downLabelValue
-	 */
+	public ClueCellModel(ClueCell clueCellView) { //blank cell?
+		this.rightLabelValue = "";
+		this.downLabelValue = "";
+		this.clueCellView = clueCellView;
+	}
+	
 	public ClueCellModel(String rightLabelValue, String downLabelValue) {
 		this.rightLabelValue = rightLabelValue;
 		this.downLabelValue = downLabelValue;
@@ -29,5 +34,13 @@ public class ClueCellModel {
 
 	public void setDownLabelValue(String downLabelValue) {
 		this.downLabelValue = downLabelValue;
+	}
+	
+	public ClueCell getClueCellView() {
+		return clueCellView;
+	}
+
+	public void setClueCellView(ClueCell clueCellView) {
+		this.clueCellView = clueCellView;
 	}
 }
