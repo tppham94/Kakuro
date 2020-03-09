@@ -1,22 +1,35 @@
 package Model;
 
-public class wordWrapper {
+public class WordWrapper {
 	WordModel wordModel;
 	BlankWordModel blankWordModel;
 
-	wordWrapper () {
+	public WordWrapper () {
 		wordModel = new WordModel ();
 		blankWordModel = new BlankWordModel ();
 	}
 	
-	wordWrapper (int regSize, int blankSize) {
+	public WordWrapper (int regSize, int blankSize) {
 		wordModel = new WordModel (regSize);
 		blankWordModel = new BlankWordModel (blankSize);
 	}
 	
-	wordWrapper (int regSize, int totalWordModel, int blankSize) {
+	public WordWrapper (int regSize, int totalWordModel, int blankSize) {
 		wordModel = new WordModel (regSize, totalWordModel);
 		blankWordModel = new BlankWordModel (blankSize);
+	}
+	
+	public WordWrapper (BlankWordModel blankWordModel) {
+		this.blankWordModel = blankWordModel;
+	}
+	
+	public WordWrapper (WordModel wordModel) {
+		this.wordModel = wordModel;
+	}
+	
+	public WordWrapper (WordModel wordModel, BlankWordModel blankWordModel) {
+		this.wordModel = wordModel;
+		this.blankWordModel = blankWordModel;
 	}
 	
 	public WordModel getWordModel() {

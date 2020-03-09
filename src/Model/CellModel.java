@@ -78,7 +78,7 @@ public class CellModel {
 			if(isSignleDigit(str)) {
 				if(isCorrectNumber(userNumber)) {
 					setCorrect(true);
-					validationSentnce = "and that number is Correct";
+					validationSentnce = " and that number is Correct";
 				}
 				else {
 					validationSentnce = " but that number is InCorrect";

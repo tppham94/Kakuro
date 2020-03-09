@@ -3,12 +3,10 @@ package Model;
 public class WordModel {
 
 	CellModel CellModelArray[];
-	GameBoardModel gbm;
 	int correctTotalForWord;
 	boolean wordIsValid;
 
 	public WordModel () { //def constructor
-		gbm = new GameBoardModel();
 		CellModelArray = new CellModel [10];
 	}
 
@@ -37,7 +35,7 @@ public class WordModel {
 		CellModelArray [index].update(number);
 	}
 	
-	public String validateWord () { //method to validate the whole word
+	public String validateWord () { //method to validate the whole word. It will return the reason why it is incorrect if incorrect.
 		wordIsValid= true;
 		for (int i=0;i<CellModelArray.length;i++) {
 			if (!CellModelArray[i].getIsCorrect()) {

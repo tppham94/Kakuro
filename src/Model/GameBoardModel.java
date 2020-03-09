@@ -3,20 +3,20 @@ package Model;
 import View.ValidateView;
 
 public class GameBoardModel {
-	wordWrapper [] wordModelArray;
+	WordWrapper [] wordModelArray;
 	boolean valid;
 	String whatNeedsToBeFixed; 
 
 	ValidateView validateView; // the text that says valid invalid or what errors it has
 	
 	public GameBoardModel () { //def constructor with 100 word containers
-		wordModelArray = new wordWrapper [100];
+		wordModelArray = new WordWrapper [100];
 		valid=false;
 		validateView = new ValidateView();
 	}
 	
 	public GameBoardModel (int size) { //boardgamewith size initialized by user
-		wordModelArray = new wordWrapper[size];
+		wordModelArray = new WordWrapper[size];
 		valid=false;
 		validateView = new ValidateView();
 	}
@@ -49,6 +49,14 @@ public class GameBoardModel {
 			}
 		}
 		return valid;
+	}
+	
+	public void setWordModelAtIndex (int index, WordModel wm) {
+		wordModelArray[index] = new WordWrapper (wm);
+	}
+	
+	public WordWrapper getWordModelAtIndex (int index) {
+		return wordModelArray[index];
 	}
 	
 	public String getWhatNeedsToBeFixed() { //accessor for the message "printed" to the user in the validateView
