@@ -68,7 +68,9 @@ public class CellModel {
 		}
 	}
 	
-	public String updateTraining(String str) { //method to update model which will be used by controller
+	//method to update model which will be used by controller it returns a string which will be used by the training controller
+	//and will show why the precise reason is that the number is wrong
+	public String updateTraining(String str) { 
 		String validationSentnce= "";
 		if (isDigit(str)) {
 			userNumber = Integer.parseInt(str);

@@ -51,19 +51,11 @@ public class GameBoardModel {
 		return valid;
 	}
 	
-	public String getWhatNeedsToBeFixed() {
+	public String getWhatNeedsToBeFixed() { //accessor for the message "printed" to the user in the validateView
 		return whatNeedsToBeFixed;
 	}
 
-	public void setWhatNeedsToBeFixed(String whatNeedsToBeFixed) {
+	public void setWhatNeedsToBeFixed(String whatNeedsToBeFixed) { //this will be the message "printed" to the user in the validateView
 		this.whatNeedsToBeFixed = whatNeedsToBeFixed;
 	}	
-//	public boolean updateValidAtBoolArrayAtIndex (int index) { // method to update a single word container
-//		boolArray[index] = (wordModelArray[index].getWordModel().validateWord());
-//		return boolArray[index];
-//	}
-	
-//	public void changeCellNumberAtIndex (int word, int index, String number) {
-//		wordModelArray[word].getWordModel().updateValueAtIndex(index, number);
-//	}
 }
