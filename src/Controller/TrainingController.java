@@ -1,25 +1,35 @@
 package Controller;
 
-import Model.WordContainerModel;
+import javax.swing.JComponent;
+
+import Model.CellModel;
+import Model.GameBoardModel;
 import Model.WordModel;
+import View.CellView;
 
 public class TrainingController {
 
-	WordContainerModel wordContainer[];
+	CellModel model1 = new CellModel ();
+	CellView view1 = model1.getCellView();
+	GameBoardModel gbModel = new GameBoardModel ();
 	
-	public TrainingController (int size) { //we will need a predefined amount of word containers
-	wordContainer = new WordContainerModel [size];
-		for(int i=0;i<wordContainer.length;i++) {
-			
-		}
+	
+	JComponent[] gameComponents;
+	
+	
+	
+	public TrainingController () {
+		view1.setController(this);
 	}
 	
-	public void notifyAll(int index, String userNumber) {
-		wordContainer [index].updateValueDownAtIndex(index, userNumber);
-	}
-	
-	public void setContainer(int index, WordModel wordModel, String direction) {
-		if(direction.equals("down")) wordContainer[index].setWordModelDown(wordModel);
-		else wordContainer[index].setWordModelRight(wordModel);
+	public void sendToCellModel(String number, CellView cv) { //to update the model based on the views event method triggered in view class
+		
+		cv.getObserverList().forEach(object -> { //upddates all cellModels that are references to the cell view
+			gbModel.setWhatNeedsToBeFixed(object.updateTraining(number)); // will set the string of what needs to be fixed
+			object.getWordObserverlist().forEach(wordObj -> gbModel.setWhatNeedsToBeFixed(gbModel.getWhatNeedsToBeFixed()+" "+wordObj.validateWord())); //updates word validity and return why its not invalid
+			});
+		gbModel.updateTraining();
 	}
 }
+
+

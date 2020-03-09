@@ -11,7 +11,8 @@ public class CellModel {
 	boolean isCorrect;
 	CellView view = new CellView();
 	ArrayList <WordModel> wordObserverlist = new ArrayList <WordModel> (1);
-
+	
+	
 	public CellModel() {
 		isCorrect = false;
 	}
@@ -36,6 +37,16 @@ public class CellModel {
 		wordObserverlist.add(wordModel2);
 	}
 	
+	
+	public CellModel(int correct, WordModel wordModel1,WordModel wordModel2, CellView  cv) {
+		correctNumber = correct;
+		isCorrect = false;
+		view= cv;
+		
+		wordObserverlist.add(wordModel1);
+		wordObserverlist.add(wordModel2);
+	}
+	
 	public boolean update(String str) { //method to update model which will be used by controller
 		if (isDigit(str)) {
 			userNumber = Integer.parseInt(str);
@@ -54,6 +65,31 @@ public class CellModel {
 			isCorrect=false;
 			setViewsValidity();
 			return false;
+		}
+	}
+	
+	public String updateTraining(String str) { //method to update model which will be used by controller
+		String validationSentnce= "";
+		if (isDigit(str)) {
+			userNumber = Integer.parseInt(str);
+			setViewsTextValidate();
+			if(isSignleDigit(str)) {
+				if(isCorrectNumber(userNumber)) {
+					setCorrect(true);
+					validationSentnce = "and that number is Correct";
+				}
+				else {
+					validationSentnce = " but that number is InCorrect";
+
+					setCorrect(false);
+				}
+			} 
+			return "Success at updating number"+validationSentnce;
+		}
+		else {
+			isCorrect=false;
+			setViewsValidity();
+			return "Sorry not a number in between 1-9";
 		}
 	}
 	
@@ -96,8 +132,13 @@ public class CellModel {
 		setViewsValidity();
 	}
 	
+	public void setViewsTextValidate () { //used to update the view on the new number and color
+		view.setTextField(userNumber);
+		setViewsValidityTraining();
+	}
+	
 	public void setViewsValidityTraining () { //method to update the views background coller
-		view.setValid(isCorrect);
+		view.setValidTraining(isCorrect);
 	}
 	
 	public void setViewsValidity () { //method to update the views background coller

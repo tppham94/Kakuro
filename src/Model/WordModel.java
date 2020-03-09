@@ -37,15 +37,21 @@ public class WordModel {
 		CellModelArray [index].update(number);
 	}
 	
-	public boolean validateWord () { //method to validate the whole word
+	public String validateWord () { //method to validate the whole word
 		wordIsValid= true;
 		for (int i=0;i<CellModelArray.length;i++) {
 			if (!CellModelArray[i].getIsCorrect()) {
 				wordIsValid = false;
 				break;
 			}
+			for(int j=0; j< CellModelArray.length; j++) {
+				if(CellModelArray[i]== CellModelArray[j])
+					wordIsValid = false;
+					break;
+			}
 		}
-		return wordIsValid;
+		if(wordIsValid) return "That word is valid";
+		else return "That word is not valid. Make sure all numbers are correct and nothing is repeated";
 	}
 	
 	public int getTotalForWord() { //accessor for word correctness

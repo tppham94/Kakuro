@@ -11,6 +11,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
 import Controller.GameController;
+import Controller.TrainingController;
 import Model.CellModel;
 import Model.WordModel;
 
@@ -18,6 +19,7 @@ public class CellView extends JTextField {
 	int number;
 	boolean valid;
 	GameController gameController;
+	TrainingController trainingController;
 	ArrayList <CellModel> observerList = new ArrayList<CellModel> (1);
 
 	public CellView () {
@@ -74,6 +76,33 @@ public class CellView extends JTextField {
 		});
 	}
 	
+	public CellView (TrainingController tc) { //cellView with controller
+		this.trainingController = tc;
+		
+		this.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+			}
+			
+		});
+	}
+	
 	
 	public void sendToController() { //send the number as a string to the controller which will send the updated number to its observers
 		gameController.sendToCellModel(this.getText(), this);
@@ -104,6 +133,10 @@ public class CellView extends JTextField {
 	
 	public void setController (GameController gameController) {
 		this.gameController = gameController;
+	}
+	
+	public void setController (TrainingController tc) {
+		this.trainingController = tc;
 	}
 	
 	public void setBackgroundColor () {
