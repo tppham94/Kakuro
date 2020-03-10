@@ -4,6 +4,8 @@ public class WordModel {
 
 	CellModel CellModelArray[];
 	int correctTotalForWord;
+	int startingIndex;
+
 	boolean wordIsValid;
 
 	public WordModel () { //def constructor
@@ -29,6 +31,10 @@ public class WordModel {
 	
 	public void setCellModelArrayAtIndex(int index, int correctNumber) { //mutator to create a new cellModel object
 		CellModelArray [index] = new CellModel (correctNumber);
+	}
+	
+	public void setCellModelArrayAtIndex(int index, CellModel cm) { //mutator to create a new cellModel object
+		CellModelArray [index] = cm;
 	}
 	
 	public void updateValueAtIndex(int index, String number) {  //mutator to set the value entered by user in the cellModel
@@ -66,6 +72,14 @@ public class WordModel {
 
 	public void setWordIsValid(boolean wordIsValid) {
 		this.wordIsValid = wordIsValid;
+	}
+	
+	public int getStartingIndex() {
+		return startingIndex;
+	}
+
+	public void setStartingIndex(int startingIndex) {
+		this.startingIndex = startingIndex;
 	}
 	
 }

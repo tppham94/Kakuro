@@ -147,6 +147,11 @@ public class CellModel {
 		view.setValid(isCorrect);
 	}
 	
+	public void addToObserverList (WordModel wm) {
+		this.wordObserverlist.add(wm);
+	}
+	
+	
 	public ArrayList<WordModel> getWordObserverlist() {
 		return wordObserverlist;
 	}
