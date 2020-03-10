@@ -19,8 +19,7 @@ public class CellView extends JTextField {
 	int number;
 	boolean valid;
 	GameController gameController;
-	TrainingController trainingController;
-	ArrayList <CellModel> observerList = new ArrayList<CellModel> (1);
+	CellModel observerList;
 
 	public CellView () {
 		
@@ -77,7 +76,7 @@ public class CellView extends JTextField {
 	}
 	
 	public CellView (TrainingController tc) { //cellView with controller
-		this.trainingController = tc;
+		this.gameController = tc;
 		
 		this.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -107,7 +106,6 @@ public class CellView extends JTextField {
 	public void sendToController() { //send the number as a string to the controller which will send the updated number to its observers
 		gameController.sendToCellModel(this.getText(), this);
 	}
-
 	
 	public void setVisualConfiguration() {
 		super.setOpaque(true);
@@ -136,7 +134,7 @@ public class CellView extends JTextField {
 	}
 	
 	public void setController (TrainingController tc) {
-		this.trainingController = tc;
+		this.gameController = tc;
 	}
 	
 	public void setBackgroundColor () {
@@ -147,11 +145,11 @@ public class CellView extends JTextField {
 	}
 	
 	public void addModelToObserverList (CellModel cellModel) {
-		observerList.add(cellModel);
+		observerList = cellModel;
 	}
 	
 	
-	public ArrayList<CellModel> getObserverList() {
+	public CellModel getObserverList() {
 		return observerList;
 	}
 	
