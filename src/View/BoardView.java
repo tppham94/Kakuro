@@ -1,16 +1,24 @@
 package View;
 
 import java.awt.GridLayout;
+import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import Controller.GameController;
 import Model.ClueCellModel;
+import Model.WorldModel;
+import Model.BlankModel;
 
 public class BoardView {
 
@@ -23,14 +31,73 @@ public class BoardView {
 	public BoardView() {
 		controller = new GameController();
 		jf = new JFrame("Kakuro");
-		gameComponents = new JComponent[100];
 		
-		initializeGameComponents();
+		 Object obj = new JSONParser().parse(new FileReader("game1.json"));  //create JSON object to parse input JSON file
+         
+	     // typecasting obj to JSONObject 
+	     JSONObject kakuro = (JSONObject) obj; 
+	          
+	    //getting game size element to create the variables that will created the correct board size for the game. 
+	    long gameSize = (long) kakuro.get("size");
+	    int realSize = (int) (gameSize*gameSize);
+	    int actualRows = (int) (gameSize+1);
+	    int actualCols = (int) (gameSize);
+		
+	    // array for the cells to be added to our game board    
+		gameComponents = new JComponent[realSize];
+		
+		//create the array for the cells to populate the correct cell values
+		JSONArray cellsArray = (JSONArray) kakuro.get("cells");
+        Iterator<String> iterator = cellsArray.iterator();
+        int indexVal = 0;
+        while(iterator.hasNext()) {
+            if (!iterator.next().contentEquals("0")) // check to only populate the Cellviews containing the correct answer
+            {	gameComponents[indexValue] = new CellView(new CellModel(iterator.next(), CellView()));   
+            }	
+            indexVal++;
+        }
+		
+        
+        JSONArray wordsArray = (JSONArray) jo.get("words"); // create JSON array for the words 
+        
+        Iterator itr2 = wordsArray.iterator();
+       
+        while(itr2.hasNext()) { // loop through the JSON words array to get the value of the elements
+        	JSONObject innerObj = (JSONObject) itr2.next();
+        	long lrow = (long) innerObj.get("row");
+        	long lcol = (long) innerObj.get("col");
+        	JSONArray wordArray = (JSONArray) innerObj.get("cell_indices"); 
+        	int wSize = wordArray.size();
+        	long totalForWord = (long) innerObj.get("sum");
+        	
+        	if (gameComponents[(int) lrow * realSize] == null) //check if component already has clueView assigned.
+        	{
+        		if ((boolean) innerObj.get("vertical").equals("false")) //check if right or down direction of clue
+        		{
+        			gameComponents[(int) lrow * realSize] = new ClueView(new ClueCellModel(Long.toString(totalForWord), ""));
+        		}
+        		else
+        		{
+        			gameComponents[(int) lrow * realSize] = new ClueView(new ClueCellModel("",Long.toString(totalForWord)));
+        		}
+        	}
+        	new WorldModel((int) wSize, (int) totalForWord, ((int) lrow * realSize) + (int) lcol);
+        }
+
+        for (int i = 0; i < gameComponents.length; i++) // go get the null components and assign a blank cell to it
+        {	
+			if(gameComponents[i] == null)
+			{
+				gameComponents[i] = new BlankView=(new BlankModel());
+			}
+		}
+        
+		//initializeGameComponents(); not needed anymore
 		// Binding components with the controller
 		controller.bindTextCells(gameComponents);
 		
 		addComponentsToJFrame();
-		setVisualLayout();
+		setVisualLayout(actualRows, actualCols);
 		addValidateButton();
 		validateButton.addActionListener(controller);
 
@@ -46,10 +113,10 @@ public class BoardView {
 	}
 
 	// Adding visual layout to jframe
-	private void setVisualLayout() {
+	private void setVisualLayout(int actualRows, int actualCols) {
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setSize(600, 600);
-		jf.setLayout(new GridLayout(11, 10));
+		jf.setLayout(new GridLayout(actualRows, actualCols));
 		jf.setVisible(true);
 
 	}
@@ -61,175 +128,7 @@ public class BoardView {
 		}
 	}
 
-	/* This methods initializes the game components
-	 * and adds it to the gameComponents array
-	 * * *   TODO: to be enhanced in upcoming iteration * * *
-	 */
-	private void initializeGameComponents() {
 
-			try {
-			String[] kakuroLine = new String[100];
-			String[] kakuroList2 = new String[100];
-			int j = 0;
-			List<String> lines = Files.readAllLines(Paths.get("C:\\Users\\mario.lapadula\\Documents\\javaExample1.txt"));
-			for (String line : lines) {
-				kakuroLine = line.split(",");
-				for(String val : kakuroLine) {
-					kakuroList2[j] = val;
-					j++;
-				}
-				
-			}
-			for(int i = 0;i < kakuroList2.length;i++) {
-				char cellVal = kakuroList2[i].charAt(0);
-				int len = kakuroList2[i].length();
-				int barPos = kakuroList2[i].indexOf("|"); 
-				String cellType = "";
-				String element1 = "";
-				String element2 = "";
-				
-				if (cellVal == 'C' && barPos > 1 && barPos == len-1 ) {
-					element1 = kakuroList2[i].substring(1,barPos);
-					element2 = "";
-				}
-				else if (cellVal == 'C' && barPos > 1 && barPos < len-1 ) {
-					element1 = kakuroList2[i].substring(1,barPos);
-					element2 = kakuroList2[i].substring(barPos+1,len);
-				}
-				else if (cellVal == 'C' && barPos == 1) {
-					element1 = "";
-					element2 = kakuroList2[i].substring(barPos+1,len);
-				}
-				else if (cellVal == 'T') {
-					element1 = kakuroList2[i].substring(1,len);
-					
-				}
-				switch(cellVal) {
-				case 'B':
-					cellType = "Blank";
-					gameComponents[i] = new ClueCell(new ClueCellModel("", ""));
-					break;
-				case 'T':
-					cellType = "Text";
-					gameComponents[i] = new TextCell(controller, element1);
-					break;
-				case 'C':
-					cellType = "Clue";
-					gameComponents[i] = new ClueCell(new ClueCellModel(element1, element2));
-					break;
-				default :
-					cellType = "fault";
-					break;
-				}
-			} 
-		}
-			catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
-		 /*
-			gameComponents[0] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[1] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[2] = new ClueCell(new ClueCellModel("", "11"));
-			gameComponents[3] = new ClueCell(new ClueCellModel("", "16"));
-			gameComponents[4] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[5] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[6] = new ClueCell(new ClueCellModel("", "3"));
-			gameComponents[7] = new ClueCell(new ClueCellModel("", "21"));
-			gameComponents[8] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[9] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[10] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[11] = new ClueCell(new ClueCellModel("12", "7"));
-			gameComponents[12] = new TextCell(controller, "5");
-			gameComponents[13] = new TextCell(controller, "7");
-			gameComponents[14] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[15] = new ClueCell(new ClueCellModel("4", ""));
-			gameComponents[16] = new TextCell(controller, "1");
-			gameComponents[17] = new TextCell(controller, "3");
-			gameComponents[18] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[19] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[20] = new ClueCell(new ClueCellModel("12", ""));
-			gameComponents[21] = new TextCell(controller, "2");
-			gameComponents[22] = new TextCell(controller, "1");
-			gameComponents[23] = new TextCell(controller, "9");
-			gameComponents[24] = new ClueCell(new ClueCellModel("", "10"));
-			gameComponents[25] = new ClueCell(new ClueCellModel("6", "16"));
-			gameComponents[26] = new TextCell(controller, "2");
-			gameComponents[27] = new TextCell(controller, "4");
-			gameComponents[28] = new ClueCell(new ClueCellModel("", "17"));
-			gameComponents[29] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[30] = new ClueCell(new ClueCellModel("4", ""));
-			gameComponents[31] = new TextCell(controller, "1");
-			gameComponents[32] = new TextCell(controller, "3");
-			gameComponents[33] = new ClueCell(new ClueCellModel("10", "38"));
-			gameComponents[34] = new TextCell(controller, "1");
-			gameComponents[35] = new TextCell(controller, "9");
-			gameComponents[36] = new ClueCell(new ClueCellModel("9", "10"));
-			gameComponents[37] = new TextCell(controller, "1");
-			gameComponents[38] = new TextCell(controller, "8");
-			gameComponents[39] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[40] = new ClueCell(new ClueCellModel("37", ""));
-			gameComponents[41] = new TextCell(controller, "4");
-			gameComponents[42] = new TextCell(controller, "2");
-			gameComponents[43] = new TextCell(controller, "5");
-			gameComponents[44] = new TextCell(controller, "3");
-			gameComponents[45] = new TextCell(controller, "7");
-			gameComponents[46] = new TextCell(controller, "1");
-			gameComponents[47] = new TextCell(controller, "6");
-			gameComponents[48] = new TextCell(controller, "9");
-			gameComponents[49] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[50] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[51] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[52] = new ClueCell(new ClueCellModel("10", "17"));
-			gameComponents[53] = new TextCell(controller, "8");
-			gameComponents[54] = new TextCell(controller, "2");
-			gameComponents[55] = new ClueCell(new ClueCellModel("7", "4"));
-			gameComponents[56] = new TextCell(controller, "2");
-			gameComponents[57] = new TextCell(controller, "5");
-			gameComponents[58] = new ClueCell(new ClueCellModel("", "29"));
-			gameComponents[59] = new ClueCell(new ClueCellModel("", "23"));
-			gameComponents[60] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[61] = new ClueCell(new ClueCellModel("40", ""));
-			gameComponents[62] = new TextCell(controller, "8");
-			gameComponents[63] = new TextCell(controller, "6");
-			gameComponents[64] = new TextCell(controller, "4");
-			gameComponents[65] = new TextCell(controller, "1");
-			gameComponents[66] = new TextCell(controller, "3");
-			gameComponents[67] = new TextCell(controller, "2");
-			gameComponents[68] = new TextCell(controller, "7");
-			gameComponents[69] = new TextCell(controller, "9");
-			gameComponents[70] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[71] = new ClueCell(new ClueCellModel("16", ""));
-			gameComponents[72] = new TextCell(controller, "9");
-			gameComponents[73] = new TextCell(controller, "7");
-			gameComponents[74] = new ClueCell(new ClueCellModel("7", "17"));
-			gameComponents[75] = new TextCell(controller, "3");
-			gameComponents[76] = new TextCell(controller, "4");
-			gameComponents[77] = new ClueCell(new ClueCellModel("11", "4"));
-			gameComponents[78] = new TextCell(controller, "5");
-			gameComponents[79] = new TextCell(controller, "6");
-			gameComponents[80] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[81] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[82] = new ClueCell(new ClueCellModel("12", ""));
-			gameComponents[83] = new TextCell(controller, "3");
-			gameComponents[84] = new TextCell(controller, "9");
-			gameComponents[85] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[86] = new ClueCell(new ClueCellModel("18", ""));
-			gameComponents[87] = new TextCell(controller, "1");
-			gameComponents[88] = new TextCell(controller, "9");
-			gameComponents[89] = new TextCell(controller, "8");
-			gameComponents[90] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[91] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[92] = new ClueCell(new ClueCellModel("17", ""));
-			gameComponents[93] = new TextCell(controller, "9");
-			gameComponents[94] = new TextCell(controller, "8");
-			gameComponents[95] = new ClueCell(new ClueCellModel("", ""));
-			gameComponents[96] = new ClueCell(new ClueCellModel("11", ""));
-			gameComponents[97] = new TextCell(controller, "3");
-			gameComponents[98] = new TextCell(controller, "8");
-			gameComponents[99] = new ClueCell(new ClueCellModel("", ""));
-            */
-	}
 
 	//added it2
 	private void notifyChange(){
