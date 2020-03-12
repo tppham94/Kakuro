@@ -37,7 +37,7 @@ public class GameBoardModel {
 					validateView.updateString ("Sorry that isn't right. Please try again");
 					break;
 				}
-				validateView.updateString ("Congradulations! You won");
+				validateView.updateString ("Congratulations! You won");
 				valid = true; // will only reach at end if doesn't break for loop meaning it is good
 			}
 		}

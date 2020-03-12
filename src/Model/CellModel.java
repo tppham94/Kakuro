@@ -47,7 +47,8 @@ public class CellModel {
 		wordObserverlist.add(wordModel2);
 	}
 	
-	public boolean update(String str) { //method to update model which will be used by controller
+	//method to update the word model which will be used by controller
+	public boolean update(String str) { 
 		if (isDigit(str)) {
 			userNumber = Integer.parseInt(str);
 			setViewsText();
@@ -95,17 +96,20 @@ public class CellModel {
 		}
 	}
 	
-	public boolean isDigit (String str) { //method to check if  the string is a digit
+	//method to check if  the string is a digit
+	public boolean isDigit (String str) { 
 		if (str.matches("\\d+")) return true;
 		else return false;
 	}
 	
-	public boolean isSignleDigit (String str) { //method to check if string is a single digit
+	//method to check if string is a single digit
+	public boolean isSignleDigit (String str) { 
 		if (str.matches("[1-9]")) return true;
 		else return false;
 	}
 	
-	public boolean isCorrectNumber (int userValue) { //method to check if it is a correct number
+	//method to check if it is a correct number
+	public boolean isCorrectNumber (int userValue) { 
 		if (userValue==correctNumber) {
 			setCorrect(true);
 			return true;
@@ -125,25 +129,30 @@ public class CellModel {
 		return isCorrect;
 	}
 	
-	public CellView getCellView () { //method to return the view, this will be used by the controller to have the same reference
+	//method to return the cell view,
+	//this will be used by the controller to have the same reference
+	public CellView getCellView () { 
 		return view;
 	}
 	
-	public void setViewsText () { //used to update the view on the new number
+	//method to update the cell view on the new number
+	public void setViewsText () { 
 		view.setTextField(userNumber);
 		setViewsValidity();
 	}
 	
-	public void setViewsTextValidate () { //used to update the view on the new number and color
+	//method to update the view on the new number and color
+	public void setViewsTextValidate () { 
 		view.setTextField(userNumber);
 		setViewsValidityTraining();
 	}
 	
-	public void setViewsValidityTraining () { //method to update the views background coller
+	//method to update the cell view's background color
+	public void setViewsValidityTraining () { 
 		view.setValidTraining(isCorrect);
 	}
 	
-	public void setViewsValidity () { //method to update the views background coller
+	public void setViewsValidity () { //method to update the views background color
 		view.setValid(isCorrect);
 	}
 	

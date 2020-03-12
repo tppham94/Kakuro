@@ -31,19 +31,19 @@ public class GameController {
 		gbModel = gbm;
 	}
 	
-	public void sendToCellModel(String number, CellView cv) { //to update the model based on the views event method triggered in view class
-		
-		cv.getObserverList().forEach(object -> { //upddates all cellModels that are references to the cell view
-			object.update(number);
-			sendToWordModel (object);
-			});
+	//to update the cell model based on the views event method triggered in view class
+	public void sendToCellModel(String number, CellView cv) { 
+		cv.getObserverList().update(number);
+		sendToWordModel(cv.getObserverList());
 	}
 	
-	public void sendToWordModel(CellModel cm) { //updates all wordModels that have the CellModel
+	//updates all wordModels that have the CellModel
+	public void sendToWordModel(CellModel cm) { 
 		cm.getWordObserverlist().forEach(wordObj -> wordObj.validateWord());
 	}
 	
-	public void sendToGameModel() { //updates all wordModels that have the CellModel
+	//updates the validate text for the gameboard
+	public void sendToGameModel() { 
 		gbModel.update();
 	}
 }

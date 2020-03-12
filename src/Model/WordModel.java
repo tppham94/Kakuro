@@ -5,7 +5,6 @@ public class WordModel {
 	CellModel CellModelArray[];
 	int correctTotalForWord;
 	int startingIndex;
-
 	boolean wordIsValid;
 
 	public WordModel () { //def constructor
