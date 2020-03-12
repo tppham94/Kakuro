@@ -18,7 +18,7 @@ import org.json.simple.parser.JSONParser;
 import Controller.GameController;
 import Model.ClueCellModel;
 import Model.WorldModel;
-import Model.BlankModel;
+import Model.CellModel;
 
 public class BoardView {
 
@@ -32,33 +32,32 @@ public class BoardView {
 		controller = new GameController();
 		jf = new JFrame("Kakuro");
 		
-		 Object obj = new JSONParser().parse(new FileReader("game1.json"));  //create JSON object to parse input JSON file
-         
-	     // typecasting obj to JSONObject 
-	     JSONObject kakuro = (JSONObject) obj; 
-	          
-	    //getting game size element to create the variables that will created the correct board size for the game. 
-	    long gameSize = (long) kakuro.get("size");
-	    int realSize = (int) (gameSize*gameSize);
-	    int actualRows = (int) (gameSize+1);
-	    int actualCols = (int) (gameSize);
-		
+		JSONObject kakuro = (JSONObject) new JSONParser().parse(new FileReader("game1.json"));  //create JSON object to parse input JSON file
+        
+	    //getting game size element to create the metrics that will created the correct board size for the game. 
+		long Size = (long) kakuro.get("size"); 
+		int gameSize = (int) Size;
 	    // array for the cells to be added to our game board    
-		gameComponents = new JComponent[realSize];
+		gameComponents = new JComponent[gameSize*gameSize];
 		
+	 		
 		//create the array for the cells to populate the correct cell values
 		JSONArray cellsArray = (JSONArray) kakuro.get("cells");
         Iterator<String> iterator = cellsArray.iterator();
         int indexVal = 0;
         while(iterator.hasNext()) {
             if (!iterator.next().contentEquals("0")) // check to only populate the Cellviews containing the correct answer
-            {	gameComponents[indexValue] = new CellView(new CellModel(iterator.next(), CellView()));   
+            {	CellView cellView = new CellView();
+                CellModel cellModel = new CellModel(value, cellView);
+                CellView.addModelToObserverList(cellModel); // Check these with Stefano
+                CellModel.registerObserver(cellView); // Check these with Stefano
+                gameComponents[indexVal] = cellView;   
             }	
             indexVal++;
         }
 		
         
-        JSONArray wordsArray = (JSONArray) jo.get("words"); // create JSON array for the words 
+JSONArray wordsArray = (JSONArray) kakuro.get("words"); // create JSON array for the words 
         
         Iterator itr2 = wordsArray.iterator();
        
@@ -70,34 +69,29 @@ public class BoardView {
         	int wSize = wordArray.size();
         	long totalForWord = (long) innerObj.get("sum");
         	
-        	if (gameComponents[(int) lrow * realSize] == null) //check if component already has clueView assigned.
+        	if (gameComponents[((int) lrow * gameSize) + (int)lcol] == null) //check if component already has clueView assigned.
         	{
         		if ((boolean) innerObj.get("vertical").equals("false")) //check if right or down direction of clue
-        		{
-        			gameComponents[(int) lrow * realSize] = new ClueView(new ClueCellModel(Long.toString(totalForWord), ""));
-        		}
+        		/{gameComponents[((int) lrow * gameSize) + (int)lcol] = new ClueCellView(new ClueCellModel(Long.toString(totalForWord),""));}
         		else
-        		{
-        			gameComponents[(int) lrow * realSize] = new ClueView(new ClueCellModel("",Long.toString(totalForWord)));
-        		}
+        		{gameComponents[((int) lrow * gameSize) + (int)lcol] = new ClueCellView(new ClueCellModel("",Long.toString(totalForWord)));}
         	}
-        	new WorldModel((int) wSize, (int) totalForWord, ((int) lrow * realSize) + (int) lcol);
+        	WorldModel WorldModel = new  WorldModel((int) wSize, (int) totalForWord, ((int) lrow * gameSize) + (int) lcol);
         }
 
         for (int i = 0; i < gameComponents.length; i++) // go get the null components and assign a blank cell to it
         {	
 			if(gameComponents[i] == null)
 			{
-				gameComponents[i] = new BlankView=(new BlankModel());
+				gameComponents[i] = new ClueCellView(new ClueCellModel("",""));
 			}
 		}
         
-		//initializeGameComponents(); not needed anymore
 		// Binding components with the controller
 		controller.bindTextCells(gameComponents);
 		
 		addComponentsToJFrame();
-		setVisualLayout(actualRows, actualCols);
+		setVisualLayout(gameSize+1, gameSize);
 		addValidateButton();
 		validateButton.addActionListener(controller);
 
@@ -127,8 +121,6 @@ public class BoardView {
 			jf.add(gameComponents[i]);
 		}
 	}
-
-
 
 	//added it2
 	private void notifyChange(){
