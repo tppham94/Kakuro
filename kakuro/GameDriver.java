@@ -1,8 +1,8 @@
 package kakuro;
 
-import javax.swing.SwingUtilities;
+import View.BoardView;
 
-import View.Board;
+import javax.swing.SwingUtilities;
 
 public class GameDriver {
 	 
@@ -10,7 +10,7 @@ public class GameDriver {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
-                	new Board();
+                	new BoardView();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
