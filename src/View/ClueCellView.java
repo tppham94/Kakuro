@@ -15,7 +15,7 @@ import javax.swing.border.Border;
 import Model.ClueCellModel;
 
 @SuppressWarnings("serial")
-public class ClueView extends JPanel {
+public class ClueCellView extends JPanel {
 
 	private static final int SIZE = 600;
 	private WordModel rightWord;  //it2 change
@@ -23,7 +23,7 @@ public class ClueView extends JPanel {
 	private JLabel rightLabel;
 	private JLabel downLabel;
 
-	public ClueView(WordModel rightWord, WorldModel bottomWord) {
+	public ClueCellView(WordModel rightWord, WorldModel bottomWord) {
 		super(new GridLayout(2, 2));
 		this.rightWord = rightWord; //it2 change
 		this.bottomWord = bottomWord; //it2 change
