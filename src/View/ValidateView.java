@@ -13,7 +13,7 @@ public class ValidateView  extends JPanel{
 	 * default constructor which sets the size of the jpanel and sets its Jlabel's text.
 	 */
 	public ValidateView () {
-		validateString = = new JLabel ("Let's Play Kakuro");
+		validateString = new JLabel ("Let's Play Kakuro");
 		setSize(300,300);
 		add(validateString);
 	}
