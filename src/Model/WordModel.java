@@ -2,45 +2,69 @@ package Model;
 
 public class WordModel {
 
-	CellModel CellModelArray[];
-	int correctTotalForWord;
-	int startingIndex;
-	boolean wordIsValid;
+	CellModel CellModelArray[]; //variable which will hold the array of cell model referemces associated to that word
+	int correctTotalForWord; //the total all the cell models must add up to for the word to be correct
+	boolean wordIsValid; //the boolean which will be used when all cell models either add up or don't add up to the correctTotalForWord
 
-	public WordModel () { //def constructor
+	/**
+	 * def constructor
+	 */
+	public WordModel () { 
 		CellModelArray = new CellModel [10];
 	}
-
-	public WordModel (int size) { //constructor with a set for of text elements for that word
-		CellModelArray = new CellModel [size];
-	}
 	
-	public WordModel (int size, int totalForWord) { //constructor which sets the correct total for the word
+	/**
+	 * constructor which sets the correct total for the word
+	 * @param size
+	 * @param totalForWord
+	 */
+	public WordModel (int size, int totalForWord) {
 		CellModelArray = new CellModel [size];
 		this.correctTotalForWord = totalForWord;
 	}
 	
-	public CellModel[] getCellModelArray () { //access method for the cellModelArray
+	/**
+	 * access method for the cellModelArray
+	 * @return
+	 */
+	public CellModel[] getCellModelArray () { 
 		return CellModelArray;
 	}
 	
-	public CellModel getCellModelArrayAtIndex (int index) { //accessor method for an index of the cellModel array
+	
+	/**
+	 * accessor method for an index of the cellModel array
+	 * @param index
+	 * @return
+	 */
+	public CellModel getCellModelArrayAtIndex (int index) {
 		return CellModelArray[index];
 	}
 	
-	public void setCellModelArrayAtIndex(int index, int correctNumber) { //mutator to create a new cellModel object
-		CellModelArray [index] = new CellModel (correctNumber);
-	}
 	
-	public void setCellModelArrayAtIndex(int index, CellModel cm) { //mutator to create a new cellModel object
+	/**
+	 * mutator to create a new cellModel object
+	 * @param index
+	 * @param cm
+	 */
+	public void setCellModelArrayAtIndex(int index, CellModel cm) { 
 		CellModelArray [index] = cm;
 	}
 	
-	public void updateValueAtIndex(int index, String number) {  //mutator to set the value entered by user in the cellModel
+	/**
+	 * mutator to set the value entered by user in the cellModel
+	 * @param index
+	 * @param number
+	 */
+	public void updateValueAtIndex(int index, String number) { 
 		CellModelArray [index].update(number);
 	}
 	
-	public String validateWord () { //method to validate the whole word. It will return the reason why it is incorrect if incorrect.
+	/**
+	 * method to validate the whole word. It will return the reason why it is incorrect if incorrect.
+	 * @return
+	 */
+	public String validateWord () {
 		wordIsValid= true;
 		for (int i=0;i<CellModelArray.length;i++) {
 			if (!CellModelArray[i].getIsCorrect()) {
@@ -57,28 +81,36 @@ public class WordModel {
 		else return "That word is not valid. Make sure all numbers are correct and nothing is repeated";
 	}
 	
-	public int getTotalForWord() { //accessor for word correctness
+	/**
+	 * accessor for correct word total
+	 * @return
+	 */
+	public int getTotalForWord() { 
 		return correctTotalForWord;
 	}
 
-	public void setTotalForWord(int totalForWord) { // mutator for word correctness
+	/**
+	 *  mutator for correct word total
+	 * @param totalForWord
+	 */
+	public void setTotalForWord(int totalForWord) { 
 		this.correctTotalForWord = totalForWord;
 	}
 	
+	/**
+	 * accessor for word correctness
+	 * @return
+	 */
 	public boolean isWordIsValid() {
 		return wordIsValid;
 	}
 
+	/**
+	 * mutator for word correctness
+	 * @param wordIsValid
+	 */
 	public void setWordIsValid(boolean wordIsValid) {
 		this.wordIsValid = wordIsValid;
-	}
-	
-	public int getStartingIndex() {
-		return startingIndex;
-	}
-
-	public void setStartingIndex(int startingIndex) {
-		this.startingIndex = startingIndex;
 	}
 	
 }

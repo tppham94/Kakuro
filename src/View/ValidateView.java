@@ -7,17 +7,23 @@ import Controller.GameController;
 
 public class ValidateView  extends JPanel{
 	
-	//the string that will be seen by the use
-	JLabel validateString = new JLabel ("Let's Play Kakuro"); 
+	JLabel validateString; //the string that will be seen by the use 
 	
-	//default constructor which sets the size of the jpanel and sets its Jlabel's text.
+	/**
+	 * default constructor which sets the size of the jpanel and sets its Jlabel's text.
+	 */
 	public ValidateView () {
+		validateString = = new JLabel ("Let's Play Kakuro");
 		setSize(300,300);
 		add(validateString);
 	}
 	
-	//method to update the text of the Jpanel
-	//this will be called from the game board model
+	/**
+	 * method to update the text of the Jpanel
+	 * this will be called from the game board model
+	 * @param str
+	 */
+	
 	public void updateString (String str) {
         Runnable doAssist = new Runnable() {
             @Override

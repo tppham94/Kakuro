@@ -17,31 +17,43 @@ import Model.CellModel;
 import Model.WordModel;
 
 public class CellView extends JTextField {
-	int number;
-	boolean valid;
 	GameController gameController;
 	CellModel observerList;
 
+	/**
+	 * Default constructor
+	 */
 	public CellView () {
-		
+		/**
+		 * Set the background color and size
+		 */
 		setVisualConfiguration();
 
 		this.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void insertUpdate(DocumentEvent e) { //sends text to controller on  inuput
+			/**
+			 * sends text to controller on input
+			 */
+			public void insertUpdate(DocumentEvent e) { 
 				// TODO Auto-generated method stub
 				sendToController();
 				
 			}
 
 			@Override
-			public void removeUpdate(DocumentEvent e) {//sends text to controller on  inuput
+			/**
+			 * sends text to controller on input
+			 */
+			public void removeUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				sendToController();
 			}
 
 			@Override
-			public void changedUpdate(DocumentEvent e) {//sends text to controller on  inuput
+			/**
+			 * sends text to controller on input
+			 */
+			public void changedUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				sendToController();
 			}
@@ -49,7 +61,11 @@ public class CellView extends JTextField {
 		});
 	}
 	
-	public CellView (GameController gbc) { //cellView with controller constructor
+	/**
+	 * 
+	 * @param cellView with regular game board controller constructor for regular games
+	 */
+	public CellView (GameController gbc) { 
 		this.gameController = gbc;
 		setVisualConfiguration();
 		
@@ -79,7 +95,12 @@ public class CellView extends JTextField {
 		});
 	}
 	
-	public CellView (TrainingController tc) { //cellView with training controller
+	
+	/**
+	 * 
+	 * @param cellView with training game board controller constructor for training games
+	 */
+	public CellView (TrainingController tc) { 
 		this.gameController = tc;
 		setVisualConfiguration();
 
@@ -107,9 +128,11 @@ public class CellView extends JTextField {
 		});
 	}
 	
-	
-	//send the number as a string to the controller which will 
-	//send the updated number to its observers
+
+	/**
+	 * send the number as a string to the controller which will
+	 * send the updated number to its observers
+	 */
 	
 	public void sendToController() { 
 		gameController.sendToCellModel(this.getText(), this);
@@ -124,11 +147,10 @@ public class CellView extends JTextField {
 	}
 	
 	
-	/*
+	/**
 	 * Mutator for the views text field number
 	 */
 	public void setTextField (int number) {
-		this.number = number;
 		//parse the int that is sent from the model to a string 
 		
 		if(this.getText()!=Integer.toString(number)) {
@@ -138,7 +160,6 @@ public class CellView extends JTextField {
 	            		setText(Integer.toString(number)); 
 	                }
 	            };
-//	            SwingUtilities.invokeLater(doAssist);
 		}
  
 
@@ -147,18 +168,10 @@ public class CellView extends JTextField {
 	
 	
 	/*
-	 * Mutator for the views validity data member
-	 */
-	public void setValid (boolean valid) {
-		this.valid = valid;
-	}
-	
-	/*
 	 * Mutator for the views validity data member when training mode is on
 	 */
 	public void setValidTraining (boolean valid) {
-		this.valid = valid;
-		setBackgroundColor(); //change color to green if valid red if invalid
+		setBackgroundColor(valid); //change color to green if valid red if invalid
 	}
 	
 	public void setController (GameController gameController) {
@@ -173,7 +186,7 @@ public class CellView extends JTextField {
 	/*
 	 * Mutator for the views background color for the training mode based on its validity
 	 */
-	public void setBackgroundColor () {
+	public void setBackgroundColor (boolean valid) {
 		if (valid) {
 			this.setBackground(Color.GREEN);
 		}
