@@ -10,6 +10,7 @@ import Controller.TrainingController;
 
 public class ValidateButtonView extends JButton{
 
+	//the controller that the button must send the message to
 	private GameController gbc;
 	
 	//default constructor

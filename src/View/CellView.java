@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
@@ -51,7 +52,8 @@ public class CellView extends JTextField {
 	public CellView (GameController gbc) { //cellView with controller constructor
 		this.gameController = gbc;
 		setVisualConfiguration();
-
+		
+		
 		this.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
@@ -61,6 +63,7 @@ public class CellView extends JTextField {
 				
 			}
 
+			
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
@@ -127,7 +130,35 @@ public class CellView extends JTextField {
 	public void setTextField (int number) {
 		this.number = number;
 		//parse the int that is sent from the model to a string 
-		this.setText(Integer.toString(number)); 
+		
+		
+        
+            Runnable doAssist = new Runnable() {
+                @Override
+                public void run() {
+            		setText(Integer.toString(number)); 
+                }
+            };
+            SwingUtilities.invokeLater(doAssist);
+        
+
+	}
+	
+	public void setTextFieldToEmpty () {
+		this.number = number;
+		//parse the int that is sent from the model to a string 
+		
+		
+        
+            Runnable doAssist = new Runnable() {
+                @Override
+                public void run() {
+            		setText(" "); 
+                }
+            };
+            SwingUtilities.invokeLater(doAssist);
+        
+
 	}
 	
 	

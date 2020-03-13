@@ -2,19 +2,21 @@ package kakuro;
 
 import javax.swing.SwingUtilities;
 
-import View.Board;
+import View.BoardView;
 
 public class GameDriver {
 	 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
+        Runnable run = new Runnable() {
             public void run() {
                 try {
-                	new Board();
+                	new BoardView();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        });
+        };
+        SwingUtilities.invokeLater(run);
+
     }
 }

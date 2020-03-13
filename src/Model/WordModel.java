@@ -15,10 +15,9 @@ public class WordModel {
 		CellModelArray = new CellModel [size];
 	}
 	
-	public WordModel (int size, int totalForWord, int startingIndex) { //constructor which sets the correct total for the word
+	public WordModel (int size, int totalForWord) { //constructor which sets the correct total for the word
 		CellModelArray = new CellModel [size];
 		this.correctTotalForWord = totalForWord;
-		this.startingIndex = startingIndex;
 	}
 	
 	public CellModel[] getCellModelArray () { //access method for the cellModelArray

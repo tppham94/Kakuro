@@ -1,5 +1,6 @@
 package View;
 
+import Controller.GameController;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,17 +12,30 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import Model.WordModel;
 
 @SuppressWarnings("serial")
-public class ClueCell extends JPanel {
+public class ClueCellView extends JPanel {
 
 	private static final int SIZE = 600;
-	private JLabel rightLabel; //the number for the horizontal row to the right 
-	private JLabel downLabel; //the number for the vertical row beneath
+	private WordModel rightWord;  //it2 change
+	private WordModel bottomWord; //it2 change
+	private JLabel rightLabel;
+	private JLabel downLabel;
 
-	public ClueCell() {
+	public ClueCellView() {
 		super(new GridLayout(2, 2));
 		addUIComponentsToPanel();
+	}
+
+	public void setRightWord(WordModel rightWord) {
+		this.rightWord = rightWord;
+		setRightLabelText();
+	}
+
+	public void setBottomWord(WordModel bottomWord) {
+		this.bottomWord = bottomWord;
+		setDownLabelText();
 	}
 
 	@Override
@@ -32,6 +46,16 @@ public class ClueCell extends JPanel {
 		Line2D.Double line = new Line2D.Double(0, 0, SIZE, SIZE);
 		g2d.setColor(Color.GRAY);
 		g2d.draw(line);
+	}
+
+	private void setRightLabelText() {
+		if (rightWord != null)
+			rightLabel.setText("" + rightWord.getTotalForWord());
+	}
+
+	private void setDownLabelText() {
+		if (bottomWord != null)
+			downLabel.setText("" + bottomWord.getTotalForWord());
 	}
 
 	/**
@@ -45,8 +69,16 @@ public class ClueCell extends JPanel {
 		 * show this label
 		 */
 		JLabel invisible = new JLabel("", JLabel.CENTER);
+		rightLabel = new JLabel("", JLabel.CENTER);
+		downLabel = new JLabel("", JLabel.CENTER);
 		invisible.setVisible(false);
 		this.add(invisible);
+
+
+		//it2 changes, rightWord and bottomWord
+		setRightLabelText();
+		//it2 changes, rightWord and bottomWord
+		setDownLabelText();
 		this.setVisualConfiguration();
 		this.add(rightLabel);
 		this.add(downLabel);

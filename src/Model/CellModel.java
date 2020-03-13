@@ -27,6 +27,13 @@ public class CellModel {
 		isCorrect = false;
 	}
 	
+	
+	public CellModel(int correct, CellView cv) {
+		correctNumber = correct;
+		isCorrect = false;
+		view =cv;
+	}
+	
 	public CellModel(int correct, WordModel wordModel1) {
 		correctNumber = correct;
 		isCorrect = false;
@@ -54,6 +61,7 @@ public class CellModel {
 	
 	//method to update the word model which will be used by controller
 	public boolean update(String str) { 
+		System.out.println(str);
 		if (isDigit(str)) {
 			userNumber = Integer.parseInt(str);
 			setViewsText();
@@ -69,7 +77,7 @@ public class CellModel {
 		}
 		else {
 			isCorrect=false;
-			setViewsValidity();
+			setViewsTextToEmpty();
 			return false;
 		}
 	}
@@ -96,7 +104,7 @@ public class CellModel {
 		}
 		else {
 			isCorrect=false;
-			setViewsValidity();
+			setViewsTextToEmpty();
 			return "Sorry not a number in between 1-9";
 		}
 	}
@@ -140,10 +148,25 @@ public class CellModel {
 		return view;
 	}
 	
+	//Mutator for cellview
+	public void setCellView (CellView cv) { 
+		 view = cv;
+	}
+	
 	//method to update the cell view on the new number
 	public void setViewsText () { 
-		view.setTextField(userNumber);
+		if(view.getText()!=Integer.toString(userNumber)) {
+			view.setTextField(userNumber);
+			setViewsValidity();
+		}
+	}
+	
+	//method to update the cell view to empty
+	public void setViewsTextToEmpty () {
+		if(view.getText()!=Integer.toString(userNumber)) {
+		view.setTextFieldToEmpty();
 		setViewsValidity();
+		}
 	}
 	
 	//method to update the view on the new number and color
