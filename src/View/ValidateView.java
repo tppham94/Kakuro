@@ -19,6 +19,11 @@ public class ValidateView  extends JPanel{
 	//method to update the text of the Jpanel
 	//this will be called from the game board model
 	public void updateString (String str) {
-		validateString.setText(str);
+        Runnable doAssist = new Runnable() {
+            @Override
+            public void run() {
+        		validateString.setText(str);
+            }
+        };
 	}
 }

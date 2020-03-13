@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 
 
 import Controller.GameController;
+import Controller.TrainingController;
 import Model.WordModel;
 import Model.CellModel;
 
@@ -33,7 +34,8 @@ public class BoardView {
 
 	// Constructor called by Game Driver
 	public BoardView() {
-		controller = new GameController();
+		int counter =0;
+		controller = new TrainingController();
 		jf = new JFrame("Kakuro");
 
 		JSONObject kakuro = null;  //create JSON object to parse input JSON file
@@ -91,6 +93,7 @@ public class BoardView {
 
         	ClueCellView clue_cell = (ClueCellView) gameComponents[row * size + col];
         	WordModel new_word = new WordModel(size, sum);
+        	controller.addToGameBoardModelArray(counter++,new_word);
         	System.out.println(jsonWordObj.toString());
         	for (int j = 0; j < cell_indices.size(); j++) {
 				System.out.println("\t" + cell_indices.get(j));

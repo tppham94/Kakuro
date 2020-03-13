@@ -131,35 +131,19 @@ public class CellView extends JTextField {
 		this.number = number;
 		//parse the int that is sent from the model to a string 
 		
-		
-        
-            Runnable doAssist = new Runnable() {
-                @Override
-                public void run() {
-            		setText(Integer.toString(number)); 
-                }
-            };
-            SwingUtilities.invokeLater(doAssist);
-        
+		if(this.getText()!=Integer.toString(number)) {
+	           Runnable doAssist = new Runnable() {
+	                @Override
+	                public void run() {
+	            		setText(Integer.toString(number)); 
+	                }
+	            };
+//	            SwingUtilities.invokeLater(doAssist);
+		}
+ 
 
 	}
 	
-	public void setTextFieldToEmpty () {
-		this.number = number;
-		//parse the int that is sent from the model to a string 
-		
-		
-        
-            Runnable doAssist = new Runnable() {
-                @Override
-                public void run() {
-            		setText(" "); 
-                }
-            };
-            SwingUtilities.invokeLater(doAssist);
-        
-
-	}
 	
 	
 	/*

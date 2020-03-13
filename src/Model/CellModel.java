@@ -61,7 +61,7 @@ public class CellModel {
 	
 	//method to update the word model which will be used by controller
 	public boolean update(String str) { 
-		System.out.println(str);
+		System.out.println("str:"+str);
 		if (isDigit(str)) {
 			userNumber = Integer.parseInt(str);
 			setViewsText();
@@ -72,14 +72,20 @@ public class CellModel {
 				else {
 					setCorrect(false);
 				}
-			} 
-			return true;
+				return true;
+			}
+			else {
+				isCorrect=false;
+				userNumber = Integer.parseInt(str);
+				return false;
+			}
 		}
 		else {
 			isCorrect=false;
-			setViewsTextToEmpty();
+			userNumber = 0;
 			return false;
 		}
+
 	}
 	
 	//method to update model which will be used by controller it returns a string which will be used by the training controller
@@ -88,23 +94,31 @@ public class CellModel {
 		String validationSentnce= "";
 		if (isDigit(str)) {
 			userNumber = Integer.parseInt(str);
-			setViewsTextValidate();
 			if(isSignleDigit(str)) {
 				if(isCorrectNumber(userNumber)) {
 					setCorrect(true);
-					validationSentnce = " and that number is Correct";
+					setViewsTextValidate();
+					validationSentnce = "Success at updating number and that number is Correct";
+					return validationSentnce;
 				}
 				else {
-					validationSentnce = " but that number is InCorrect";
-
 					setCorrect(false);
+					setViewsTextValidate();
+					validationSentnce = "Success at updating number but that number is InCorrect";
+					return validationSentnce;
 				}
 			} 
-			return "Success at updating number"+validationSentnce;
+			else {
+				setCorrect(false);
+				setViewsTextValidate();
+				validationSentnce = "Number must be single digit";
+				return validationSentnce;
+			}
 		}
 		else {
+			userNumber = 0;
 			isCorrect=false;
-			setViewsTextToEmpty();
+			setViewsTextValidate();
 			return "Sorry not a number in between 1-9";
 		}
 	}
@@ -158,14 +172,6 @@ public class CellModel {
 		if(view.getText()!=Integer.toString(userNumber)) {
 			view.setTextField(userNumber);
 			setViewsValidity();
-		}
-	}
-	
-	//method to update the cell view to empty
-	public void setViewsTextToEmpty () {
-		if(view.getText()!=Integer.toString(userNumber)) {
-		view.setTextFieldToEmpty();
-		setViewsValidity();
 		}
 	}
 	

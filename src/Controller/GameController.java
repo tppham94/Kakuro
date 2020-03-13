@@ -45,4 +45,8 @@ public class GameController {
 	public void sendToGameModel() { 
 		gbModel.update();
 	}
+	
+	public void addToGameBoardModelArray(int index, WordModel wm) {
+		gbModel.setWordModelAtIndex(index,wm);
+	}
 }
