@@ -15,7 +15,6 @@ import Model.CellModel;
 import Model.GameBoardModel;
 import Model.WordModel;
 import View.CellView;
-import View.TextCell;
 
 public class GameController {
 	
@@ -33,8 +32,8 @@ public class GameController {
 	
 	//to update the cell model based on the views event method triggered in view class
 	public void sendToCellModel(String number, CellView cv) { 
-		cv.getObserverList().update(number);
-		sendToWordModel(cv.getObserverList());
+		cv.getObserverList().update(number); //updates the cell model associated to the cell view
+		sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
 	}
 	
 	//updates all wordModels that have the CellModel

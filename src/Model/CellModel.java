@@ -6,17 +6,22 @@ import Controller.GameController;
 import View.CellView;
 
 public class CellModel {
-	int correctNumber;
-	int userNumber;
-	boolean isCorrect;
-	CellView view = new CellView();
+	int correctNumber; //the correct number associated to that cell
+	int userNumber; //the user's number being entered by the user
+	boolean isCorrect; //that cell's validity status
+	CellView view = new CellView(); //the cell view which the model has to update
+	
+	//the word model array of maximum size 2,
+	//will be updated every time there is a change done to the cell model
+	//need a reference to both words that it belongs to s that they can be updated
 	ArrayList <WordModel> wordObserverlist = new ArrayList <WordModel> (1);
 	
-	
+	//def constructor which sets isCorrect to false
 	public CellModel() {
 		isCorrect = false;
 	}
 	
+	//constructor which take correct number and sets the default correct value to false
 	public CellModel(int correct) {
 		correctNumber = correct;
 		isCorrect = false;

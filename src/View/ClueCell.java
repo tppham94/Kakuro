@@ -11,19 +11,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import Model.ClueCellModel;
 
 @SuppressWarnings("serial")
 public class ClueCell extends JPanel {
 
 	private static final int SIZE = 600;
-	private ClueCellModel model;
-	private JLabel rightLabel;
-	private JLabel downLabel;
+	private JLabel rightLabel; //the number for the horizontal row to the right 
+	private JLabel downLabel; //the number for the vertical row beneath
 
-	public ClueCell(ClueCellModel model) {
+	public ClueCell() {
 		super(new GridLayout(2, 2));
-		this.model = model;
 		addUIComponentsToPanel();
 	}
 
@@ -50,9 +47,6 @@ public class ClueCell extends JPanel {
 		JLabel invisible = new JLabel("", JLabel.CENTER);
 		invisible.setVisible(false);
 		this.add(invisible);
-
-		rightLabel = new JLabel(model.getRightLabelValue());
-		downLabel = new JLabel(model.getDownLabelValue());
 		this.setVisualConfiguration();
 		this.add(rightLabel);
 		this.add(downLabel);

@@ -23,9 +23,9 @@ public class CellView extends JTextField {
 
 	public CellView () {
 		
-		
-		this.getDocument().addDocumentListener(new DocumentListener() {
+		setVisualConfiguration();
 
+		this.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) { //sends text to controller on  inuput
 				// TODO Auto-generated method stub
@@ -48,9 +48,10 @@ public class CellView extends JTextField {
 		});
 	}
 	
-	public CellView (GameController gbc) { //cellView with controller
+	public CellView (GameController gbc) { //cellView with controller constructor
 		this.gameController = gbc;
-		
+		setVisualConfiguration();
+
 		this.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
@@ -75,9 +76,10 @@ public class CellView extends JTextField {
 		});
 	}
 	
-	public CellView (TrainingController tc) { //cellView with controller
+	public CellView (TrainingController tc) { //cellView with training controller
 		this.gameController = tc;
-		
+		setVisualConfiguration();
+
 		this.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
@@ -103,7 +105,10 @@ public class CellView extends JTextField {
 	}
 	
 	
-	public void sendToController() { //send the number as a string to the controller which will send the updated number to its observers
+	//send the number as a string to the controller which will 
+	//send the updated number to its observers
+	
+	public void sendToController() { 
 		gameController.sendToCellModel(this.getText(), this);
 	}
 	
@@ -115,18 +120,30 @@ public class CellView extends JTextField {
 		this.setHorizontalAlignment(JTextField.CENTER);
 	}
 	
+	
+	/*
+	 * Mutator for the views text field number
+	 */
 	public void setTextField (int number) {
 		this.number = number;
-		this.setText(Integer.toString(number));
+		//parse the int that is sent from the model to a string 
+		this.setText(Integer.toString(number)); 
 	}
 	
+	
+	/*
+	 * Mutator for the views validity data member
+	 */
 	public void setValid (boolean valid) {
 		this.valid = valid;
 	}
 	
+	/*
+	 * Mutator for the views validity data member when training mode is on
+	 */
 	public void setValidTraining (boolean valid) {
 		this.valid = valid;
-		setBackgroundColor();
+		setBackgroundColor(); //change color to green if valid red if invalid
 	}
 	
 	public void setController (GameController gameController) {
@@ -137,6 +154,10 @@ public class CellView extends JTextField {
 		this.gameController = tc;
 	}
 	
+	
+	/*
+	 * Mutator for the views background color for the training mode based on its validity
+	 */
 	public void setBackgroundColor () {
 		if (valid) {
 			this.setBackground(Color.GREEN);
@@ -144,11 +165,17 @@ public class CellView extends JTextField {
 		else this.setBackground(Color.RED);
 	}
 	
+	/*
+	 * To add a cell model object to the cell view 
+	 */
 	public void addModelToObserverList (CellModel cellModel) {
 		observerList = cellModel;
 	}
 	
 	
+	/*
+	 * Accessor method for the cell view's observerList object
+	 */
 	public CellModel getObserverList() {
 		return observerList;
 	}
