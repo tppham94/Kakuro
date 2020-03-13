@@ -21,6 +21,7 @@ public class WordModel {
 	public WordModel (int size, int totalForWord) {
 		CellModelArray = new CellModel [size];
 		this.correctTotalForWord = totalForWord;
+		this.wordIsValid = false;
 	}
 	
 	/**
