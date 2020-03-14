@@ -5,7 +5,6 @@ public class WordModel {
 	CellModel CellModelArray[];
 	int correctTotalForWord;
 	int startingIndex;
-
 	boolean wordIsValid;
 
 	public WordModel () { //def constructor
@@ -29,9 +28,9 @@ public class WordModel {
 		return CellModelArray[index];
 	}
 	
-//	public void setCellModelArrayAtIndex(int index, int correctNumber) { //mutator to create a new cellModel object
-//		CellModelArray [index] = new CellModel (correctNumber);
-//	}
+	public void setCellModelArrayAtIndex(int index, int correctNumber) { //mutator to create a new cellModel object
+		CellModelArray [index] = new CellModel (correctNumber);
+	}
 	
 	public void setCellModelArrayAtIndex(int index, CellModel cm) { //mutator to create a new cellModel object
 		CellModelArray [index] = cm;

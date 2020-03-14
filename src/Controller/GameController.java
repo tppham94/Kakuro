@@ -1,6 +1,15 @@
 package Controller;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 import Model.CellModel;
 import Model.GameBoardModel;
@@ -21,16 +30,23 @@ public class GameController {
 		gbModel = gbm;
 	}
 	
-	public void sendToCellModel(String number, CellView cv) { //to update the model based on the views event method triggered in view class
-		cv.getObserverList().update(number);
-		sendToWordModel(cv.getObserverList());
+	//to update the cell model based on the views event method triggered in view class
+	public void sendToCellModel(String number, CellView cv) { 
+		cv.getObserverList().update(number); //updates the cell model associated to the cell view
+		sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
 	}
 	
-	public void sendToWordModel(CellModel cm) { //updates all wordModels that have the CellModel
+	//updates all wordModels that have the CellModel
+	public void sendToWordModel(CellModel cm) { 
 		cm.getWordObserverlist().forEach(wordObj -> wordObj.validateWord());
 	}
 	
-	public void sendToGameModel() { //updates all wordModels that have the CellModel
+	//updates the validate text for the gameboard
+	public void sendToGameModel() { 
 		gbModel.update();
+	}
+	
+	public void addToGameBoardModelArray(int index, WordModel wm) {
+		gbModel.setWordModelAtIndex(index,wm);
 	}
 }

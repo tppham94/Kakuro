@@ -6,22 +6,32 @@ import Controller.GameController;
 import View.CellView;
 
 public class CellModel {
-	int correctNumber;
-	int userNumber;
-	boolean isCorrect;
-	CellView view = new CellView();
+	int correctNumber; //the correct number associated to that cell
+	int userNumber; //the user's number being entered by the user
+	boolean isCorrect; //that cell's validity status
+	CellView view = new CellView(); //the cell view which the model has to update
+	
+	//the word model array of maximum size 2,
+	//will be updated every time there is a change done to the cell model
+	//need a reference to both words that it belongs to s that they can be updated
 	ArrayList <WordModel> wordObserverlist = new ArrayList <WordModel> (1);
 	
-	
+	//def constructor which sets isCorrect to false
 	public CellModel() {
 		isCorrect = false;
 	}
 	
-	public CellModel(int correct, CellView cellView) {
+	//constructor which take correct number and sets the default correct value to false
+	public CellModel(int correct) {
 		correctNumber = correct;
 		isCorrect = false;
-
-		view = cellView;
+	}
+	
+	
+	public CellModel(int correct, CellView cv) {
+		correctNumber = correct;
+		isCorrect = false;
+		view =cv;
 	}
 	
 	public CellModel(int correct, WordModel wordModel1) {
@@ -49,7 +59,9 @@ public class CellModel {
 		wordObserverlist.add(wordModel2);
 	}
 	
-	public boolean update(String str) { //method to update model which will be used by controller
+	//method to update the word model which will be used by controller
+	public boolean update(String str) { 
+		System.out.println("str:"+str);
 		if (isDigit(str)) {
 			userNumber = Integer.parseInt(str);
 			setViewsText();
@@ -60,14 +72,20 @@ public class CellModel {
 				else {
 					setCorrect(false);
 				}
-			} 
-			return true;
+				return true;
+			}
+			else {
+				isCorrect=false;
+				userNumber = Integer.parseInt(str);
+				return false;
+			}
 		}
 		else {
 			isCorrect=false;
-			setViewsValidity();
+			userNumber = 0;
 			return false;
 		}
+
 	}
 	
 	//method to update model which will be used by controller it returns a string which will be used by the training controller
@@ -76,38 +94,49 @@ public class CellModel {
 		String validationSentnce= "";
 		if (isDigit(str)) {
 			userNumber = Integer.parseInt(str);
-			setViewsTextValidate();
 			if(isSignleDigit(str)) {
 				if(isCorrectNumber(userNumber)) {
 					setCorrect(true);
-					validationSentnce = " and that number is Correct";
+					setViewsTextValidate();
+					validationSentnce = "Success at updating number and that number is Correct";
+					return validationSentnce;
 				}
 				else {
-					validationSentnce = " but that number is InCorrect";
-
 					setCorrect(false);
+					setViewsTextValidate();
+					validationSentnce = "Success at updating number but that number is InCorrect";
+					return validationSentnce;
 				}
 			} 
-			return "Success at updating number"+validationSentnce;
+			else {
+				setCorrect(false);
+				setViewsTextValidate();
+				validationSentnce = "Number must be single digit";
+				return validationSentnce;
+			}
 		}
 		else {
+			userNumber = 0;
 			isCorrect=false;
-			setViewsValidity();
+			setViewsTextValidate();
 			return "Sorry not a number in between 1-9";
 		}
 	}
 	
-	public boolean isDigit (String str) { //method to check if  the string is a digit
+	//method to check if  the string is a digit
+	public boolean isDigit (String str) { 
 		if (str.matches("\\d+")) return true;
 		else return false;
 	}
 	
-	public boolean isSignleDigit (String str) { //method to check if string is a single digit
+	//method to check if string is a single digit
+	public boolean isSignleDigit (String str) { 
 		if (str.matches("[1-9]")) return true;
 		else return false;
 	}
 	
-	public boolean isCorrectNumber (int userValue) { //method to check if it is a correct number
+	//method to check if it is a correct number
+	public boolean isCorrectNumber (int userValue) { 
 		if (userValue==correctNumber) {
 			setCorrect(true);
 			return true;
@@ -127,25 +156,37 @@ public class CellModel {
 		return isCorrect;
 	}
 	
-	public CellView getCellView () { //method to return the view, this will be used by the controller to have the same reference
+	//method to return the cell view,
+	//this will be used by the controller to have the same reference
+	public CellView getCellView () { 
 		return view;
 	}
 	
-	public void setViewsText () { //used to update the view on the new number
-		view.setTextField(userNumber);
-		setViewsValidity();
+	//Mutator for cellview
+	public void setCellView (CellView cv) { 
+		 view = cv;
 	}
 	
-	public void setViewsTextValidate () { //used to update the view on the new number and color
+	//method to update the cell view on the new number
+	public void setViewsText () { 
+		if(view.getText()!=Integer.toString(userNumber)) {
+			view.setTextField(userNumber);
+			setViewsValidity();
+		}
+	}
+	
+	//method to update the view on the new number and color
+	public void setViewsTextValidate () { 
 		view.setTextField(userNumber);
 		setViewsValidityTraining();
 	}
 	
-	public void setViewsValidityTraining () { //method to update the views background coller
+	//method to update the cell view's background color
+	public void setViewsValidityTraining () { 
 		view.setValidTraining(isCorrect);
 	}
 	
-	public void setViewsValidity () { //method to update the views background coller
+	public void setViewsValidity () { //method to update the views background color
 		view.setValid(isCorrect);
 	}
 	

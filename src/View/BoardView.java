@@ -12,15 +12,18 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import javafx.scene.control.Cell;
+//import javafx.scene.control.Cell;
+
+
+import Controller.GameController;
+import Controller.TrainingController;
+import Model.GameBoardModel;
+import Model.WordModel;
+import Model.CellModel;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-import Controller.GameController;
-import Model.ClueCellModel;
-import Model.WordModel;
-import Model.CellModel;
 import org.json.simple.parser.ParseException;
 
 public class BoardView {
@@ -29,15 +32,25 @@ public class BoardView {
 	JButton validateButton;
 	JComponent[] gameComponents;
 	JFrame jf;
+	ValidateView vView;
+	GameBoardModel gModel;
+	ValidateButtonView vBView;
+	JSONArray wordsArray;
+	int wordsArraySize;
 
 	// Constructor called by Game Driver
-	public BoardView() {
-		controller = new GameController();
+	public BoardView(ValidateView vView, GameBoardModel gModel, ValidateButtonView vBView) {
+		this.vView = vView;
+		this.gModel = gModel;
+		this.vBView = vBView;
+
+		int counter =0;
+		controller = new TrainingController();
 		jf = new JFrame("Kakuro");
 
 		JSONObject kakuro = null;  //create JSON object to parse input JSON file
 		try {
-			kakuro = (JSONObject) new JSONParser().parse(new FileReader("C:\\Users\\TP\\Desktop\\Github\\Kakuro\\src\\game1.json"));
+			kakuro = (JSONObject) new JSONParser().parse(new FileReader("..\\Kakuro\\src\\game1.json"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
@@ -57,7 +70,7 @@ public class BoardView {
 			if (value == 0) {
 				gameComponents[i] = new ClueCellView();
 			} else {
-				CellView cellView = new CellView();
+				CellView cellView = new CellView(controller);
 				CellModel cellModel = new CellModel(value, cellView);
 				cellView.addModelToObserverList(cellModel);
 				gameComponents[i] = cellView;
@@ -77,7 +90,8 @@ public class BoardView {
 //        }
 		
         
-		JSONArray wordsArray = (JSONArray) kakuro.get("words"); // create JSON array for the words
+		wordsArray = (JSONArray) kakuro.get("words"); // create JSON array for the words
+		wordsArraySize = wordsArray.size();
         for (int i=0; i < wordsArray.size(); i++) {
         	JSONObject jsonWordObj = (JSONObject) wordsArray.get(i);
         	int row = (int) (long) jsonWordObj.get("row");
@@ -90,6 +104,7 @@ public class BoardView {
 
         	ClueCellView clue_cell = (ClueCellView) gameComponents[row * size + col];
         	WordModel new_word = new WordModel(size, sum);
+        	controller.addToGameBoardModelArray(counter++,new_word);
         	System.out.println(jsonWordObj.toString());
         	for (int j = 0; j < cell_indices.size(); j++) {
 				System.out.println("\t" + cell_indices.get(j));
@@ -141,25 +156,31 @@ public class BoardView {
 		
 		addComponentsToJFrame();
 		setVisualLayout(gameSize+1, gameSize);
-		addValidateButton();
+		//addValidateButton();
+
+		jf.add(vBView);
+		jf.add(vView);
 //		validateButton.addActionListener(controller);
 
 		//added it2
 		notifyChange();
 	}
 
+	/*
 	// Adding validate button
 	private void addValidateButton() {
 		validateButton = new JButton("validate");
 		validateButton.setToolTipText("Validate");
 		jf.add(validateButton);
 	}
+	 */
 
 	// Adding visual layout to jframe
 	private void setVisualLayout(int actualRows, int actualCols) {
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setSize(600, 600);
 		jf.setLayout(new GridLayout(actualRows, actualCols));
+		jf.setLocationRelativeTo(null);
 		jf.setVisible(true);
 
 	}
@@ -169,6 +190,10 @@ public class BoardView {
 		for (int i = 0; i < gameComponents.length; i++) {
 			jf.add(gameComponents[i]);
 		}
+	}
+
+	public int getWordArraySize(){
+		return wordsArraySize;
 	}
 
 	//added it2
