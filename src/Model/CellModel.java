@@ -163,7 +163,23 @@ public class CellModel {
 	public boolean getIsCorrect () {
 		return isCorrect;
 	}
-	
+
+	/**
+	 * Returns the correct value for the cell.
+	 *
+	 * Used for saving the game.
+	 * @return
+	 */
+	public int getCorrectNumber () { return correctNumber; }
+
+	/**
+	 * Returns the current value of the cell.
+	 *
+	 * Used for saving the game.
+	 * @return
+	 */
+	public int getUserNumber () { return userNumber; }
+
 	/**
 	 * method to return the cell view,
 	 * this will be used by the controller to have the same reference

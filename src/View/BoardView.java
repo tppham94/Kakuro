@@ -141,4 +141,8 @@ public class BoardView extends JPanel {
 		return this.boardPanel;
 	}
 
+	public JComponent getComponentAt(int i) {
+		return this.gameComponents[i];
+	}
+
 }

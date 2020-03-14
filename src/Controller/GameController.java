@@ -1,27 +1,24 @@
 package Controller;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-
 import Model.CellModel;
 import Model.GameBoardModel;
 import Model.WordModel;
 import View.CellView;
+import View.ClueCellView;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import javax.swing.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameController {
 	
 
 	GameBoardModel gbModel;	
 	ArrayList <WordModel> wordObserverlist;
-	
+
 	/**
 	 * Default constructor which assigns a new gameboard
 	 * @param gbm
@@ -68,5 +65,69 @@ public class GameController {
 	 */
 	public void addToGameBoardModelArray(int index, WordModel wm) {
 		gbModel.setWordModelAtIndex(index,wm);
+	}
+
+	public void saveGame(View.BoardView boardView, String filename) throws IOException {
+		JSONObject json_output = new JSONObject();
+
+		int size = gbModel.getLength();
+		json_output.put("size", size);
+
+		JSONArray cell_array = new JSONArray();
+		JSONArray word_array = new JSONArray();
+		for (int i=0; i < cell_values.length; i++) {
+			JComponent component = boardView.getComponentAt(i);
+			int correctValue = 0;
+			int currentValue = 0;
+			if (component instanceof CellView) {
+				CellView cellView = (CellView) component;
+				correctValue = cellView.getObserverList().getCorrectNumber();
+				currentValue = cellView.getObserverList().getUserNumber();
+			} else if (component instanceof ClueCellView) {
+				ClueCellView clueCellView = (ClueCellView) component;
+				WordModel rightWord = clueCellView.getRightWord();
+				WordModel bottomWord = clueCellView.getBottomWord();
+				if (rightWord != null) {
+					JSONObject right_obj = new JSONObject();
+					right_obj.put("vertical", false);
+					right_obj.put("sum", rightWord.getTotalForWord());
+					right_obj.put("index", i);
+					JSONArray cell_indices = new JSONArray();
+
+					CellModel[] cellModels = rightWord.getCellModelArray();
+					for (int j=0; j < cellModels.length; j++) {
+						CellView cm_cellView = cellModels[j].getCellView();
+						cell_indices.add(cm_cellView.getIndex());
+					}
+
+					right_obj.put("cell_indices", cell_indices);
+				}
+				if (bottomWord != null) {
+					JSONObject bottom_obj = new JSONObject();
+					bottom_obj.put("vertical", true);
+					bottom_obj.put("sum", bottomWord.getTotalForWord());
+					bottom_obj.put("index", i);
+					JSONArray cell_indices = new JSONArray();
+
+					CellModel[] cellModels = bottomWord.getCellModelArray();
+					for (int j=0; j < cellModels.length; j++) {
+						CellView cm_cellView = cellModels[j].getCellView();
+						cell_indices.add(cm_cellView.getIndex());
+					}
+
+					bottom_obj.put("cell_indices", cell_indices);
+				}
+			}
+			JSONObject cell_object = new JSONObject();
+			cell_object.put("correct", correctValue);
+			cell_object.put("current", currentValue);
+			cell_array.add(cell_array);
+		}
+		json_output.put("cells", cell_array);
+		json_output.put("words", word_array);
+
+		FileWriter writer = new FileWriter(filename);
+		writer.write(json_output.toJSONString());
+		writer.flush();
 	}
 }

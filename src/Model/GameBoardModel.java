@@ -109,7 +109,9 @@ public class GameBoardModel {
 	public void setWhatNeedsToBeFixed(String whatNeedsToBeFixed) { 
 		this.whatNeedsToBeFixed = whatNeedsToBeFixed;
 	}	
-	
+
+	public int getWordModelCount() { return wordModelArray.length; }
+
 	public int getLength() {
 		return length;
 	}

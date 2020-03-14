@@ -19,6 +19,7 @@ import Model.WordModel;
 public class CellView extends JTextField {
 	GameController gameController;
 	CellModel observerList;
+	int index;
 
 	/**
 	 * Default constructor
@@ -207,5 +208,12 @@ public class CellView extends JTextField {
 	public CellModel getObserverList() {
 		return observerList;
 	}
-	
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
 }

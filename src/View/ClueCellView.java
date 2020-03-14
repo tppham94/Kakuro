@@ -1,18 +1,11 @@
 package View;
 
-import Controller.GameController;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.geom.Line2D;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
-
 import Model.WordModel;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.geom.Line2D;
 
 @SuppressWarnings("serial")
 public class ClueCellView extends JPanel {
@@ -38,6 +31,14 @@ public class ClueCellView extends JPanel {
 	public void setRightWord(WordModel rightWord) {
 		this.rightWord = rightWord;
 		setRightLabelText();
+	}
+
+	public WordModel getRightWord() {
+		return rightWord;
+	}
+
+	public WordModel getBottomWord() {
+		return bottomWord;
 	}
 
 	/**
