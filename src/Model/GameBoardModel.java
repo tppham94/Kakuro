@@ -46,7 +46,6 @@ public class GameBoardModel {
 	 */
 	public boolean update () { 
 		for(int i=0;i<wordModelArray.length;i++) {
-			if(wordModelArray[i].getClass().equals("WordModel")) { //only wordModels can be checked for validation
 				if(wordModelArray[i].isWordIsValid()==false) {
 					valid = false;
 					validateView.updateString ("Sorry that isn't right. Please try again");
@@ -55,7 +54,6 @@ public class GameBoardModel {
 				validateView.updateString ("Congratulations! You won");
 				valid = true; // will only reach at end if doesn't break for loop meaning it is good
 			}
-		}
 		return valid;
 	}
 	

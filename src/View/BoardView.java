@@ -19,6 +19,7 @@ import Controller.GameController;
 import Controller.TrainingController;
 import Model.WordModel;
 import Model.CellModel;
+import Model.GameBoardModel;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -35,7 +36,8 @@ public class BoardView {
 	// Constructor called by Game Driver
 	public BoardView() {
 		int counter =0;
-		controller = new TrainingController();
+		GameBoardModel gbm = new GameBoardModel(33);
+		controller = new TrainingController(gbm);
 		jf = new JFrame("Kakuro");
 
 		JSONObject kakuro = null;  //create JSON object to parse input JSON file

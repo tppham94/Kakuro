@@ -16,6 +16,15 @@ public class TrainingController extends GameController{
 	}
 	
 	/**
+	 * Constructor which has a gameBoardModelSet
+	 * @param gbm
+	 */
+	public TrainingController (GameBoardModel gbm) {
+		super();
+		super.gbModel = gbm;
+	}
+	
+	/**
 	 * to update all of the models based on the views event method triggered in view class
 	Needs to update at time of click so that the user can know what is wrong with that specific cell
 	*/
