@@ -75,7 +75,7 @@ public class GameController {
 
 		JSONArray cell_array = new JSONArray();
 		JSONArray word_array = new JSONArray();
-		for (int i=0; i < cell_values.length; i++) {
+		for (int i=0; i < size*size; i++) {
 			JComponent component = boardView.getComponentAt(i);
 			int correctValue = 0;
 			int currentValue = 0;
