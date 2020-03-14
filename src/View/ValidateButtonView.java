@@ -10,39 +10,52 @@ import Controller.TrainingController;
 
 public class ValidateButtonView extends JButton{
 
-	//the controller that the button must send the message to
-	private GameController gbc;
-	
-	//default constructor
+	private GameController gbc;//the controller that the button must send the action to
+
+	/**
+	 * default constructor in case called
+	 */
 	public ValidateButtonView() {
 		
 	}
 	
-	//constructor which takes game controller and a string for the default message 
-	//on the button as parameters
+	/**
+	 * constructor which takes game controller and a string for the default message 
+	 * on the button as parameters
+	 * @param str
+	 * @param gbc
+	 */
+	
 	public ValidateButtonView(String str, GameController gbc) {
 		super(str);
 		this.gbc = gbc;
 		addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){  
-				updateGameBoard();    
+				updateGameBoard();
 			}  	    
 		});  	
 	}
 	
-	//constructor which takes training controller and a string for the default message 
-	//on the button as parameters
+	/**
+	 * constructor which takes training controller and a string for the default message s
+	 * on the button as parameters
+	 * @param str
+	 * @param tc
+	 */
+	
 	public ValidateButtonView(String str, TrainingController tc) {
 		super(str);
 		this.gbc = tc;
 		addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){  
-				updateGameBoard();    
+				updateGameBoard();
 			}  	    
 		});  	
 	}
 	
-	//send to the controller the notification to update the game model 
+	/**
+	 * send to the controller the notification to update the game model 
+	 */
 	public void updateGameBoard () {
 		this.gbc.sendToGameModel();
 	}

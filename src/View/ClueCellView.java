@@ -20,25 +20,39 @@ public class ClueCellView extends JPanel {
 	private static final int SIZE = 600;
 	private WordModel rightWord;  //it2 change
 	private WordModel bottomWord; //it2 change
-	private JLabel rightLabel;
-	private JLabel downLabel;
+	private JLabel rightLabel;// label which will display to the user the total needed for the word on the right
+	private JLabel downLabel; //label which will display to the user the total needed for the word bellow
 
+	/**
+	 * Default constructor which creates a 2x2 grid for the 2 numbers
+	 */
 	public ClueCellView() {
 		super(new GridLayout(2, 2));
 		addUIComponentsToPanel();
 	}
 
+	/**
+	 * Mutator to set the right word model
+	 * @param rightWord
+	 */
 	public void setRightWord(WordModel rightWord) {
 		this.rightWord = rightWord;
 		setRightLabelText();
 	}
 
+	/**
+	 * Mutator to set the bottom word model
+	 * @param bottomWord
+	 */
 	public void setBottomWord(WordModel bottomWord) {
 		this.bottomWord = bottomWord;
 		setDownLabelText();
 	}
 
 	@Override
+	/**
+	 * setting visuals of the clue cell
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -48,11 +62,18 @@ public class ClueCellView extends JPanel {
 		g2d.draw(line);
 	}
 
+
+	/**
+	 * Mutator to get the total of the word on the right
+	 */
 	private void setRightLabelText() {
 		if (rightWord != null)
 			rightLabel.setText("" + rightWord.getTotalForWord());
 	}
 
+	/**
+	 * Mutator to get the total of the bottom word
+	 */
 	private void setDownLabelText() {
 		if (bottomWord != null)
 			downLabel.setText("" + bottomWord.getTotalForWord());
