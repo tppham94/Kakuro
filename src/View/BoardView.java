@@ -1,6 +1,9 @@
 package View;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 //import javafx.scene.control.Cell;
 
@@ -30,6 +34,7 @@ public class BoardView extends JPanel {
     JButton validateButton;
     JComponent[] gameComponents;
     private JPanel boardPanel;
+    private JButton saveButton;
 
     GameController controller;
 
@@ -59,10 +64,10 @@ public class BoardView extends JPanel {
 
 
     public void initComponents(JSONObject jsonObject) {
-        //boardPanel = new JPanel(new GridLayout());
+    	saveButton = new JButton("Save");
+    	saveButton.setMargin(new Insets(5,5,5,5));
 
-        int counter = 0;
-        //jf = new JFrame("Kakuro");
+		int counter = 0;
 
         JSONObject kakuro = null;  //create JSON object to parse input JSON file
         try {
@@ -91,16 +96,30 @@ public class BoardView extends JPanel {
         vBtnView = new ValidateButtonView("Vals", controller);
 
 
-        //boardPanel.add(addComponentsToJFrame());
-        //addComponentsToJFrame();
         boardPanel = new JPanel(new GridLayout(size + 1, size));
         boardPanel.setPreferredSize(new Dimension(600, 600));
         for (int i = 0; i < gameComponents.length; i++) {
             boardPanel.add(gameComponents[i]);
         }
-        //boardPanel.setLayout(new GridLayout(gameSize+1, gameSize));
-        // setVisualLayout(gameSize+1, gameSize);
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser file = new JFileChooser(new File("../Kakuro"));
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json", "json");
+                file.setFileFilter(filter);
+                file.showSaveDialog(null);
+                try {
+                    controller.saveGame(BoardView.this, "src/" + file.getSelectedFile().getName() + ".json");
+                    JOptionPane.showMessageDialog(null, "You have saved!");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
         boardPanel.add(vBtnView);
+		boardPanel.add(saveButton);
         boardPanel.add(vView);
         add(boardPanel);
     }

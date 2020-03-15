@@ -3,6 +3,7 @@ package Controller;
 import Model.CellModel;
 import Model.GameBoardModel;
 import Model.WordModel;
+import View.BoardView;
 import View.CellView;
 import View.ClueCellView;
 import org.json.simple.JSONArray;
@@ -11,6 +12,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -47,6 +50,7 @@ public class GameController {
      * @param number
      * @param cv
      */
+
     public void sendToCellModel(String number, CellView cv) {
         cv.getObserverList().update(number); //updates the cell model associated to the cell view
         sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
