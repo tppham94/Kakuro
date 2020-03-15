@@ -80,10 +80,10 @@ public class GameController {
     }
 
     public void saveGame(View.BoardView boardView, String filename) throws IOException {
+        System.out.println("Saving game to: " + filename);
         JSONObject json_output = new JSONObject();
 
         int size = gbModel.getLength();
-        json_output.put("size", size);
 
         JSONArray cell_array = new JSONArray();
         JSONArray word_array = new JSONArray();
@@ -113,6 +113,7 @@ public class GameController {
                     }
 
                     right_obj.put("cell_indices", cell_indices);
+                    word_array.add(right_obj);
                 }
                 if (bottomWord != null) {
                     JSONObject bottom_obj = new JSONObject();
@@ -128,12 +129,13 @@ public class GameController {
                     }
 
                     bottom_obj.put("cell_indices", cell_indices);
+                    word_array.add(bottom_obj);
                 }
             }
             JSONObject cell_object = new JSONObject();
             cell_object.put("correct", correctValue);
             cell_object.put("current", currentValue);
-            cell_array.add(cell_array);
+            cell_array.add(cell_object);
         }
         json_output.put("cells", cell_array);
         json_output.put("words", word_array);
@@ -141,6 +143,7 @@ public class GameController {
         FileWriter writer = new FileWriter(filename);
         writer.write(json_output.toJSONString());
         writer.flush();
+        writer.close();
     }
 
     public void loadGame(View.BoardView boardView, String filepath) {

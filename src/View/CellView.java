@@ -1,6 +1,8 @@
 package View;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -20,6 +22,7 @@ public class CellView extends JTextField {
     GameController gameController;
     CellModel observerList;
     int index;
+    boolean updateWithoutNotification = false;
 
     /**
      * Default constructor
@@ -30,36 +33,7 @@ public class CellView extends JTextField {
          */
         setVisualConfiguration();
 
-        this.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            /**
-             * sends text to controller on input
-             */
-            public void insertUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-
-            }
-
-            @Override
-            /**
-             * sends text to controller on input
-             */
-            public void removeUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-            }
-
-            @Override
-            /**
-             * sends text to controller on input
-             */
-            public void changedUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-            }
-
-        });
+        setupListeners();
     }
 
     /**
@@ -70,29 +44,7 @@ public class CellView extends JTextField {
         setVisualConfiguration();
 
 
-        this.getDocument().addDocumentListener(new DocumentListener() {
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-
-            }
-
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-            }
-
-        });
+        setupListeners();
     }
 
 
@@ -103,30 +55,55 @@ public class CellView extends JTextField {
         this.gameController = tc;
         setVisualConfiguration();
 
-        this.getDocument().addDocumentListener(new DocumentListener() {
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                // TODO Auto-generated method stub
-                sendToController();
-            }
-
-        });
+        setupListeners();
     }
 
+    private void setupListeners() {
+        this.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (!updateWithoutNotification) {
+                    sendToController();
+                }
+                updateWithoutNotification = false;
+            }
+        });
+//        this.getDocument().addDocumentListener(new DocumentListener() {
+//            @Override
+//            /**
+//             * sends text to controller on input
+//             */
+//            public void insertUpdate(DocumentEvent e) {
+//                if (!updateWithoutNotification) {
+//                    sendToController();
+//                }
+//                updateWithoutNotification = false;
+//            }
+//
+//            @Override
+//            /**
+//             * sends text to controller on input
+//             */
+//            public void removeUpdate(DocumentEvent e) {
+//                if (!updateWithoutNotification) {
+//                    sendToController();
+//                }
+//                updateWithoutNotification = false;
+//            }
+//
+//            @Override
+//            /**
+//             * sends text to controller on input
+//             */
+//            public void changedUpdate(DocumentEvent e) {
+//                if (!updateWithoutNotification) {
+//                    sendToController();
+//                }
+//                updateWithoutNotification = false;
+//            }
+//
+//        });
+    }
 
     /**
      * send the number as a string to the controller which will
@@ -151,14 +128,16 @@ public class CellView extends JTextField {
      */
     public void setTextField(int number) {
         //parse the int that is sent from the model to a string
-
         if (this.getText() != Integer.toString(number)) {
-            Runnable doAssist = new Runnable() {
-                @Override
-                public void run() {
-                    setText(Integer.toString(number));
-                }
-            };
+            // Block notification to game controller in order to prevent infinite loop.
+            updateWithoutNotification = true;
+            setText(Integer.toString(number));
+//            Runnable doAssist = new Runnable() {
+//                @Override
+//                public void run() {
+//                    setText(Integer.toString(number));
+//                }
+//            };
         }
 
 

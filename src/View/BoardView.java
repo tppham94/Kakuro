@@ -69,26 +69,18 @@ public class BoardView extends JPanel {
 
 		int counter = 0;
 
-        JSONObject kakuro = null;  //create JSON object to parse input JSON file
-        try {
-            kakuro = (JSONObject) new JSONParser().parse(new FileReader(".\\src\\game1.json"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         //getting game size element to create the metrics that will created the correct board size for the game.
-        int size = (int) (long) kakuro.get("size");
+        int size = (int) (long) jsonObject.get("size");
         // array for the cells to be added to our game board
         gameComponents = new JComponent[size * size];
+        controller.getGameBoardModel().setLength(size);
 
         //create the array for the cells to populate the correct cell values
-        JSONArray cellsArray = (JSONArray) kakuro.get("cells");
+        JSONArray cellsArray = (JSONArray) jsonObject.get("cells");
         handleCellsCalls(cellsArray);
 
 
-        JSONArray wordsArray = (JSONArray) kakuro.get("words"); // create JSON array for the words
+        JSONArray wordsArray = (JSONArray) jsonObject.get("words"); // create JSON array for the words
         controller.initializeWordModelArray(wordsArray.size());
         handleWordCalls(wordsArray);
 
@@ -127,12 +119,24 @@ public class BoardView extends JPanel {
     //uses the cellsArray to initialize the game components with the corect cluecellView or Cellview.
     private void handleCellsCalls(JSONArray cellsArray) {
         for (int i = 0; i < cellsArray.size(); i++) {
-            int value = (int) (long) cellsArray.get(i);
+            int value = 0;
+            int currentValue = 0;
+            try {
+                value = (int) (long) cellsArray.get(i);
+            } catch (Exception e) {
+                JSONObject cell = (JSONObject) cellsArray.get(i);
+                value = (int) (long) cell.get("correct");
+                currentValue = (int) (long) cell.get("current");
+            }
             if (value == 0) {
                 gameComponents[i] = new View.ClueCellView();
             } else {
                 View.CellView cellView = new View.CellView(controller);
+                cellView.setIndex(i);
                 CellModel cellModel = new CellModel(value, cellView);
+                if (currentValue > 0) {
+                    cellModel.update("" + currentValue);
+                }
                 cellView.addModelToObserverList(cellModel);
                 gameComponents[i] = cellView;
             }
@@ -155,9 +159,7 @@ public class BoardView extends JPanel {
             View.ClueCellView clue_cell = (View.ClueCellView) gameComponents[index];
             WordModel new_word = new WordModel(word_size, sum);
             controller.addToGameBoardModelArray(counter++, new_word);
-            System.out.println(jsonWordObj.toString());
             for (int j = 0; j < cell_indices.size(); j++) {
-                System.out.println("\t" + cell_indices.get(j));
                 CellModel cell_model = ((View.CellView) gameComponents[(int) (long) cell_indices.get(j)]).getObserverList();
                 new_word.setCellModelArrayAtIndex(j, cell_model);
             }
@@ -176,7 +178,6 @@ public class BoardView extends JPanel {
     private void setVisualLayout(int actualRows, int actualCols) {
 
         setLayout(new GridLayout(actualRows, actualCols));
-        System.out.println(this);
         //setVisible(true);
         //removed the jf in front of them
     }
