@@ -97,7 +97,7 @@ public class NewGameView extends JPanel {
         backButton.addActionListener(backListener);
     }
 
-    public void addTutorialListener(ActionListener tutorialListener){
+    public void addTutorialListener(ActionListener tutorialListener) {
         tutorialButton.addActionListener(tutorialListener);
     }
 

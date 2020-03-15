@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class MainMenuView extends JFrame{
+public class MainMenuView extends JFrame {
 
     //Components
     private JLabel menuName;
@@ -21,13 +21,11 @@ public class MainMenuView extends JFrame{
     private CardLayout cards;
 
     // Use to get access to the other class
-    LoginView l_view;
     NewGameView n_view;
     BoardView b_view;
 
     // constructor
-    public MainMenuView(LoginView l_view, NewGameView n_view, BoardView b_view) throws IOException {
-        this.l_view = l_view;
+    public MainMenuView(NewGameView n_view, BoardView b_view) throws IOException {
         this.n_view = n_view;
         this.b_view = b_view;
 
@@ -36,10 +34,10 @@ public class MainMenuView extends JFrame{
     }
 
     // Initializing the frame configuration
-    private void initFrameConfiguration(){
+    private void initFrameConfiguration() {
         setTitle("Main Menu");
         setLayout(new GridBagLayout());
-        setPreferredSize(new Dimension(800,750));
+        setPreferredSize(new Dimension(800, 750));
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -62,13 +60,13 @@ public class MainMenuView extends JFrame{
         mainPanel.add(menuName, c);
 
         newGameButton = new JButton("New Game");
-        newGameButton.setPreferredSize(new Dimension(90,25));
+        newGameButton.setPreferredSize(new Dimension(90, 25));
 
         loadButton = new JButton("Load Game");
-        loadButton.setPreferredSize(new Dimension(90,25));
+        loadButton.setPreferredSize(new Dimension(90, 25));
 
         exitButton = new JButton("Exit");
-        exitButton.setPreferredSize(new Dimension(90,25));
+        exitButton.setPreferredSize(new Dimension(90, 25));
 
         background = new JLabel(new ImageIcon(ImageIO.read(new File(".\\src\\View\\darkbg.jpg"))));
         setContentPane(background);
@@ -78,7 +76,7 @@ public class MainMenuView extends JFrame{
         c.gridy = 1;
         c.ipadx = 10;
         c.ipady = 5;
-        c.insets = new Insets(20,0,20,0);
+        c.insets = new Insets(20, 0, 20, 0);
         mainPanel.add(newGameButton, c);
 
 
@@ -96,35 +94,34 @@ public class MainMenuView extends JFrame{
         mainPanel.add(exitButton, c);
 
 
-        mainPanel.setBackground(new Color(0,0,0,0));
-        cardPanels.add(mainPanel,"MainMenu");
-        cardPanels.add(l_view.getLoginPanel(),"Login");
-        cardPanels.add(n_view.getNewGamePanel(),"NewGame");
-        cardPanels.add(b_view,"EasyGameKakuro");
+        mainPanel.setBackground(new Color(0, 0, 0, 0));
+        cardPanels.add(mainPanel, "MainMenu");
+        cardPanels.add(n_view.getNewGamePanel(), "NewGame");
+        cardPanels.add(b_view, "EasyGameKakuro");
         add(cardPanels);
         revalidate();
         repaint();
     }
 
     // Method for accessing the buttons in the controller
-    public void addNewGameListener(ActionListener newGameListener){
+    public void addNewGameListener(ActionListener newGameListener) {
         newGameButton.addActionListener(newGameListener);
     }
 
-    public void addLoadListener(ActionListener loadListener){
+    public void addLoadListener(ActionListener loadListener) {
         loadButton.addActionListener(loadListener);
     }
 
-    public void addExitListener(ActionListener exitListener){
+    public void addExitListener(ActionListener exitListener) {
         exitButton.addActionListener(exitListener);
     }
 
     // Created to be able to access the switch between panels
-    public CardLayout getCardLayout(){
+    public CardLayout getCardLayout() {
         return this.cards;
     }
 
-    public JPanel getCardPanels(){
+    public JPanel getCardPanels() {
         return this.cardPanels;
     }
 }
