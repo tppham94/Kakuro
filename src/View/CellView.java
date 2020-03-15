@@ -59,50 +59,51 @@ public class CellView extends JTextField {
     }
 
     private void setupListeners() {
-        this.addActionListener(new ActionListener() {
+//        this.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent actionEvent) {
+//                System.out.println("CellView action " + actionEvent);
+//                if (!updateWithoutNotification) {
+//                    sendToController();
+//                }
+//                updateWithoutNotification = false;
+//            }
+//        });
+        this.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+            /**
+             * sends text to controller on input
+             */
+            public void insertUpdate(DocumentEvent e) {
                 if (!updateWithoutNotification) {
                     sendToController();
                 }
                 updateWithoutNotification = false;
             }
+
+            @Override
+            /**
+             * sends text to controller on input
+             */
+            public void removeUpdate(DocumentEvent e) {
+                if (!updateWithoutNotification) {
+                    sendToController();
+                }
+                updateWithoutNotification = false;
+            }
+
+            @Override
+            /**
+             * sends text to controller on input
+             */
+            public void changedUpdate(DocumentEvent e) {
+                if (!updateWithoutNotification) {
+                    sendToController();
+                }
+                updateWithoutNotification = false;
+            }
+
         });
-//        this.getDocument().addDocumentListener(new DocumentListener() {
-//            @Override
-//            /**
-//             * sends text to controller on input
-//             */
-//            public void insertUpdate(DocumentEvent e) {
-//                if (!updateWithoutNotification) {
-//                    sendToController();
-//                }
-//                updateWithoutNotification = false;
-//            }
-//
-//            @Override
-//            /**
-//             * sends text to controller on input
-//             */
-//            public void removeUpdate(DocumentEvent e) {
-//                if (!updateWithoutNotification) {
-//                    sendToController();
-//                }
-//                updateWithoutNotification = false;
-//            }
-//
-//            @Override
-//            /**
-//             * sends text to controller on input
-//             */
-//            public void changedUpdate(DocumentEvent e) {
-//                if (!updateWithoutNotification) {
-//                    sendToController();
-//                }
-//                updateWithoutNotification = false;
-//            }
-//
-//        });
     }
 
     /**
@@ -130,14 +131,14 @@ public class CellView extends JTextField {
         //parse the int that is sent from the model to a string
         if (this.getText() != Integer.toString(number)) {
             // Block notification to game controller in order to prevent infinite loop.
-            updateWithoutNotification = true;
-            setText(Integer.toString(number));
-//            Runnable doAssist = new Runnable() {
-//                @Override
-//                public void run() {
-//                    setText(Integer.toString(number));
-//                }
-//            };
+            Runnable doAssist = new Runnable() {
+                @Override
+                public void run() {
+                    updateWithoutNotification = true;
+                    setText(Integer.toString(number));
+                }
+            };
+            SwingUtilities.invokeLater(doAssist);
         }
 
 

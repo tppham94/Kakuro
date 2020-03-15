@@ -85,6 +85,8 @@ public class GameController {
 
         int size = gbModel.getLength();
 
+        json_output.put("size", size);
+
         JSONArray cell_array = new JSONArray();
         JSONArray word_array = new JSONArray();
         for (int i = 0; i < size * size; i++) {
@@ -160,7 +162,6 @@ public class GameController {
             e.printStackTrace();
             return;
         }
-
         boardView.initComponents(jsonObject);
     }
 
