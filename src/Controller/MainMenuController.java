@@ -30,7 +30,7 @@ public class MainMenuController extends JPanel {
         mView.addNewGameListener(new newGameListener());
         mView.addLoadListener(new loadListener());
         mView.addExitListener(new exitListener());
-    }   
+    }
 
     private class exitListener implements ActionListener {
         @Override
@@ -46,7 +46,7 @@ public class MainMenuController extends JPanel {
             JFileChooser file = new JFileChooser(new File("../Kakuro"));
             file.showOpenDialog(null);
             gController.loadGame(bView, file.getSelectedFile().toString());
-            //mView.getCardLayout().show(mView.getCardPanels(),"Login");
+            mView.getCardLayout().show(mView.getCardPanels(), "EasyGameKakuro");
             mView.revalidate();
             mView.repaint();
         }
