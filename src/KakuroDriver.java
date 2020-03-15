@@ -1,3 +1,4 @@
+import Controller.GameController;
 import Controller.LoginController;
 import Controller.MainMenuController;
 import Controller.NewGameController;
@@ -21,8 +22,9 @@ public class KakuroDriver {
         NewGameView n_view = new NewGameView();
         BoardView b_view = new BoardView(false);
         MainMenuView m_view = new MainMenuView(l_view, n_view, b_view);
+        GameController g_Controller = new GameController();
 
-        MainMenuController m_controller = new MainMenuController(m_model, m_view);
+        MainMenuController m_controller = new MainMenuController(m_model, m_view, b_view, g_Controller);
         LoginController l_controller = new LoginController(l_view, m_view);
         NewGameController n_controller = new NewGameController(n_view, m_view, b_view);
     }
