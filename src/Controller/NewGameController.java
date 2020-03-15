@@ -27,6 +27,7 @@ public class NewGameController extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             m_view.setTitle("Easy");
+            b_view.getController().loadGame(b_view,"src/game1.json");
             m_view.getCardLayout().show(m_view.getCardPanels(),"EasyGameKakuro");
             m_view.revalidate();
             m_view.repaint();

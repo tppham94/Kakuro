@@ -119,4 +119,8 @@ public class GameBoardModel {
 	public void setLength(int length) {
 		this.length = length;
 	}
+
+	public void initializeWordModelArray(int size) {
+		wordModelArray = new WordModel[size];
+	}
 }

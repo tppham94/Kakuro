@@ -7,8 +7,12 @@ import View.CellView;
 import View.ClueCellView;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -129,5 +133,39 @@ public class GameController {
 		FileWriter writer = new FileWriter(filename);
 		writer.write(json_output.toJSONString());
 		writer.flush();
+	}
+
+	public void loadGame(View.BoardView boardView, String filepath) {
+		JSONObject jsonObject;
+		try {
+			jsonObject = readJSONFile(filepath);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+
+		boardView.initComponents(jsonObject);
+	}
+
+	// imports the JSON file for the game
+	private JSONObject readJSONFile(String filepath) throws IOException, ParseException {
+		JSONObject input_json = null;
+		input_json = (JSONObject) new JSONParser().parse(new FileReader(filepath));
+
+		return input_json;
+	}
+
+	public void initializeWordModelArray(int size) {
+		gbModel.initializeWordModelArray(size);
+	}
+
+	public Model.GameBoardModel getGameBoardModel() {
+		return gbModel;
 	}
 }

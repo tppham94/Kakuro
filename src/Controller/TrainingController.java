@@ -7,7 +7,7 @@ import Model.GameBoardModel;
 import Model.WordModel;
 import View.CellView;
 
-public class TrainingController extends GameController{
+public class TrainingController extends GameController {
 	
 	
 	//default constructor 

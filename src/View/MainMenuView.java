@@ -115,7 +115,7 @@ public class MainMenuView extends JFrame{
         cardPanels.add(mainPanel,"MainMenu");
         cardPanels.add(l_view.getLoginPanel(),"Login");
         cardPanels.add(n_view.getNewGamePanel(),"NewGame");
-        cardPanels.add(b_view.getBoardPanel(),"EasyGameKakuro");
+        cardPanels.add(b_view,"EasyGameKakuro");
         add(cardPanels);
         revalidate();
         repaint();

@@ -12,14 +12,14 @@ import java.awt.*;
 import java.io.IOException;
 
 // Driver class
-public class KakuroDriver{
+public class KakuroDriver {
 
     // Instantiating the views, controllers and model in order to connect them to each other
     public static void main(String[]args) throws IOException {
         MainMenuModel m_model = new MainMenuModel();
         LoginView l_view = new LoginView();
         NewGameView n_view = new NewGameView();
-        BoardView b_view = new BoardView();
+        BoardView b_view = new BoardView(false);
         MainMenuView m_view = new MainMenuView(l_view, n_view, b_view);
 
         MainMenuController m_controller = new MainMenuController(m_model, m_view);
