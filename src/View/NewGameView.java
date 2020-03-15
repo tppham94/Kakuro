@@ -1,7 +1,5 @@
 package View;
 
-import sun.awt.image.ToolkitImage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -13,20 +11,19 @@ public class NewGameView extends JPanel {
     private JButton mediumButton;
     private JButton hardButton;
     private JButton backButton;
+    private JButton tutorialButton;
     private JPanel newGamePanel;
-    private JPanel buttonPanel;
 
     private GridBagConstraints c;
 
-    public NewGameView(){
+    public NewGameView() {
         initNewGameView();
     }
 
     // Initializing the content of the panel
-    public void initNewGameView(){
+    public void initNewGameView() {
 
         newGamePanel = new JPanel(new GridBagLayout());
-        //buttonPanel = new JPanel(new GridBagLayout());
 
         c = new GridBagConstraints();
 
@@ -38,13 +35,16 @@ public class NewGameView extends JPanel {
         newGamePanel.add(difficulty, c);
 
         easyButton = new JButton("Easy");
-        easyButton.setPreferredSize(new Dimension(90,25));
+        easyButton.setPreferredSize(new Dimension(90, 25));
 
         mediumButton = new JButton("Medium");
-        mediumButton.setPreferredSize(new Dimension(90,25));
+        mediumButton.setPreferredSize(new Dimension(90, 25));
 
         hardButton = new JButton("Hard");
-        hardButton.setPreferredSize(new Dimension(90,25));
+        hardButton.setPreferredSize(new Dimension(90, 25));
+
+        tutorialButton = new JButton("Tutorial");
+        tutorialButton.setPreferredSize(new Dimension(90, 25));
 
         backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(90, 25));
@@ -55,7 +55,7 @@ public class NewGameView extends JPanel {
         c.gridy = 1;
         c.ipadx = 10;
         c.ipady = 5;
-        c.insets = new Insets(20,0,20,0);
+        c.insets = new Insets(20, 0, 20, 0);
         newGamePanel.add(easyButton, c);
 
 
@@ -76,24 +76,32 @@ public class NewGameView extends JPanel {
         c.gridy = 4;
         c.ipadx = 10;
         c.ipady = 5;
+        newGamePanel.add(tutorialButton, c);
+
+        c.gridx = 0;
+        c.gridy = 5;
+        c.ipadx = 10;
+        c.ipady = 5;
         newGamePanel.add(backButton, c);
 
-        //newGamePanel.add(buttonPanel);
-        //buttonPanel.setBackground(new Color(0,0,0,0));
-        newGamePanel.setBackground(new Color(0,0,0,0));
+        newGamePanel.setBackground(new Color(0, 0, 0, 0));
         add(newGamePanel);
     }
 
     // Method use to get access to the buttons
-    public void addEasyListener(ActionListener easyListener){
+    public void addEasyListener(ActionListener easyListener) {
         easyButton.addActionListener(easyListener);
     }
 
-    public void addBackListener(ActionListener backListener){
+    public void addBackListener(ActionListener backListener) {
         backButton.addActionListener(backListener);
     }
 
-    public JPanel getNewGamePanel(){
+    public void addTutorialListener(ActionListener tutorialListener){
+        tutorialButton.addActionListener(tutorialListener);
+    }
+
+    public JPanel getNewGamePanel() {
         return this.newGamePanel;
     }
 }

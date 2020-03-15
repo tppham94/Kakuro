@@ -21,6 +21,7 @@ public class NewGameController extends JPanel {
 
         n_view.addEasyListener(new easyListener());
         n_view.addBackListener(new backListener());
+        n_view.addTutorialListener(new tutorialListener());
     }
 
     private class easyListener implements ActionListener {
@@ -41,6 +42,19 @@ public class NewGameController extends JPanel {
             m_view.getCardLayout().show(m_view.getCardPanels(), "MainMenu");
             m_view.revalidate();
             m_view.repaint();
+        }
+    }
+
+    private class tutorialListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            m_view.setTitle("Tutorial");
+            b_view.setTrainingMode(true);
+            b_view.getController().loadGame(b_view,"src/game1.json");
+            m_view.getCardLayout().show(m_view.getCardPanels(),"EasyGameKakuro");
+            m_view.revalidate();
+            m_view.repaint();
+
         }
     }
 }

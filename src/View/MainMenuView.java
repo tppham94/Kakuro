@@ -1,14 +1,9 @@
 package View;
 
-import Controller.LoginController;
-import Controller.MainMenuController;
-import Model.MainMenuModel;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,10 +11,9 @@ public class MainMenuView extends JFrame{
 
     //Components
     private JLabel menuName;
-    private JButton newGameBtn;
-    private JButton loadBtn;
-    private JButton tutorialBtn;
-    private JButton exitBtn;
+    private JButton newGameButton;
+    private JButton loadButton;
+    private JButton exitButton;
     private JPanel mainPanel;
     private JPanel cardPanels;
     private GridBagConstraints c;
@@ -67,17 +61,14 @@ public class MainMenuView extends JFrame{
         menuName.setForeground(Color.white);
         mainPanel.add(menuName, c);
 
-        newGameBtn = new JButton("New Game");
-        newGameBtn.setPreferredSize(new Dimension(90,25));
+        newGameButton = new JButton("New Game");
+        newGameButton.setPreferredSize(new Dimension(90,25));
 
-        loadBtn = new JButton("Load Game");
-        loadBtn.setPreferredSize(new Dimension(90,25));
+        loadButton = new JButton("Load Game");
+        loadButton.setPreferredSize(new Dimension(90,25));
 
-        tutorialBtn = new JButton("Tutorial");
-        tutorialBtn.setPreferredSize(new Dimension(90,25));
-
-        exitBtn = new JButton("Exit");
-        exitBtn.setPreferredSize(new Dimension(90,25));
+        exitButton = new JButton("Exit");
+        exitButton.setPreferredSize(new Dimension(90,25));
 
         background = new JLabel(new ImageIcon(ImageIO.read(new File(".\\src\\View\\darkbg.jpg"))));
         setContentPane(background);
@@ -88,7 +79,7 @@ public class MainMenuView extends JFrame{
         c.ipadx = 10;
         c.ipady = 5;
         c.insets = new Insets(20,0,20,0);
-        mainPanel.add(newGameBtn, c);
+        mainPanel.add(newGameButton, c);
 
 
         c.fill = GridBagConstraints.BOTH;
@@ -96,19 +87,13 @@ public class MainMenuView extends JFrame{
         c.gridy = 2;
         c.ipadx = 10;
         c.ipady = 5;
-        mainPanel.add(loadBtn, c);
+        mainPanel.add(loadButton, c);
 
         c.gridx = 0;
         c.gridy = 3;
         c.ipadx = 10;
         c.ipady = 5;
-        mainPanel.add(tutorialBtn, c);
-
-        c.gridx = 0;
-        c.gridy = 4;
-        c.ipadx = 10;
-        c.ipady = 5;
-        mainPanel.add(exitBtn, c);
+        mainPanel.add(exitButton, c);
 
 
         mainPanel.setBackground(new Color(0,0,0,0));
@@ -123,15 +108,15 @@ public class MainMenuView extends JFrame{
 
     // Method for accessing the buttons in the controller
     public void addNewGameListener(ActionListener newGameListener){
-        newGameBtn.addActionListener(newGameListener);
+        newGameButton.addActionListener(newGameListener);
     }
 
     public void addLoadListener(ActionListener loadListener){
-        loadBtn.addActionListener(loadListener);
+        loadButton.addActionListener(loadListener);
     }
 
     public void addExitListener(ActionListener exitListener){
-        exitBtn.addActionListener(exitListener);
+        exitButton.addActionListener(exitListener);
     }
 
     // Created to be able to access the switch between panels
