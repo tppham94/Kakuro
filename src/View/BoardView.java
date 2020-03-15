@@ -36,7 +36,7 @@ public class BoardView {
 	// Constructor called by Game Driver
 	public BoardView() {
 		int counter =0;
-		GameBoardModel gbm = new GameBoardModel(33);
+		GameBoardModel gbm = new GameBoardModel(35);
 		controller = new TrainingController(gbm);
 		jf = new JFrame("Kakuro");
 

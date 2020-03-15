@@ -39,6 +39,10 @@ public class CellModel {
 	
 	/**
 	 * method to update the word model which will be used by controller
+	 * The method first checks if its a digit
+	 * Then checks if its a single digit 
+	 * Then checks if its the number that matches the correctDigit
+	 * if correct it sets the isCorrect to true
 	 * @param str
 	 * @return
 	 */
@@ -71,7 +75,7 @@ public class CellModel {
 	}
 	
 	/**
-	 * method to update model which will be used by controller .
+	 * method to update model which will be used by controller . Goes throguh the same checks as the update()
 	 * It returns a string which will be used by the training controller
 	 * and will show why the precise reason is that the number is wrong
 	 * @param str

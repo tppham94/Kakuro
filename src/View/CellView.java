@@ -73,6 +73,9 @@ public class CellView extends JTextField {
 		this.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
+			/**
+			 * sends text to controller on input
+			 */
 			public void insertUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				sendToController();
@@ -81,12 +84,18 @@ public class CellView extends JTextField {
 
 			
 			@Override
+			/**
+			 * sends text to controller on input
+			 */
 			public void removeUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				sendToController();
 			}
 
 			@Override
+			/**
+			 * sends text to controller on input
+			 */
 			public void changedUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				sendToController();
@@ -107,6 +116,9 @@ public class CellView extends JTextField {
 		this.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
+			/**
+			 * sends text to controller on input
+			 */
 			public void insertUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				sendToController();
@@ -114,12 +126,18 @@ public class CellView extends JTextField {
 			}
 
 			@Override
+			/**
+			 * sends text to controller on input
+			 */
 			public void removeUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				sendToController();
 			}
 
 			@Override
+			/**
+			 * sends text to controller on input
+			 */
 			public void changedUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				sendToController();
@@ -138,6 +156,10 @@ public class CellView extends JTextField {
 		gameController.sendToCellModel(this.getText(), this);
 	}
 	
+	
+	/**
+	 * Set the appearance for the cellview
+	 */
 	public void setVisualConfiguration() {
 		super.setOpaque(true);
 		super.setBackground(Color.WHITE);
@@ -174,10 +196,18 @@ public class CellView extends JTextField {
 		setBackgroundColor(valid); //change color to green if valid red if invalid
 	}
 	
+	/**
+	 * Mutator to set the game controller with a param of gameController
+	 * @param gameController
+	 */
 	public void setController (GameController gameController) {
 		this.gameController = gameController;
 	}
 	
+	/**
+	 * Mutator to set the game controller using inheritance with a param of trainingController
+	 * @param gameController
+	 */
 	public void setController (TrainingController tc) {
 		this.gameController = tc;
 	}
