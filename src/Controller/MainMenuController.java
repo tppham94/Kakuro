@@ -6,10 +6,11 @@ import View.LoginView;
 import View.MainMenuView;
 
 import javax.swing.*;
-import javax.swing.plaf.FileChooserUI;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 
 public class MainMenuController extends JPanel {
 
@@ -44,6 +45,8 @@ public class MainMenuController extends JPanel {
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Login");
             JFileChooser file = new JFileChooser(new File("../Kakuro"));
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json","json");
+            file.setFileFilter(filter);
             file.showOpenDialog(null);
             gController.loadGame(bView, file.getSelectedFile().toString());
             mView.getCardLayout().show(mView.getCardPanels(), "EasyGameKakuro");
