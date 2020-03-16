@@ -17,7 +17,6 @@ import Controller.TrainingController;
 import View.CellView;
 
 class TestForCellModel {
-	
 
     @Test
     public void testCellModel() {

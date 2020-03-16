@@ -29,7 +29,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class BoardView extends JPanel {
-    // REMOVE the JFrame Stuff and convert it to JPanel
 
     JComponent[] gameComponents;
     private JPanel boardPanel;
@@ -65,8 +64,6 @@ public class BoardView extends JPanel {
     public void initComponents(JSONObject jsonObject) {
     	saveButton = new JButton("Save");
     	saveButton.setMargin(new Insets(5,5,5,5));
-
-		int counter = 0;
 
         //getting game size element to create the metrics that will created the correct board size for the game.
         int size = (int) (long) jsonObject.get("size");
@@ -171,7 +168,6 @@ public class BoardView extends JPanel {
         }
 
     }
-
 
     public JComponent getComponentAt(int i) {
         return this.gameComponents[i];

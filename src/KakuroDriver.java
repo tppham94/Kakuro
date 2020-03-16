@@ -12,12 +12,12 @@ public class KakuroDriver {
 
     // Instantiating the views, controllers and model in order to connect them to each other
     public static void main(String[] args) throws IOException {
-        NewGameView n_view = new NewGameView();
-        BoardView b_view = new BoardView(false);
-        MainMenuView m_view = new MainMenuView(n_view, b_view);
+        NewGameView nView = new NewGameView();
+        BoardView bView = new BoardView(false);
+        MainMenuView mView = new MainMenuView(nView, bView);
         GameController gController = new GameController();
 
-        MainMenuController m_controller = new MainMenuController(m_view, b_view, gController);
-        NewGameController n_controller = new NewGameController(n_view, m_view, b_view);
+        MainMenuController m_controller = new MainMenuController(mView, bView, gController);
+        NewGameController n_controller = new NewGameController(nView, mView, bView);
     }
 }
