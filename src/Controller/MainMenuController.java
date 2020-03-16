@@ -42,7 +42,7 @@ public class MainMenuController extends JPanel {
             file.setFileFilter(filter);
             file.showOpenDialog(null);
             gController.loadGame(bView, file.getSelectedFile().toString());
-            mView.getCardLayout().show(mView.getCardPanels(), "EasyGameKakuro");
+            mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
         }
