@@ -10,50 +10,62 @@ import java.awt.event.ActionListener;
 
 public class NewGameController extends JPanel {
 
-    MainMenuView m_view;
-    NewGameView n_view;
-    BoardView b_view;
+    MainMenuView mView;
+    NewGameView nView;
+    BoardView bView;
 
-    public NewGameController(NewGameView n_view, MainMenuView m_view, BoardView b_view) {
-        this.n_view = n_view;
-        this.m_view = m_view;
-        this.b_view = b_view;
+    public NewGameController(NewGameView nView, MainMenuView mView, BoardView bView) {
+        this.nView = nView;
+        this.mView = mView;
+        this.bView = bView;
 
-        n_view.addEasyListener(new easyListener());
-        n_view.addBackListener(new backListener());
-        n_view.addTutorialListener(new tutorialListener());
+        nView.addEasyListener(new easyListener());
+        nView.addHardListener(new hardListener());
+        nView.addBackListener(new backListener());
+        nView.addTutorialListener(new tutorialListener());
     }
 
     private class easyListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            m_view.setTitle("Easy");
-            b_view.getController().loadGame(b_view,"src/game1.json");
-            m_view.getCardLayout().show(m_view.getCardPanels(),"EasyGameKakuro");
-            m_view.revalidate();
-            m_view.repaint();
+            mView.setTitle("Easy");
+            bView.getController().loadGame(bView,"src/game1.json");
+            mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
+            mView.revalidate();
+            mView.repaint();
+        }
+    }
+
+    private class hardListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mView.setTitle("Hard");
+            bView.getController().loadGame(bView,"src/hard.json");
+            mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
+            mView.revalidate();
+            mView.repaint();
         }
     }
 
     private class backListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            m_view.setTitle("Main Menu");
-            m_view.getCardLayout().show(m_view.getCardPanels(), "MainMenu");
-            m_view.revalidate();
-            m_view.repaint();
+            mView.setTitle("Main Menu");
+            mView.getCardLayout().show(mView.getCardPanels(), "MainMenu");
+            mView.revalidate();
+            mView.repaint();
         }
     }
 
     private class tutorialListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            m_view.setTitle("Tutorial");
-            b_view.setTrainingMode(true);
-            b_view.getController().loadGame(b_view,"src/game1.json");
-            m_view.getCardLayout().show(m_view.getCardPanels(),"EasyGameKakuro");
-            m_view.revalidate();
-            m_view.repaint();
+            mView.setTitle("Tutorial");
+            bView.setTrainingMode(true);
+            bView.getController().loadGame(bView,"src/game1.json");
+            mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
+            mView.revalidate();
+            mView.repaint();
 
         }
     }

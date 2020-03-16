@@ -21,13 +21,13 @@ public class MainMenuView extends JFrame {
     private CardLayout cards;
 
     // Use to get access to the other class
-    NewGameView n_view;
-    BoardView b_view;
+    NewGameView nView;
+    BoardView bView;
 
     // constructor
-    public MainMenuView(NewGameView n_view, BoardView b_view) throws IOException {
-        this.n_view = n_view;
-        this.b_view = b_view;
+    public MainMenuView(NewGameView nView, BoardView bView) throws IOException {
+        this.nView = nView;
+        this.bView = bView;
 
         initComponent();
         initFrameConfiguration();
@@ -96,8 +96,8 @@ public class MainMenuView extends JFrame {
 
         mainPanel.setBackground(new Color(0, 0, 0, 0));
         cardPanels.add(mainPanel, "MainMenu");
-        cardPanels.add(n_view.getNewGamePanel(), "NewGame");
-        cardPanels.add(b_view, "EasyGameKakuro");
+        cardPanels.add(nView.getNewGamePanel(), "NewGame");
+        cardPanels.add(bView, "KakuroGames");
         add(cardPanels);
         revalidate();
         repaint();
