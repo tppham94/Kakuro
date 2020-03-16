@@ -31,7 +31,6 @@ import org.json.simple.parser.ParseException;
 public class BoardView extends JPanel {
     // REMOVE the JFrame Stuff and convert it to JPanel
 
-    JButton validateButton;
     JComponent[] gameComponents;
     private JPanel boardPanel;
     private JButton saveButton;
@@ -173,25 +172,6 @@ public class BoardView extends JPanel {
 
     }
 
-
-    // Adding visual layout to jframe
-    private void setVisualLayout(int actualRows, int actualCols) {
-
-        setLayout(new GridLayout(actualRows, actualCols));
-        //setVisible(true);
-        //removed the jf in front of them
-    }
-
-    // Adding J-components to the grid
-    private void addComponentsToJFrame() {
-        for (int i = 0; i < gameComponents.length; i++) {
-            add(gameComponents[i]);
-        }
-    }
-
-    public JPanel getBoardPanel() {
-        return this.boardPanel;
-    }
 
     public JComponent getComponentAt(int i) {
         return this.gameComponents[i];
