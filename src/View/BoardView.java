@@ -90,26 +90,15 @@ public class BoardView extends JPanel {
             boardPanel.add(gameComponents[i]);
         }
 
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser file = new JFileChooser(new File("../Kakuro"));
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json", "json");
-                file.setFileFilter(filter);
-                file.showSaveDialog(null);
-                try {
-                    controller.saveGame(BoardView.this, "src/" + file.getSelectedFile().getName() + ".json");
-                    JOptionPane.showMessageDialog(null, "You have saved!");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-
+        controller.saveButton(this);
         boardPanel.add(vBtnView);
 		boardPanel.add(saveButton);
         boardPanel.add(vView);
         add(boardPanel);
+    }
+
+    public void addSaveListener(ActionListener saveListener) {
+        saveButton.addActionListener(saveListener);
     }
 
     //uses the cellsArray to initialize the game components with the corect cluecellView or Cellview.

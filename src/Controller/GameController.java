@@ -12,12 +12,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class GameController {
@@ -25,7 +23,7 @@ public class GameController {
 
     GameBoardModel gbModel;
     ArrayList<WordModel> wordObserverlist;
-
+    BoardView bView;
     /**
      * Default constructor which assigns a new gameboard
      *
@@ -78,6 +76,25 @@ public class GameController {
     public void addToGameBoardModelArray(int index, WordModel wm) {
         gbModel.setWordModelAtIndex(index, wm);
     }
+
+    public void saveButton(View.BoardView bView){
+        bView.addSaveListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser file = new JFileChooser(new File("../Kakuro"));
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json", "json");
+                file.setFileFilter(filter);
+                file.showSaveDialog(null);
+                try {
+                    saveGame(bView, "src/" + file.getSelectedFile().getName() + ".json");
+                    JOptionPane.showMessageDialog(null, "You have saved!");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+
 
     public void saveGame(View.BoardView boardView, String filename) throws IOException {
         System.out.println("Saving game to: " + filename);
