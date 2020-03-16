@@ -20,6 +20,7 @@ public class NewGameController extends JPanel {
         this.bView = bView;
 
         nView.addEasyListener(new easyListener());
+        nView.addMediumListener(new mediumListener());
         nView.addHardListener(new hardListener());
         nView.addBackListener(new backListener());
         nView.addTutorialListener(new tutorialListener());
@@ -29,7 +30,18 @@ public class NewGameController extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Easy");
-            bView.getController().loadGame(bView,"src/game1.json");
+            bView.getController().loadGame(bView,"src/easy.json");
+            mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
+            mView.revalidate();
+            mView.repaint();
+        }
+    }
+
+    private class mediumListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mView.setTitle("Medium");
+            bView.getController().loadGame(bView,"src/medium.json");
             mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
             mView.revalidate();
             mView.repaint();
@@ -62,7 +74,7 @@ public class NewGameController extends JPanel {
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Tutorial");
             bView.setTrainingMode(true);
-            bView.getController().loadGame(bView,"src/game1.json");
+            bView.getController().loadGame(bView,"src/easy.json");
             mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
             mView.revalidate();
             mView.repaint();

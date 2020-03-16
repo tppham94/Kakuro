@@ -1,0 +1,249 @@
+{
+ "size": 11,
+ "cells": [
+0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,7,8,0,0,0,2,3
+0,8,9,0,4,9,7,5,0,3,1
+0,2,1,4,0,0,8,4,9,6,2
+0,0,2,8,0,2,9,0,3,1,5
+0,0,0,9,8,7,0,8,1,0,0
+0,0,0,3,2,0,3,9,8,0,0
+0,2,5,1,0,1,9,0,4,1,0
+0,5,3,2,1,4,0,0,2,4,1
+0,3,8,0,4,8,7,9,0,2,5
+0,1,9,0,0,0,9,8,0,0,0
+],
+"words": [
+    {"index": 4,
+     "vertical": true,
+     "sum": 11,
+     "cell_indices": [15, 26]
+        },
+    {"index": 5,
+     "vertical": true,
+     "sum": 17,
+     "cell_indices": [16, 27]
+        },
+    {"index": 9,
+     "vertical": true,
+     "sum": 12,
+     "cell_indices": [20, 31, 42, 53]
+        },
+    {"index": 10,
+     "vertical": true,
+     "sum": 11,
+     "cell_indices": [21, 32, 43, 54]
+        },
+    {"index": 12,
+     "vertical": true,
+     "sum": 10,
+     "cell_indices": [23, 34]
+        },
+    {"index": 13,
+     "vertical": true,
+     "sum": 12,
+     "cell_indices": [24, 35]
+        },
+    {"index": 14,
+     "vertical": false,
+     "sum": 15,
+     "cell_indices": [15, 16]
+        },
+    {"index": 17,
+     "vertical": true,
+     "sum": 24,
+     "cell_indices": [28, 39, 50]
+        },
+    {"index": 18,
+     "vertical": true,
+     "sum": 9,
+     "cell_indices": [29, 40]
+        },
+    {"index": 19,
+     "vertical": false,
+     "sum": 5,
+     "cell_indices": [20, 21]
+        },
+    {"index": 22,
+     "vertical": false,
+     "sum": 17,
+     "cell_indices": [23, 24]
+        },
+    {"index": 25,
+     "vertical": true,
+     "sum": 27,
+     "cell_indices": [36, 47, 58, 69, 80, 91]
+        },
+    {"index": 25,
+     "vertical": false,
+     "sum": 25,
+     "cell_indices": [26, 27, 28, 29]
+        },
+    {"index": 30,
+     "vertical": true,
+     "sum": 27,
+     "cell_indices": [41, 52, 63, 74, 85, 96]
+        },
+    {"index": 30,
+     "vertical": false,
+     "sum": 4,
+     "cell_indices": [31, 32]
+        },
+    {"index": 33,
+     "vertical": false,
+     "sum": 7,
+     "cell_indices": [34, 35, 36]
+        },
+    {"index": 38,
+     "vertical": true,
+     "sum": 9,
+     "cell_indices": [49, 60]
+        },
+    {"index": 38,
+     "vertical": false,
+     "sum": 29,
+     "cell_indices": [39, 40, 41, 42, 43]
+        },
+    {"index": 45,
+     "vertical": false,
+     "sum": 10,
+     "cell_indices": [46, 47]
+        },
+    {"index": 48,
+     "vertical": true,
+     "sum": 10,
+     "cell_indices": [59, 70]
+        },
+    {"index": 48,
+     "vertical": false,
+     "sum": 11,
+     "cell_indices": [49, 50]
+        },
+    {"index": 51,
+     "vertical": true,
+     "sum": 17,
+     "cell_indices": [62, 73]
+        },
+    {"index": 51,
+     "vertical": false,
+     "sum": 9,
+     "cell_indices": [52, 53, 54]
+        },
+    {"index": 57,
+     "vertical": false,
+     "sum": 24,
+     "cell_indices": [58, 59, 60]
+        },
+    {"index": 61,
+     "vertical": true,
+     "sum": 12,
+     "cell_indices": [72, 83]
+        },
+    {"index": 61,
+     "vertical": false,
+     "sum": 9,
+     "cell_indices": [62, 63]
+        },
+    {"index": 67,
+     "vertical": true,
+     "sum": 11,
+     "cell_indices": [78, 89, 100, 111]
+        },
+    {"index": 68,
+     "vertical": true,
+     "sum": 25,
+     "cell_indices": [79, 90, 101, 112]
+        },
+    {"index": 68,
+     "vertical": false,
+     "sum": 5,
+     "cell_indices": [69, 70]
+        },
+    {"index": 71,
+     "vertical": true,
+     "sum": 13,
+     "cell_indices": [82, 93, 104]
+        },
+    {"index": 71,
+     "vertical": false,
+     "sum": 20,
+     "cell_indices": [72, 73, 74]
+        },
+    {"index": 75,
+     "vertical": true,
+     "sum": 7,
+     "cell_indices": [86, 97, 108]
+        },
+    {"index": 77,
+     "vertical": false,
+     "sum": 8,
+     "cell_indices": [78, 79, 80]
+        },
+    {"index": 81,
+     "vertical": true,
+     "sum": 5,
+     "cell_indices": [92, 103]
+        },
+    {"index": 81,
+     "vertical": false,
+     "sum": 10,
+     "cell_indices": [82, 83]
+        },
+    {"index": 84,
+     "vertical": false,
+     "sum": 5,
+     "cell_indices": [85, 86]
+        },
+    {"index": 87,
+     "vertical": true,
+     "sum": 6,
+     "cell_indices": [98, 109]
+        },
+    {"index": 88,
+     "vertical": false,
+     "sum": 15,
+     "cell_indices": [89, 90, 91, 92, 93]
+        },
+    {"index": 94,
+     "vertical": true,
+     "sum": 16,
+     "cell_indices": [105, 116]
+        },
+    {"index": 95,
+     "vertical": true,
+     "sum": 17,
+     "cell_indices": [106, 117]
+        },
+    {"index": 95,
+     "vertical": false,
+     "sum": 7,
+     "cell_indices": [96, 97, 98]
+        },
+    {"index": 99,
+     "vertical": false,
+     "sum": 11,
+     "cell_indices": [100, 101]
+        },
+    {"index": 102,
+     "vertical": false,
+     "sum": 28,
+     "cell_indices": [103, 104, 105, 106]
+        },
+    {"index": 107,
+     "vertical": false,
+     "sum": 7,
+     "cell_indices": [108, 109]
+        },
+    {"index": 110,
+     "vertical": false,
+     "sum": 10,
+     "cell_indices": [111, 112]
+        },
+    {"index": 115,
+     "vertical": false,
+     "sum": 17,
+     "cell_indices": [116, 117]
+        }
+    ]  
+}
+
