@@ -26,11 +26,6 @@ public class ValidateView extends JPanel {
      */
 
     public void updateString(String str) {
-        Runnable doAssist = new Runnable() {
-            @Override
-            public void run() {
-                validateString.setText(str);
-            }
-        };
+        validateString.setText(str);
     }
 }

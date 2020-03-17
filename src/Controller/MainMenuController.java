@@ -16,8 +16,8 @@ public class MainMenuController extends JPanel {
     private GameController gController;
     private BoardView bView;
 
-    public MainMenuController(MainMenuView view, BoardView bView, GameController gController) {
-        this.mView = view;
+    public MainMenuController(BoardView bView, GameController gController) {
+        this.mView = MainMenuView.getInstance();
         this.bView = bView;
         this.gController = gController;
 

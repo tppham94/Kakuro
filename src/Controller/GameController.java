@@ -6,6 +6,7 @@ import Model.WordModel;
 import View.BoardView;
 import View.CellView;
 import View.ClueCellView;
+import View.MainMenuView;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -95,6 +96,19 @@ public class GameController {
         });
     }
 
+    public void backButton(View.BoardView bView){
+        bView.addBackListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainMenuView mView = MainMenuView.getInstance();
+                bView.removeAll();
+                mView.setTitle("Main Menu");
+                mView.getCardLayout().show(mView.getCardPanels(),"MainMenu");
+                mView.revalidate();
+                mView.repaint();
+            }
+        });
+    }
 
     public void saveGame(View.BoardView boardView, String filename) throws IOException {
         System.out.println("Saving game to: " + filename);

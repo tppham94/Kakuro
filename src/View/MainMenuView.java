@@ -24,13 +24,28 @@ public class MainMenuView extends JFrame {
     NewGameView nView;
     BoardView bView;
 
+    // Singleton
+    private static MainMenuView single_instance = null;
+
+    private MainMenuView(){
+        System.out.println("If you see this its too late");
+    }
+
+    public static MainMenuView getInstance(){
+        if(single_instance == null){
+            single_instance = new MainMenuView();
+        }
+        return single_instance;
+    }
+
     // constructor
     public MainMenuView(NewGameView nView, BoardView bView) throws IOException {
-        this.nView = nView;
-        this.bView = bView;
+        MainMenuView mView = MainMenuView.getInstance();
+        mView.nView = nView;
+        mView.bView = bView;
 
-        initComponent();
-        initFrameConfiguration();
+        mView.initComponent();
+        mView.initFrameConfiguration();
     }
 
     // Initializing the frame configuration

@@ -33,15 +33,16 @@ public class BoardView extends JPanel {
     JComponent[] gameComponents;
     private JPanel boardPanel;
     private JButton saveButton;
+    private JButton backButton;
 
     GameController controller;
-
+    GameBoardModel gbm;
     ValidateView vView;
     ValidateButtonView vBtnView;
 
     // Constructor called by Game Driver
     public BoardView(boolean trainingMode) {
-        GameBoardModel gbm = new GameBoardModel();
+         gbm = new GameBoardModel();
         if (trainingMode) {
             controller = new TrainingController(gbm);
         } else {
@@ -64,6 +65,9 @@ public class BoardView extends JPanel {
     public void initComponents(JSONObject jsonObject) {
     	saveButton = new JButton("Save");
     	saveButton.setMargin(new Insets(5,5,5,5));
+
+    	backButton = new JButton("Back");
+    	backButton.setMargin(new Insets(5,5,5,5));
 
         //getting game size element to create the metrics that will created the correct board size for the game.
         int size = (int) (long) jsonObject.get("size");
@@ -91,8 +95,10 @@ public class BoardView extends JPanel {
         }
 
         controller.saveButton(this);
+        controller.backButton(this);
         boardPanel.add(vBtnView);
 		boardPanel.add(saveButton);
+		boardPanel.add(backButton);
         boardPanel.add(vView);
         add(boardPanel);
     }
@@ -164,6 +170,14 @@ public class BoardView extends JPanel {
 
     public GameController getController() {
         return controller;
+    }
+
+    public GameBoardModel getGbm(){
+        return gbm;
+    }
+
+    public void addBackListener(ActionListener backListener){
+        backButton.addActionListener(backListener);
     }
 
 }

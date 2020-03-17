@@ -17,7 +17,7 @@ public class KakuroDriver {
         MainMenuView mView = new MainMenuView(nView, bView);
         GameController gController = new GameController();
 
-        MainMenuController m_controller = new MainMenuController(mView, bView, gController);
-        NewGameController n_controller = new NewGameController(nView, mView, bView);
+        MainMenuController m_controller = new MainMenuController(bView, gController);
+        NewGameController n_controller = new NewGameController(nView, bView);
     }
 }

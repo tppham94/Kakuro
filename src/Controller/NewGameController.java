@@ -14,9 +14,9 @@ public class NewGameController extends JPanel {
     NewGameView nView;
     BoardView bView;
 
-    public NewGameController(NewGameView nView, MainMenuView mView, BoardView bView) {
+    public NewGameController(NewGameView nView, BoardView bView) {
+        this.mView = MainMenuView.getInstance();
         this.nView = nView;
-        this.mView = mView;
         this.bView = bView;
 
         nView.addEasyListener(new easyListener());
