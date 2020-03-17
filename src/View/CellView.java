@@ -129,6 +129,7 @@ public class CellView extends JTextField {
      */
     public void setTextField(int number) {
         //parse the int that is sent from the model to a string
+    	
         if (this.getText() != Integer.toString(number)) {
             // Block notification to game controller in order to prevent infinite loop.
             Runnable doAssist = new Runnable() {

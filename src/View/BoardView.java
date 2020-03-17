@@ -85,8 +85,8 @@ public class BoardView extends JPanel {
         handleWordCalls(wordsArray);
 
         vView = new ValidateView();
-        vBtnView = new ValidateButtonView("Vals", controller);
-
+        vBtnView = new ValidateButtonView("Validate", controller);
+        gbm.setValidateView(vView);
 
         boardPanel = new JPanel(new GridLayout(size + 1, size));
         boardPanel.setPreferredSize(new Dimension(600, 600));

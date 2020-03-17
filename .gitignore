@@ -30,3 +30,4 @@ out
 hs_err_pid*
 /bin/
 /build/
+/.metadata/

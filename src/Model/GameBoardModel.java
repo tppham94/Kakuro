@@ -15,7 +15,6 @@ public class GameBoardModel {
     public GameBoardModel() {
         wordModelArray = new WordModel[34];
         valid = false;
-        validateView = new ValidateView();
     }
 
     /**
@@ -26,7 +25,6 @@ public class GameBoardModel {
     public GameBoardModel(int size) {
         wordModelArray = new WordModel[size];
         valid = false;
-        validateView = new ValidateView();
     }
 
     /**
@@ -38,7 +36,6 @@ public class GameBoardModel {
     public GameBoardModel(int size, int length) {
         wordModelArray = new WordModel[size];
         valid = false;
-        validateView = new ValidateView();
         this.length = length;
     }
 
@@ -132,5 +129,9 @@ public class GameBoardModel {
 
     public void initializeWordModelArray(int size) {
         wordModelArray = new WordModel[size];
+    }
+    
+    public void setValidateView(ValidateView vView) {
+    	validateView = vView;
     }
 }
