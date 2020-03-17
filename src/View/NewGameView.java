@@ -93,11 +93,11 @@ public class NewGameView extends JPanel {
         easyButton.addActionListener(easyListener);
     }
 
-    public void addMediumListener(ActionListener mediumListener){
+    public void addMediumListener(ActionListener mediumListener) {
         mediumButton.addActionListener(mediumListener);
     }
 
-    public void addHardListener(ActionListener hardListener){
+    public void addHardListener(ActionListener hardListener) {
         hardButton.addActionListener(hardListener);
     }
 

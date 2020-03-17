@@ -30,8 +30,8 @@ public class NewGameController extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Easy");
-            bView.getController().loadGame(bView,"src/easy.json");
-            mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
+            bView.getController().loadGame(bView, "src/easy.json");
+            mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
         }
@@ -41,8 +41,8 @@ public class NewGameController extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Medium");
-            bView.getController().loadGame(bView,"src/medium.json");
-            mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
+            bView.getController().loadGame(bView, "src/medium.json");
+            mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
         }
@@ -52,8 +52,8 @@ public class NewGameController extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Hard");
-            bView.getController().loadGame(bView,"src/hard.json");
-            mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
+            bView.getController().loadGame(bView, "src/hard.json");
+            mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
         }
@@ -74,8 +74,8 @@ public class NewGameController extends JPanel {
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Tutorial");
             bView.setTrainingMode(true);
-            bView.getController().loadGame(bView,"src/easy.json");
-            mView.getCardLayout().show(mView.getCardPanels(),"KakuroGames");
+            bView.getController().loadGame(bView, "src/easy.json");
+            mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
 

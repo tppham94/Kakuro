@@ -25,6 +25,7 @@ public class GameController {
     GameBoardModel gbModel;
     ArrayList<WordModel> wordObserverlist;
     BoardView bView;
+
     /**
      * Default constructor which assigns a new gameboard
      *
@@ -78,7 +79,7 @@ public class GameController {
         gbModel.setWordModelAtIndex(index, wm);
     }
 
-    public void saveButton(View.BoardView bView){
+    public void saveButton(View.BoardView bView) {
         bView.addSaveListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,14 +97,14 @@ public class GameController {
         });
     }
 
-    public void backButton(View.BoardView bView){
+    public void backButton(View.BoardView bView) {
         bView.addBackListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MainMenuView mView = MainMenuView.getInstance();
                 bView.removeAll();
                 mView.setTitle("Main Menu");
-                mView.getCardLayout().show(mView.getCardPanels(),"MainMenu");
+                mView.getCardLayout().show(mView.getCardPanels(), "MainMenu");
                 mView.revalidate();
                 mView.repaint();
             }

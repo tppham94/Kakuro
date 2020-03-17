@@ -27,12 +27,11 @@ public class MainMenuView extends JFrame {
     // Singleton
     private static MainMenuView single_instance = null;
 
-    private MainMenuView(){
-        System.out.println("If you see this its too late");
+    private MainMenuView() {
     }
 
-    public static MainMenuView getInstance(){
-        if(single_instance == null){
+    public static MainMenuView getInstance() {
+        if (single_instance == null) {
             single_instance = new MainMenuView();
         }
         return single_instance;
