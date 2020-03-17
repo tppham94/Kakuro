@@ -19,177 +19,225 @@ import Model.CellModel;
 import Model.WordModel;
 
 public class CellView extends JTextField {
-    GameController gameController;
-    CellModel observerList;
-    int index;
-    boolean updateWithoutNotification = false;
+	GameController gameController;
+	CellModel observerList;
 
-    /**
-     * Default constructor
-     */
-    public CellView() {
-        /**
-         * Set the background color and size
-         */
-        setVisualConfiguration();
+	/**
+	 * Default constructor
+	 */
+	public CellView () {
+		/**
+		 * Set the background color and size
+		 */
+		setVisualConfiguration();
 
-        setupListeners();
-    }
+		this.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void insertUpdate(DocumentEvent e) { 
+				// TODO Auto-generated method stub
+				sendToController();
+				
+			}
 
-    /**
-     * @param cellView with regular game board controller constructor for regular games
-     */
-    public CellView(GameController gbc) {
-        this.gameController = gbc;
-        setVisualConfiguration();
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+			}
 
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+			}
+			
+		});
+	}
+	
+	/**
+	 * 
+	 * @param cellView with regular game board controller constructor for regular games
+	 */
+	public CellView (GameController gbc) { 
+		this.gameController = gbc;
+		setVisualConfiguration();
+		
+		
+		this.getDocument().addDocumentListener(new DocumentListener() {
 
-        setupListeners();
-    }
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+				
+			}
 
+			
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+			}
 
-    /**
-     * @param cellView with training game board controller constructor for training games
-     */
-    public CellView(TrainingController tc) {
-        this.gameController = tc;
-        setVisualConfiguration();
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+			}
+			
+		});
+	}
+	
+	
+	/**
+	 * 
+	 * @param cellView with training game board controller constructor for training games
+	 */
+	public CellView (TrainingController tc) { 
+		this.gameController = tc;
+		setVisualConfiguration();
 
-        setupListeners();
-    }
+		this.getDocument().addDocumentListener(new DocumentListener() {
 
-    private void setupListeners() {
-//        this.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent actionEvent) {
-//                System.out.println("CellView action " + actionEvent);
-//                if (!updateWithoutNotification) {
-//                    sendToController();
-//                }
-//                updateWithoutNotification = false;
-//            }
-//        });
-        this.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            /**
-             * sends text to controller on input
-             */
-            public void insertUpdate(DocumentEvent e) {
-                if (!updateWithoutNotification) {
-                    sendToController();
-                }
-                updateWithoutNotification = false;
-            }
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+				
+			}
 
-            @Override
-            /**
-             * sends text to controller on input
-             */
-            public void removeUpdate(DocumentEvent e) {
-                if (!updateWithoutNotification) {
-                    sendToController();
-                }
-                updateWithoutNotification = false;
-            }
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+			}
 
-            @Override
-            /**
-             * sends text to controller on input
-             */
-            public void changedUpdate(DocumentEvent e) {
-                if (!updateWithoutNotification) {
-                    sendToController();
-                }
-                updateWithoutNotification = false;
-            }
+			@Override
+			/**
+			 * sends text to controller on input
+			 */
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				sendToController();
+			}
+			
+		});
+	}
+	
 
-        });
-    }
+	/**
+	 * send the number as a string to the controller which will
+	 * send the updated number to its observers
+	 */
+	
+	public void sendToController() { 
+		gameController.sendToCellModel(this.getText(), this);
+	}
+	
+	
+	/**
+	 * Set the appearance for the cellview
+	 */
+	public void setVisualConfiguration() {
+		super.setOpaque(true);
+		super.setBackground(Color.WHITE);
+		super.setForeground(Color.BLACK);
+		super.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+		this.setHorizontalAlignment(JTextField.CENTER);
+	}
+	
+	
+	/**
+	 * Mutator for the views text field number
+	 */
+	public void setTextField (int number) {
+		//parse the int that is sent from the model to a string 
+		
+		if(this.getText()!=Integer.toString(number)) {
+	           Runnable doAssist = new Runnable() {
+	                @Override
+	                public void run() {
+	            		setText(Integer.toString(number)); 
+	                }
+	            };
+		}
+ 
 
-    /**
-     * send the number as a string to the controller which will
-     * send the updated number to its observers
-     */
-
-    public void sendToController() {
-        gameController.sendToCellModel(this.getText(), this);
-    }
-
-    public void setVisualConfiguration() {
-        super.setOpaque(true);
-        super.setBackground(Color.WHITE);
-        super.setForeground(Color.BLACK);
-        super.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
-        this.setHorizontalAlignment(JTextField.CENTER);
-    }
-
-
-    /**
-     * Mutator for the views text field number
-     */
-    public void setTextField(int number) {
-        //parse the int that is sent from the model to a string
-        if (this.getText() != Integer.toString(number)) {
-            // Block notification to game controller in order to prevent infinite loop.
-            Runnable doAssist = new Runnable() {
-                @Override
-                public void run() {
-                    updateWithoutNotification = true;
-                    setText(Integer.toString(number));
-                }
-            };
-            SwingUtilities.invokeLater(doAssist);
-        }
-
-
-    }
-
-
-    /*
-     * Mutator for the views validity data member when training mode is on
-     */
-    public void setValidTraining(boolean valid) {
-        setBackgroundColor(valid); //change color to green if valid red if invalid
-    }
-
-    public void setController(GameController gameController) {
-        this.gameController = gameController;
-    }
-
-    public void setController(TrainingController tc) {
-        this.gameController = tc;
-    }
-
-
-    /*
-     * Mutator for the views background color for the training mode based on its validity
-     */
-    public void setBackgroundColor(boolean valid) {
-        if (valid) {
-            this.setBackground(Color.GREEN);
-        } else this.setBackground(Color.RED);
-    }
-
-    /*
-     * To add a cell model object to the cell view
-     */
-    public void addModelToObserverList(CellModel cellModel) {
-        observerList = cellModel;
-    }
-
-
-    /*
-     * Accessor method for the cell view's observerList object
-     */
-    public CellModel getObserverList() {
-        return observerList;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
+	}
+	
+	
+	
+	/*
+	 * Mutator for the views validity data member when training mode is on
+	 */
+	public void setValidTraining (boolean valid) {
+		setBackgroundColor(valid); //change color to green if valid red if invalid
+	}
+	
+	/**
+	 * Mutator to set the game controller with a param of gameController
+	 * @param gameController
+	 */
+	public void setController (GameController gameController) {
+		this.gameController = gameController;
+	}
+	
+	/**
+	 * Mutator to set the game controller using inheritance with a param of trainingController
+	 * @param gameController
+	 */
+	public void setController (TrainingController tc) {
+		this.gameController = tc;
+	}
+	
+	
+	/*
+	 * Mutator for the views background color for the training mode based on its validity
+	 */
+	public void setBackgroundColor (boolean valid) {
+		if (valid) {
+			this.setBackground(Color.GREEN);
+		}
+		else this.setBackground(Color.RED);
+	}
+	
+	/*
+	 * To add a cell model object to the cell view 
+	 */
+	public void addModelToObserverList (CellModel cellModel) {
+		observerList = cellModel;
+	}
+	
+	
+	/*
+	 * Accessor method for the cell view's observerList object
+	 */
+	public CellModel getObserverList() {
+		return observerList;
+	}
+	
 }

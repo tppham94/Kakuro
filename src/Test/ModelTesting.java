@@ -1,5 +1,12 @@
 package Test;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Model.CellModel;
+import Model.GameBoardModel;
+import Model.WordModel;
 //import Model.WordWrapper;
 
 public class ModelTesting {
