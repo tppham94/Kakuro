@@ -53,7 +53,14 @@ public class GameController {
 
     public void sendToCellModel(String number, CellView cv) {
     	if(!number.isEmpty()) {
-        	if(!(Integer.parseInt(number)==cv.getObserverList().getUserNumber())) {
+        	if(number.contains("0")) number = number.substring(1);
+        	if(!number.isEmpty()) {
+        		if(number.matches("\\d{0}")) { //if there are no number
+                    cv.getObserverList().update(number); //updates the cell model associated to the cell view
+                    sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
+        		}
+        	}
+    		else if(!(number.equals(Integer.toString(cv.getObserverList().getUserNumber())))) {
                 cv.getObserverList().update(number); //updates the cell model associated to the cell view
                 sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
         	}	
