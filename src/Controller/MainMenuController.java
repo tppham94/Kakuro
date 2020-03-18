@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 
-public class MainMenuController extends JPanel {
+public class MainMenuController{
 
     // **************************************************
     // Fields

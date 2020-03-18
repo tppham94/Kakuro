@@ -94,11 +94,6 @@ public class WordModel {
                 wordIsValid = false;
                 break;
             }
-            for (int j = 0; j < CellModelArray.length; j++) {
-                if (CellModelArray[i] == CellModelArray[j])
-                    wordIsValid = false;
-                break;
-            }
         }
         if (wordIsValid) return "That word is valid";
         else return "That word is not valid. Make sure all numbers are correct and nothing is repeated";
@@ -128,6 +123,7 @@ public class WordModel {
      * @return
      */
     public boolean isWordIsValid() {
+        validateWord();
         return wordIsValid;
     }
 
