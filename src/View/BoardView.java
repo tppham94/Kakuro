@@ -1,3 +1,10 @@
+/**
+ * author: Drew wagner, TP Pham, Mari Lapadula
+ * The BoardView class is the View which groups all of the CellViews together in a grid layout. 
+ * It will also add the ValidateButtonView object to the bottom. 
+ * Lastly, it will add a ValidateView at the top. 
+ * It is the main container which will group everything into one window. 
+ */
 package View;
 
 import java.awt.*;

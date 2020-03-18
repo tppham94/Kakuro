@@ -1,3 +1,10 @@
+/**
+ * author: Stefano Scalzo
+ * The ValidateView class consists of the panel that will be displayed to the user to show them 
+ * the errors in their current game and hints on what to fix in training mode. 
+ * It will also tell them when the board is valid. 
+ * In training mode it will tell them if their cell is correct.
+ */
 package View;
 
 import javax.swing.JLabel;

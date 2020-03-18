@@ -1,3 +1,9 @@
+/**
+ * author: Stefano scalzo
+ * The GameController class awaits notification from either CellView, validButtonView or the saveButtonView, 
+ * and then delegates the tasks to the corresponding  model. It assigns a new game board,
+ *  updates all wordModels that have the CellModel, it updates the validated text for the gameBoard.
+ */
 package Controller;
 
 import Model.CellModel;

@@ -1,3 +1,10 @@
+/**
+ * author: Stefano Scalzo
+ * The TrainingController is similar to GameController, 
+ * with an addition method to update the text that needs to be fixed and 
+ * calls on updateTraining methods in the cellModel class instead of the update methods. 
+ */
+
 package Controller;
 
 import java.util.regex.Matcher;

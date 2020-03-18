@@ -1,3 +1,9 @@
+/**
+ * Author: stefano scalzo
+ * The CellView class consists of the layout of each cell, including background color and text field.
+ * The following methods all act in a similar manner whenever the input inserted into cells changes: 
+ */
+
 package View;
 
 import java.awt.Color;

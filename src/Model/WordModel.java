@@ -1,3 +1,11 @@
+/**
+ * Auhtor: Stefano Scalzo
+ * The WordModel class is representative as the Kakuro word. 
+ * The class consists of methods and private data members which are used to hold and read a group of cell models. 
+ * By holding these values it allows validation to be more descriptive, 
+ * and quicker when being used to check the whole game's validation
+ */
+
 package Model;
 
 public class WordModel {

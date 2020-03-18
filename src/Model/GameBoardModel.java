@@ -1,3 +1,13 @@
+/**
+ * Author: Stefano Scalzo
+ * Game board model at any given time maintains the current state of the game. 
+ * The GameBoardModel class is notified any time the user enters a new text or 
+ * the user clicks the validateButtonView button. 
+ * It will take the value entered by the user and send it to it's corresponding cellModel. 
+ * It will then notify all the proper wordModel's associated to that cellModel that they must validate themselves. 
+ * Lastly it will tell the gameBoardModel to validate it's rowModel array. 
+ */
+
 package Model;
 
 import View.ValidateView;

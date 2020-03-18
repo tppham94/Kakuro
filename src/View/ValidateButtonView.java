@@ -1,3 +1,8 @@
+/**
+ * author: Stefano Scalzo
+ * The ValidateButtonView class consists of method showing the layout of the validate button.
+ */
+
 package View;
 
 import java.awt.event.ActionEvent;

@@ -1,3 +1,9 @@
+/**
+ * author: Khadija, Ivan
+ *  The ClueCell class consists of the layout of the clue cells,including background color, 
+ *  size of the cell border, text size and alignment of text in clue cells
+ */
+
 package View;
 
 import Model.WordModel;

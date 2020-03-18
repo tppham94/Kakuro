@@ -1,3 +1,9 @@
+/**
+ * Author: Stefano Scalzo
+ * The Cellmodel class contains methods to update the data stored for the corresponding cellView. 
+ * It is notified by the controller when there is a new input by the user and does the correct validation. 
+ * It will also notify a list of WordModel of observers to check their validation.
+ */
 package Model;
 
 import java.util.ArrayList;
