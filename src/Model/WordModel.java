@@ -10,10 +10,16 @@ package Model;
 
 public class WordModel {
 
+    // **************************************************
+    // Fields
+    // **************************************************
     CellModel CellModelArray[]; //variable which will hold the array of cell model referemces associated to that word
     int correctTotalForWord; //the total all the cell models must add up to for the word to be correct
     boolean wordIsValid; //the boolean which will be used when all cell models either add up or don't add up to the correctTotalForWord
 
+    // **************************************************
+    // Constructors
+    // **************************************************
     /**
      * def constructor
      */
@@ -30,9 +36,11 @@ public class WordModel {
     public WordModel(int size, int totalForWord) {
         CellModelArray = new CellModel[size];
         this.correctTotalForWord = totalForWord;
-        //this.wordIsValid = false;
     }
 
+    // **************************************************
+    // Public methods
+    // **************************************************
     /**
      * access method for the cellModelArray
      *
@@ -131,5 +139,4 @@ public class WordModel {
     public void setWordIsValid(boolean wordIsValid) {
         this.wordIsValid = wordIsValid;
     }
-
 }

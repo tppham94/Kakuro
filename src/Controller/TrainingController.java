@@ -7,20 +7,19 @@
 
 package Controller;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.JComponent;
-
 import Model.CellModel;
 import Model.GameBoardModel;
-import Model.WordModel;
 import View.CellView;
 
 public class TrainingController extends GameController {
 
+    // **************************************************
+    // Constructors
+    // **************************************************
 
-    //default constructor
+    /**
+     * Default Constructor
+     */
     public TrainingController() {
         super();
     }
@@ -35,6 +34,9 @@ public class TrainingController extends GameController {
         super.gbModel = gbm;
     }
 
+    // **************************************************
+    // Public methods
+    // **************************************************
     /**
      * to update all of the models based on the views event method triggered in view class
      * Needs to update at time of click so that the user can know what is wrong with that specific cell

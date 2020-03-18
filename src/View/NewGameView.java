@@ -1,7 +1,24 @@
+/**
+ * The purpose of this file is to let the user
+ * have an option of different type of game
+ * that they can choose from by interacting
+ * with the buttons given on the screen.
+ *
+ * @author: Tan-Phat Pham
+ */
 package View;
 
-import javax.swing.*;
-import java.awt.*;
+//import javax.swing.*;
+//import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 public class NewGameView extends JPanel {

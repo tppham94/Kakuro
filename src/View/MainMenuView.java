@@ -2,15 +2,27 @@
  * The purpose of the MainMenuView is to be able to
  * display the components so that the user can
  * see and interact. All other scenes are connected
- * to the MainMenuView as a main frame
+ * to the MainMenuView as a main frame.
+ *
  * @author: Tan-Phat Pham
  */
 
 package View;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import javax.swing.ImageIcon;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;

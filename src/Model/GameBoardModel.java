@@ -13,14 +13,21 @@ package Model;
 import View.ValidateView;
 
 public class GameBoardModel {
+
+    // **************************************************
+    // Fields
+    // **************************************************
     WordModel[] wordModelArray; //the array of words that the GameBoardContains
     boolean valid; //the boolean if the whole game is valid. Meaning all words are valid
     String whatNeedsToBeFixed; //the string which will be sent to the validateView
     int length; //the total length of the view
     ValidateView validateView; // the text that says valid invalid or what errors it has
 
+    // **************************************************
+    // Constructors
+    // **************************************************
     /**
-     * def constructor with 100 word containers
+     * def constructor with 34 word containers
      */
     public GameBoardModel() {
         wordModelArray = new WordModel[34];
@@ -49,6 +56,9 @@ public class GameBoardModel {
         this.length = length;
     }
 
+    // **************************************************
+    // Public methods
+    // **************************************************
     /**
      * update method that updates the board based on boolean's for speed
      *
@@ -85,7 +95,6 @@ public class GameBoardModel {
 
         return valid;
     }
-
 
     /**
      * Mutator to set a specific word at an index

@@ -1,3 +1,11 @@
+/**
+ * The purpose of this file is to connect all the
+ * files together into a working application and
+ * to be able to run it.
+ *
+ * @author: Tan-Phat Pham
+ */
+
 import Controller.GameController;
 import Controller.MainMenuController;
 import Controller.NewGameController;

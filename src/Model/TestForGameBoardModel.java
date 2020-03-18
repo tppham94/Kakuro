@@ -1,3 +1,9 @@
+/**
+ *
+ *
+ * author: Mario Lapadula
+ */
+
 package Model;
 
 import static org.junit.Assert.assertEquals;
@@ -17,6 +23,9 @@ import View.CellView;
 
 class TestForGameBoardModel {
 
+    // **************************************************
+    // Public methods
+    // **************************************************
     @Test
     public void testGameBoardModel() {
         WordModel[] wordModelArray = new WordModel[34];
@@ -34,7 +43,6 @@ class TestForGameBoardModel {
 
         wordModelArray = null;
         assertNull("Word array not exist", wordModelArray);
-
     }
 
     @Test
@@ -85,7 +93,6 @@ class TestForGameBoardModel {
 
     @Test
     public void testGetWordModelCount() {
-
         GameBoardModel testModelArray = new GameBoardModel();
 
         assertEquals("The default Array size  is 34", 34, testModelArray.getWordModelCount());
@@ -115,5 +122,4 @@ class TestForGameBoardModel {
         wordModelArray = null;
         assertNull("Word array not exist", wordModelArray);
     }
-
 }

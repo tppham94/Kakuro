@@ -1,26 +1,38 @@
 /**
- * author: Khadija, Ivan
- *  The ClueCell class consists of the layout of the clue cells,including background color, 
- *  size of the cell border, text size and alignment of text in clue cells
+ * author: Khadija Subtain, Ivan Ivachenko
+ * The ClueCell class consists of the layout of the clue cells,including background color,
+ * size of the cell border, text size and alignment of text in clue cells
  */
 
 package View;
 
 import Model.WordModel;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.BorderFactory;
+import java.awt.GridLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Color;
 import javax.swing.border.Border;
-import java.awt.*;
 import java.awt.geom.Line2D;
 
 @SuppressWarnings("serial")
 public class ClueCellView extends JPanel {
 
+    // **************************************************
+    // Fields
+    // **************************************************
     private static final int SIZE = 600;
     private WordModel rightWord;  //it2 change
     private WordModel bottomWord; //it2 change
     private JLabel rightLabel;// label which will display to the user the total needed for the word on the right
     private JLabel downLabel; //label which will display to the user the total needed for the word bellow
+
+    // **************************************************
+    // Constructors
+    // **************************************************
 
     /**
      * Default constructor which creates a 2x2 grid for the 2 numbers
@@ -29,6 +41,31 @@ public class ClueCellView extends JPanel {
         super(new GridLayout(2, 2));
         addUIComponentsToPanel();
     }
+
+
+    // **************************************************
+    // Private methods
+    // **************************************************
+
+    /**
+     * Mutator to get the total of the word on the right
+     */
+    private void setRightLabelText() {
+        if (rightWord != null)
+            rightLabel.setText("" + rightWord.getTotalForWord());
+    }
+
+    /**
+     * Mutator to get the total of the bottom word
+     */
+    private void setDownLabelText() {
+        if (bottomWord != null)
+            downLabel.setText("" + bottomWord.getTotalForWord());
+    }
+
+    // **************************************************
+    // Public methods
+    // **************************************************
 
     /**
      * Mutator to set the right word model
@@ -71,23 +108,6 @@ public class ClueCellView extends JPanel {
         g2d.draw(line);
     }
 
-
-    /**
-     * Mutator to get the total of the word on the right
-     */
-    private void setRightLabelText() {
-        if (rightWord != null)
-            rightLabel.setText("" + rightWord.getTotalForWord());
-    }
-
-    /**
-     * Mutator to get the total of the bottom word
-     */
-    private void setDownLabelText() {
-        if (bottomWord != null)
-            downLabel.setText("" + bottomWord.getTotalForWord());
-    }
-
     /**
      * This methods add components to the J-panel components are being aligned
      */
@@ -104,15 +124,11 @@ public class ClueCellView extends JPanel {
         invisible.setVisible(false);
         this.add(invisible);
 
-
-        //it2 changes, rightWord and bottomWord
         setRightLabelText();
-        //it2 changes, rightWord and bottomWord
         setDownLabelText();
         this.setVisualConfiguration();
         this.add(rightLabel);
         this.add(downLabel);
-
     }
 
     /**

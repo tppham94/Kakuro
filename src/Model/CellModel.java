@@ -1,7 +1,7 @@
 /**
  * Author: Stefano Scalzo
- * The Cellmodel class contains methods to update the data stored for the corresponding cellView. 
- * It is notified by the controller when there is a new input by the user and does the correct validation. 
+ * The Cellmodel class contains methods to update the data stored for the corresponding cellView.
+ * It is notified by the controller when there is a new input by the user and does the correct validation.
  * It will also notify a list of WordModel of observers to check their validation.
  */
 package Model;
@@ -12,6 +12,10 @@ import Controller.GameController;
 import View.CellView;
 
 public class CellModel {
+
+    // **************************************************
+    // Fields
+    // **************************************************
     int correctNumber; //the correct number associated to that cell
     int userNumber; //the user's number being entered by the user
     boolean isCorrect; //that cell's validity status
@@ -24,6 +28,10 @@ public class CellModel {
      */
 
     ArrayList<WordModel> wordObserverlist = new ArrayList<WordModel>(1);
+
+    // **************************************************
+    // Constructors
+    // **************************************************
 
     /**
      * def constructor which sets isCorrect to false
@@ -42,7 +50,9 @@ public class CellModel {
         view = cv;
     }
 
-
+    // **************************************************
+    // Public methods
+    // **************************************************
     /**
      * method to update the word model which will be used by controller
      *
@@ -82,7 +92,6 @@ public class CellModel {
      * @param str
      * @return
      */
-
     public String updateTraining(String str) {
         String validationSentence = "";
         if (isDigit(str)) {
@@ -248,5 +257,4 @@ public class CellModel {
     public ArrayList<WordModel> getWordObserverlist() {
         return wordObserverlist;
     }
-
 }

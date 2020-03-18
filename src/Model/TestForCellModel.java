@@ -1,3 +1,8 @@
+/**
+ *
+ * author: Mario Lapadula
+ */
+
 package Model;
 
 import static org.junit.Assert.assertEquals;
@@ -6,9 +11,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +20,9 @@ import View.CellView;
 
 class TestForCellModel {
 
+    // **************************************************
+    // Public methods
+    // **************************************************
     @Test
     public void testCellModel() {
         GameController tst = new GameController();
@@ -35,7 +40,6 @@ class TestForCellModel {
         CellModel testModel = new CellModel(5, new CellView(tst));
 
         assertNotNull("CellModel not NULL", testModel);
-
     }
 
     @Test
@@ -82,7 +86,6 @@ class TestForCellModel {
 
         assertTrue("Update CellModel Test", testModel.isCorrectNumber(9));
         assertFalse("Update CellModel Test", testModel.isCorrectNumber(10));
-
     }
 
     @Test
@@ -125,7 +128,6 @@ class TestForCellModel {
         CellView testView = new CellView();
         testModel.setCellView(testView);
 
-
         assertNotNull("CellView exists", testModel.getCellView());
 
         testModel.setCellView(null);
@@ -146,7 +148,6 @@ class TestForCellModel {
 
     @Test
     public void testAddToObserverList() {
-
         CellModel tstModel = new CellModel();
 
         assertTrue("CellModel is NULL", tstModel.getWordObserverlist().isEmpty());

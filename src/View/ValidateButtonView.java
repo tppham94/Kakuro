@@ -15,10 +15,16 @@ import Controller.TrainingController;
 
 public class ValidateButtonView extends JButton {
 
+    // **************************************************
+    // Fields
+    // **************************************************
     private GameController gbc;//the controller that the button must send the action to
 
+    // **************************************************
+    // Constructors
+    // **************************************************
     /**
-     * default constructor in case called
+     * Default constructor in case called
      */
     public ValidateButtonView() {
 
@@ -60,6 +66,9 @@ public class ValidateButtonView extends JButton {
         });
     }
 
+    // **************************************************
+    // Public methods
+    // **************************************************
     /**
      * send to the controller the notification to update the game model
      */

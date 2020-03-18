@@ -1,5 +1,6 @@
 /**
  * Author: stefano scalzo
+ * Modified by: Drew Wagner, Tan-Phat Pham
  * The CellView class consists of the layout of each cell, including background color and text field.
  * The following methods all act in a similar manner whenever the input inserted into cells changes: 
  */
@@ -7,29 +8,30 @@
 package View;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.Document;
 
 import Controller.GameController;
 import Controller.TrainingController;
 import Model.CellModel;
-import Model.WordModel;
 
 public class CellView extends JTextField {
+
+    // **************************************************
+    // Fields
+    // **************************************************
     GameController gameController;
     CellModel observerList;
     int index;
     boolean updateWithoutNotification = false;
 
+    // **************************************************
+    // Constructors
+    // **************************************************
     /**
      * Default constructor
      */
@@ -38,7 +40,6 @@ public class CellView extends JTextField {
          * Set the background color and size
          */
         setVisualConfiguration();
-
         setupListeners();
     }
 
@@ -48,33 +49,14 @@ public class CellView extends JTextField {
     public CellView(GameController gbc) {
         this.gameController = gbc;
         setVisualConfiguration();
-
-
         setupListeners();
     }
 
-
-    /**
-     * @param cellView with training game board controller constructor for training games
-     */
-    public CellView(TrainingController tc) {
-        this.gameController = tc;
-        setVisualConfiguration();
-
-        setupListeners();
-    }
-
+    // **************************************************
+    // Private methods
+    // **************************************************
     private void setupListeners() {
-//        this.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent actionEvent) {
-//                System.out.println("CellView action " + actionEvent);
-//                if (!updateWithoutNotification) {
-//                    sendToController();
-//                }
-//                updateWithoutNotification = false;
-//            }
-//        });
+
         this.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             /**
@@ -108,8 +90,19 @@ public class CellView extends JTextField {
                 }
                 updateWithoutNotification = false;
             }
-
         });
+    }
+
+    // **************************************************
+    // Public methods
+    // **************************************************
+    /**
+     * @param cellView with training game board controller constructor for training games
+     */
+    public CellView(TrainingController tc) {
+        this.gameController = tc;
+        setVisualConfiguration();
+        setupListeners();
     }
 
     /**
@@ -147,16 +140,14 @@ public class CellView extends JTextField {
             };
             SwingUtilities.invokeLater(doAssist);
         }
-
-
     }
 
 
-    /*
+    /**
      * Mutator for the views validity data member when training mode is on
      */
     public void setValidTraining(boolean valid) {
-        setBackgroundColor(valid); //change color to green if valid red if invalid
+        setBackgroundColor(valid);
     }
 
     public void setController(GameController gameController) {
@@ -168,7 +159,7 @@ public class CellView extends JTextField {
     }
 
 
-    /*
+    /**
      * Mutator for the views background color for the training mode based on its validity
      */
     public void setBackgroundColor(boolean valid) {
@@ -177,15 +168,14 @@ public class CellView extends JTextField {
         } else this.setBackground(Color.RED);
     }
 
-    /*
+    /**
      * To add a cell model object to the cell view
      */
     public void addModelToObserverList(CellModel cellModel) {
         observerList = cellModel;
     }
 
-
-    /*
+    /**
      * Accessor method for the cell view's observerList object
      */
     public CellModel getObserverList() {

@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JComponent;
 import javax.swing.JButton;
 
-
 import Controller.GameController;
 import Controller.TrainingController;
 import Model.WordModel;

@@ -1,8 +1,9 @@
 /**
  * author: Stefano scalzo
- * The GameController class awaits notification from either CellView, validButtonView or the saveButtonView, 
+ * Modified by: Drew Wagner, Tan-Phat Pham
+ * The GameController class awaits notification from either CellView, validButtonView or the saveButtonView,
  * and then delegates the tasks to the corresponding  model. It assigns a new game board,
- *  updates all wordModels that have the CellModel, it updates the validated text for the gameBoard.
+ * updates all wordModels that have the CellModel, it updates the validated text for the gameBoard.
  */
 package Controller;
 
@@ -28,10 +29,14 @@ import java.util.ArrayList;
 
 public class GameController {
 
-
+    // **************************************************
+    // Fields
+    // **************************************************
     GameBoardModel gbModel;
-    ArrayList<WordModel> wordObserverlist;
-    BoardView bView;
+
+    // **************************************************
+    // Constructors
+    // **************************************************
 
     /**
      * Default constructor which assigns a new gameboard
@@ -51,6 +56,28 @@ public class GameController {
         gbModel = gbm;
     }
 
+    // **************************************************
+    // Private methods
+    // **************************************************
+
+    /**
+     * Method to lets user import JSON file
+     * @param filepath
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
+    private JSONObject readJSONFile(String filepath) throws IOException, ParseException {
+        JSONObject input_json = null;
+        input_json = (JSONObject) new JSONParser().parse(new FileReader(filepath));
+
+        return input_json;
+    }
+
+    // **************************************************
+    // Public methods
+    // **************************************************
+
     /**
      * to update the cell model based on the views event method triggered in view class
      *
@@ -59,20 +86,18 @@ public class GameController {
      */
 
     public void sendToCellModel(String number, CellView cv) {
-    	if(!number.isEmpty()) {
-        	if(number.contains("0")) number = number.substring(1);
-        	if(!number.isEmpty()) {
-        		if(number.matches("\\d{0}")) { //if there are no number
+        if (!number.isEmpty()) {
+            if (number.contains("0")) number = number.substring(1);
+            if (!number.isEmpty()) {
+                if (number.matches("\\d{0}")) { //if there are no number
                     cv.getObserverList().update(number); //updates the cell model associated to the cell view
                     sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
-        		}
-        	
-    		else if(!(number.equals(Integer.toString(cv.getObserverList().getUserNumber())))) {
-                cv.getObserverList().update(number); //updates the cell model associated to the cell view
-                sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
-        	}	
-    	}
-    	}
+                } else if (!(number.equals(Integer.toString(cv.getObserverList().getUserNumber())))) {
+                    cv.getObserverList().update(number); //updates the cell model associated to the cell view
+                    sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
+                }
+            }
+        }
     }
 
     /**
@@ -99,6 +124,11 @@ public class GameController {
         gbModel.setWordModelAtIndex(index, wm);
     }
 
+    /**
+     * Method that takes a BoardView current state
+     * and save it strictly to a JSON file
+     * @param bView
+     */
     public void saveButton(View.BoardView bView) {
         bView.addSaveListener(new ActionListener() {
             @Override
@@ -109,20 +139,25 @@ public class GameController {
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json", "json");
                 file.setFileFilter(filter);
                 int choice = file.showSaveDialog(null);
-                if(choice == JFileChooser.APPROVE_OPTION) {
+                if (choice == JFileChooser.APPROVE_OPTION) {
                     try {
                         saveGame(bView, file.getSelectedFile().getName() + ".json");
                         JOptionPane.showMessageDialog(null, "You have saved!");
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                } else if(choice == JFileChooser.CANCEL_OPTION){
+                } else if (choice == JFileChooser.CANCEL_OPTION) {
 
                 }
             }
         });
     }
 
+    /**
+     * Method that takes BoardView as parameter that
+     * lets the user navigate back to the main menu
+     * @param bView
+     */
     public void backButton(View.BoardView bView) {
         bView.addBackListener(new ActionListener() {
             @Override
@@ -138,6 +173,14 @@ public class GameController {
         });
     }
 
+    /**
+     * Method that takes BoardView and a String as parameter
+     * that will allow user to save the game current state
+     * with its values to a JSON file
+     * @param boardView
+     * @param filename
+     * @throws IOException
+     */
     public void saveGame(View.BoardView boardView, String filename) throws IOException {
         System.out.println("Saving game to: " + filename);
         JSONObject json_output = new JSONObject();
@@ -207,6 +250,13 @@ public class GameController {
         writer.close();
     }
 
+    /**
+     * Method that takes BoardView and a String as parameter
+     * and that allows the user to load an existing game
+     * strictly a JSON file
+     * @param boardView
+     * @param filepath
+     */
     public void loadGame(View.BoardView boardView, String filepath) {
         JSONObject jsonObject;
         try {
@@ -224,18 +274,20 @@ public class GameController {
         boardView.initComponents(jsonObject);
     }
 
-    // imports the JSON file for the game
-    private JSONObject readJSONFile(String filepath) throws IOException, ParseException {
-        JSONObject input_json = null;
-        input_json = (JSONObject) new JSONParser().parse(new FileReader(filepath));
-
-        return input_json;
-    }
-
+    /**
+     * Method that initialize the size of
+     * the WordModelArray
+     * @param size
+     */
     public void initializeWordModelArray(int size) {
         gbModel.initializeWordModelArray(size);
     }
 
+    /**
+     * Methods that allows to get access to the
+     * GameBoardModel
+     * @return
+     */
     public Model.GameBoardModel getGameBoardModel() {
         return gbModel;
     }

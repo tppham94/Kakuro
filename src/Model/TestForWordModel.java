@@ -1,3 +1,9 @@
+/**
+ *
+ *
+ * author: Mario Lapadula
+ */
+
 package Model;
 
 import static org.junit.Assert.assertEquals;
@@ -14,8 +20,14 @@ import View.CellView;
 
 class TestForWordModel {
 
+    // **************************************************
+    // Fields
+    // **************************************************
     CellModel testArray[];
 
+    // **************************************************
+    // Public methods
+    // **************************************************
     @Test
     public void testWordModel() {
 
