@@ -1,3 +1,11 @@
+/**
+ * The MainMenuController allows the user to
+ * navigate between scenes of the game
+ * with the buttons
+ *
+ * @author: Tan-Phat Pham
+ */
+
 package Controller;
 
 import View.BoardView;
@@ -12,10 +20,23 @@ import java.io.File;
 
 public class MainMenuController extends JPanel {
 
+    // **************************************************
+    // Fields
+    // **************************************************
     private MainMenuView mView;
     private GameController gController;
     private BoardView bView;
 
+    // **************************************************
+    // Constructors
+    // **************************************************
+
+    /**
+     * Parameterized constructor
+     *
+     * @param bView
+     * @param gController
+     */
     public MainMenuController(BoardView bView, GameController gController) {
         this.mView = MainMenuView.getInstance();
         this.bView = bView;
@@ -26,6 +47,13 @@ public class MainMenuController extends JPanel {
         mView.addExitListener(new exitListener());
     }
 
+    // **************************************************
+    // Private methods
+    // *************************************************
+
+    /**
+     * Method that contains listener for each functionality of the buttons
+     */
     private class exitListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -41,12 +69,12 @@ public class MainMenuController extends JPanel {
             FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json", "json");
             file.setFileFilter(filter);
             int choice = file.showOpenDialog(null);
-            if (choice == JFileChooser.APPROVE_OPTION){
+            if (choice == JFileChooser.APPROVE_OPTION) {
                 gController.loadGame(bView, file.getSelectedFile().toString());
                 mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
                 mView.revalidate();
                 mView.repaint();
-            } else if(choice == JFileChooser.CANCEL_OPTION){
+            } else if (choice == JFileChooser.CANCEL_OPTION) {
             }
 
         }

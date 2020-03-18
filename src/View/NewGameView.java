@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 
 public class NewGameView extends JPanel {
 
+    // **************************************************
+    // Fields
+    // **************************************************
     private JLabel difficulty;
     private JButton easyButton;
     private JButton mediumButton;
@@ -13,20 +16,26 @@ public class NewGameView extends JPanel {
     private JButton backButton;
     private JButton tutorialButton;
     private JPanel newGamePanel;
-
     private GridBagConstraints c;
 
+    /**
+     *  Default Constructor
+     */
     public NewGameView() {
         initNewGameView();
     }
 
-    // Initializing the content of the panel
+    // **************************************************
+    // Public methods
+    // **************************************************
+
+    /**
+     * Method that initialize the component of the panel
+     */
     public void initNewGameView() {
 
         newGamePanel = new JPanel(new GridBagLayout());
-
         c = new GridBagConstraints();
-
         setLayout(new GridBagLayout());
 
         difficulty = new JLabel("Difficulty");
@@ -88,7 +97,9 @@ public class NewGameView extends JPanel {
         add(newGamePanel);
     }
 
-    // Method use to get access to the buttons
+    /**
+     *  Methods that adds listener to buttons
+     */
     public void addEasyListener(ActionListener easyListener) {
         easyButton.addActionListener(easyListener);
     }
@@ -109,6 +120,10 @@ public class NewGameView extends JPanel {
         tutorialButton.addActionListener(tutorialListener);
     }
 
+    /**
+     * Method that gives access to the newGamePanel
+     * @return
+     */
     public JPanel getNewGamePanel() {
         return this.newGamePanel;
     }

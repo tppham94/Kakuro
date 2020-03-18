@@ -128,6 +128,7 @@ public class GameController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MainMenuView mView = MainMenuView.getInstance();
+                bView.setTrainingMode(false);
                 bView.removeAll();
                 mView.setTitle("Main Menu");
                 mView.getCardLayout().show(mView.getCardPanels(), "MainMenu");

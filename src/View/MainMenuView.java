@@ -1,3 +1,11 @@
+/**
+ * The purpose of the MainMenuView is to be able to
+ * display the components so that the user can
+ * see and interact. All other scenes are connected
+ * to the MainMenuView as a main frame
+ * @author: Tan-Phat Pham
+ */
+
 package View;
 
 import javax.imageio.ImageIO;
@@ -9,7 +17,9 @@ import java.io.IOException;
 
 public class MainMenuView extends JFrame {
 
-    //Components
+    // **************************************************
+    // Fields
+    // **************************************************
     private JLabel menuName;
     private JButton newGameButton;
     private JButton loadButton;
@@ -19,25 +29,31 @@ public class MainMenuView extends JFrame {
     private GridBagConstraints c;
     private JLabel background;
     private CardLayout cards;
+    private NewGameView nView;
+    private BoardView bView;
 
-    // Use to get access to the other class
-    NewGameView nView;
-    BoardView bView;
-
-    // Singleton
+    /**
+     * Static Variable single_instance of type Singleton
+     */
     private static MainMenuView single_instance = null;
 
-    private MainMenuView() {
+    // **************************************************
+    // Constructors
+    // **************************************************
+
+    /**
+     * Default Constructors
+     */
+    public MainMenuView() {
     }
 
-    public static MainMenuView getInstance() {
-        if (single_instance == null) {
-            single_instance = new MainMenuView();
-        }
-        return single_instance;
-    }
-
-    // constructor
+    /**
+     * Parameterized constructor
+     *
+     * @param nView
+     * @param bView
+     * @throws IOException
+     */
     public MainMenuView(NewGameView nView, BoardView bView) throws IOException {
         MainMenuView mView = MainMenuView.getInstance();
         mView.nView = nView;
@@ -47,7 +63,21 @@ public class MainMenuView extends JFrame {
         mView.initFrameConfiguration();
     }
 
-    // Initializing the frame configuration
+    /**
+     * Static Method to create instance of Singleton class
+     *
+     * @return
+     */
+    public static MainMenuView getInstance() {
+        if (single_instance == null) {
+            single_instance = new MainMenuView();
+        }
+        return single_instance;
+    }
+
+    /**
+     * Method to initialize the Frame of the Game and its content
+     */
     private void initFrameConfiguration() {
         setTitle("Main Menu");
         setLayout(new GridBagLayout());
@@ -59,7 +89,15 @@ public class MainMenuView extends JFrame {
 
     }
 
-    // Initializing the content of the frame
+    // **************************************************
+    // Private methods
+    // *************************************************
+
+    /**
+     * Method that contains every component to be display on the Frame
+     *
+     * @throws IOException
+     */
     private void initComponent() throws IOException {
         mainPanel = new JPanel(new GridBagLayout());
 
@@ -81,8 +119,8 @@ public class MainMenuView extends JFrame {
 
         exitButton = new JButton("Exit");
         exitButton.setPreferredSize(new Dimension(90, 25));
-        background = new JLabel(new ImageIcon(ImageIO.read(new File("./View/darkbg.jpg"))));
-       setContentPane(background);
+        background = new JLabel(new ImageIcon(ImageIO.read(new File("./src/View/darkbg.jpg"))));
+        setContentPane(background);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
@@ -116,7 +154,14 @@ public class MainMenuView extends JFrame {
         repaint();
     }
 
-    // Method for accessing the buttons in the controller
+    // **************************************************
+    // Public methods
+    // **************************************************
+
+    /**
+     * Methods to add listener to the buttons
+     *
+     */
     public void addNewGameListener(ActionListener newGameListener) {
         newGameButton.addActionListener(newGameListener);
     }
@@ -129,7 +174,11 @@ public class MainMenuView extends JFrame {
         exitButton.addActionListener(exitListener);
     }
 
-    // Created to be able to access the switch between panels
+    /**
+     * Methods to get access to the card layouts and the card panels
+     *
+     * @return
+     */
     public CardLayout getCardLayout() {
         return this.cards;
     }

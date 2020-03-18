@@ -1,3 +1,11 @@
+/**
+ * The NewGameController allows the user to
+ * navigate between scenes of the game
+ * with the buttons
+ *
+ * @author: Tan-Phat Pham
+ */
+
 package Controller;
 
 import View.BoardView;
@@ -10,10 +18,23 @@ import java.awt.event.ActionListener;
 
 public class NewGameController extends JPanel {
 
+    // **************************************************
+    // Fields
+    // **************************************************
     MainMenuView mView;
     NewGameView nView;
     BoardView bView;
 
+    // **************************************************
+    // Constructors
+    // **************************************************
+
+    /**
+     * Parameterized constructor
+     *
+     * @param nView
+     * @param bView
+     */
     public NewGameController(NewGameView nView, BoardView bView) {
         this.mView = MainMenuView.getInstance();
         this.nView = nView;
@@ -26,11 +47,19 @@ public class NewGameController extends JPanel {
         nView.addTutorialListener(new tutorialListener());
     }
 
+
+    // **************************************************
+    // Private methods
+    // *************************************************
+
+    /**
+     * Method that contains listener for each functionality of the buttons
+     */
     private class easyListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Easy");
-            bView.getController().loadGame(bView, "./easy.json");
+            bView.getController().loadGame(bView, "./src/easy.json");
             mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
@@ -41,7 +70,7 @@ public class NewGameController extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Medium");
-            bView.getController().loadGame(bView, "./medium.json");
+            bView.getController().loadGame(bView, "./src/medium.json");
             mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
@@ -52,7 +81,7 @@ public class NewGameController extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Hard");
-            bView.getController().loadGame(bView, "./hard.json");
+            bView.getController().loadGame(bView, "./src/hard.json");
             mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
@@ -74,7 +103,7 @@ public class NewGameController extends JPanel {
         public void actionPerformed(ActionEvent e) {
             mView.setTitle("Tutorial");
             bView.setTrainingMode(true);
-            bView.getController().loadGame(bView, "./easy.json");
+            bView.getController().loadGame(bView, "./src/easy.json");
             mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
             mView.revalidate();
             mView.repaint();
