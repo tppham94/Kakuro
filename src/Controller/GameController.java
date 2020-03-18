@@ -104,12 +104,16 @@ public class GameController {
                 JFileChooser file = new JFileChooser(new File("../Kakuro"));
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json", "json");
                 file.setFileFilter(filter);
-                file.showSaveDialog(null);
-                try {
-                    saveGame(bView, "src/" + file.getSelectedFile().getName() + ".json");
-                    JOptionPane.showMessageDialog(null, "You have saved!");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                int choice = file.showSaveDialog(null);
+                if(choice == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        saveGame(bView, "src/" + file.getSelectedFile().getName() + ".json");
+                        JOptionPane.showMessageDialog(null, "You have saved!");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else if(choice == JFileChooser.CANCEL_OPTION){
+                    
                 }
             }
         });

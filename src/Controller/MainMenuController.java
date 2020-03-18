@@ -40,11 +40,15 @@ public class MainMenuController extends JPanel {
             JFileChooser file = new JFileChooser(new File("../Kakuro"));
             FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json", "json");
             file.setFileFilter(filter);
-            file.showOpenDialog(null);
-            gController.loadGame(bView, file.getSelectedFile().toString());
-            mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
-            mView.revalidate();
-            mView.repaint();
+            int choice = file.showOpenDialog(null);
+            if (choice == JFileChooser.APPROVE_OPTION){
+                gController.loadGame(bView, file.getSelectedFile().toString());
+                mView.getCardLayout().show(mView.getCardPanels(), "KakuroGames");
+                mView.revalidate();
+                mView.repaint();
+            } else if(choice == JFileChooser.CANCEL_OPTION){
+            }
+
         }
     }
 
