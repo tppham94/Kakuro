@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -93,6 +94,7 @@ public class GameController {
     /**
      * Setting a specific word model at a specific index of the game board model
      */
+
     public void addToGameBoardModelArray(int index, WordModel wm) {
         gbModel.setWordModelAtIndex(index, wm);
     }
@@ -101,19 +103,21 @@ public class GameController {
         bView.addSaveListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser file = new JFileChooser(new File("../Kakuro"));
+                JFileChooser file = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                file.setCurrentDirectory(new File(System.getProperty("user.dir")));
+                file.setAcceptAllFileFilterUsed(false);
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON", "json", "json");
                 file.setFileFilter(filter);
                 int choice = file.showSaveDialog(null);
                 if(choice == JFileChooser.APPROVE_OPTION) {
                     try {
-                        saveGame(bView, "src/" + file.getSelectedFile().getName() + ".json");
+                        saveGame(bView, file.getSelectedFile().getName() + ".json");
                         JOptionPane.showMessageDialog(null, "You have saved!");
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
                 } else if(choice == JFileChooser.CANCEL_OPTION){
-                    
+
                 }
             }
         });
