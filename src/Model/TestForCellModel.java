@@ -1,6 +1,6 @@
 /**
- * author: Mario Lapadula
  * The TestForCellModel class contains methods to test that the important CellModel methods properly work.
+ *  * @author Mario Lapadula
  */
 
 package Model;
