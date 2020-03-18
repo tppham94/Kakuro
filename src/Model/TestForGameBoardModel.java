@@ -1,9 +1,8 @@
 /**
- *
- *
- * author: Mario Lapadula
- */
+ * The TestForGameBoardModel class contains methods to test the important GameBoardModel methods properly work.
+ * @author Mario Lapadula
 
+ */
 package Model;
 
 import static org.junit.Assert.assertEquals;
@@ -26,6 +25,12 @@ class TestForGameBoardModel {
     // **************************************************
     // Public methods
     // **************************************************
+	
+	/**
+     * This is to test the GameBoardModel default constructor to insure the GameBoard model is created when called. 
+     * It creates a WorldModel object Array with a default size.
+     * It then asserts that object Array is created or not if a null Array is passed.
+     */
     @Test
     public void testGameBoardModel() {
         WordModel[] wordModelArray = new WordModel[34];
@@ -35,6 +40,11 @@ class TestForGameBoardModel {
         assertNull("array is NULL", wordModelArray);
     }
 
+	/**
+     * This is to test the GameBoardModel default constructor to insure the GameBoard model is created when called. 
+     * It creates a WorldModel object Array with a defined size received from the call.
+     * It then asserts that object Array is created or not if a null Array is passed.
+     */
     @Test
     public void testGameBoardModelInt() {
         int size = 10;
@@ -45,6 +55,11 @@ class TestForGameBoardModel {
         assertNull("Word array not exist", wordModelArray);
     }
 
+    /**
+     * This is to test the GameBoardModel default constructor to insure the GameBoard model is created when called. 
+     * It creates a WorldModel object Array with a defined size received from the call.
+     * It then asserts that object Array is created or not if a null Array is passed.
+     */
     @Test
     public void testGameBoardModelIntInt() {
         int size = 10;
@@ -55,6 +70,11 @@ class TestForGameBoardModel {
         assertNull("Word array not exist", wordModelArray);
     }
 
+    /**
+     * This is to test the update(String str) method that receives a string value. 
+     * It receives a string value for  a CellView object for a game controller object.
+     * It verifies that this CellModel for that CellView is updated correctly by asserting the expected value.
+     */    	
     @Test
     public void testUpdate() {
         GameController tst = new GameController();
@@ -64,6 +84,12 @@ class TestForGameBoardModel {
         assertFalse("Update CellModel Test", testModel.update("A"));
     }
 
+    /**
+     * This is to test the updateTraining(String str) method that receives a string value. 
+     * It receives a string value for a  CellView object for a training controller object.
+     * It verifies that this CellModel for that CellView is updated correctly by asserting the expected value.
+     * 
+    */    
     @Test
     public void testUpdateTraining() {
         TrainingController tst = new TrainingController();
@@ -73,6 +99,12 @@ class TestForGameBoardModel {
         assertFalse("Update CellModel Test", testModel.update("A"));
     }
 
+    /**
+     * This is to test the setWordModelAtIndex() and getWordModelAtIndex methods. 
+     * It receives a int value for a WordlModel object to assign to the Word Array.
+     * It tests by for calling the set method to set the object with and index to the Word Array and
+     * then asserts by that Array contains the object at the index of the value returned from the get method. 
+    */   
     @Test
     public void testSetGetWordModelAtIndex() {
         GameBoardModel testModelArray = new GameBoardModel();
@@ -80,7 +112,11 @@ class TestForGameBoardModel {
         assertNotNull("Array at index 1 is not Null", testModelArray.getWordModelAtIndex(1));
     }
 
-
+    /**
+     * This is to test the setWhatNeedsToBeFixed() and getWhatNeedsToBeFixed methods. 
+     * It creates a GameBoardModel object, and with the set method it assigns the string value to be fixed.
+     * It tests by for calling the get method on the obj Array to get the value and then asserts by if matches the expected value. 
+    */   
     @Test
     public void testSetGetWhatNeedsToBeFixed() {
         GameBoardModel testModelArray = new GameBoardModel();
@@ -91,6 +127,12 @@ class TestForGameBoardModel {
         assertNotSame("The word to be fixed is not 5", "5", testModelArray.getWhatNeedsToBeFixed());
     }
 
+    /**
+     * This is to test the getWhatNeedsToBeFixed method. 
+     * It creates a GameBoardModel object by calling default constructor.
+     * It tests by for calling the get method on the obj Array to get the value for the size. 
+     * It then asserts to see that size returned is equal to the expected default size, and if a specific size is assigned its not equal to default size.
+    */   
     @Test
     public void testGetWordModelCount() {
         GameBoardModel testModelArray = new GameBoardModel();
@@ -103,6 +145,12 @@ class TestForGameBoardModel {
 
     }
 
+    /**
+     * This is to test the setLength and getLength methods. 
+     * It creates a GameBoardModel object by calling default constructor.
+     * It tests by for calling the set method on the obj Array to set a specific length. 
+     * It then asserts to see that get method returned is equal to the expected set length, and if the length assigned its not equal to expected length.
+    */   
     @Test
     public void testSetGetLength() {
         GameBoardModel testModelArray = new GameBoardModel();
@@ -113,6 +161,11 @@ class TestForGameBoardModel {
         assertNotEquals("The length is 5", 5, testModelArray.getLength());
     }
 
+    /**
+     * This is to test the initializeWordModelArray method. 
+     * It creates a WorldModel object Array with a defined size received from the call.
+     * It then asserts that object Array is created or not if a null Array is passed.
+     */
     @Test
     public void testInitializeWordModelArray() {
         int size = 10;
