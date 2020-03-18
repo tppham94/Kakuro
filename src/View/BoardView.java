@@ -32,6 +32,7 @@ public class BoardView extends JPanel {
 
     JComponent[] gameComponents;
     private JPanel boardPanel;
+    private JPanel buttonPanel;
     private JButton saveButton;
     private JButton backButton;
 
@@ -42,7 +43,7 @@ public class BoardView extends JPanel {
 
     // Constructor called by Game Driver
     public BoardView(boolean trainingMode) {
-         gbm = new GameBoardModel();
+        gbm = new GameBoardModel();
         if (trainingMode) {
             controller = new TrainingController(gbm);
         } else {
@@ -63,11 +64,16 @@ public class BoardView extends JPanel {
 
 
     public void initComponents(JSONObject jsonObject) {
-    	saveButton = new JButton("Save");
-    	saveButton.setMargin(new Insets(5,5,5,5));
+        setLayout(new GridBagLayout());
+        GridBagConstraints gc = new GridBagConstraints();
 
-    	backButton = new JButton("Back");
-    	backButton.setMargin(new Insets(5,5,5,5));
+        saveButton = new JButton("Save");
+        saveButton.setMargin(new Insets(5, 5, 5, 5));
+        saveButton.setPreferredSize(new Dimension(200, 100));
+
+        backButton = new JButton("Back");
+        backButton.setMargin(new Insets(5, 5, 5, 5));
+        backButton.setPreferredSize(new Dimension(200, 100));
 
         //getting game size element to create the metrics that will created the correct board size for the game.
         int size = (int) (long) jsonObject.get("size");
@@ -85,22 +91,44 @@ public class BoardView extends JPanel {
         handleWordCalls(wordsArray);
 
         vView = new ValidateView();
+        vView.setPreferredSize(new Dimension(50, 50));
         vBtnView = new ValidateButtonView("Validate", controller);
+        vBtnView.setPreferredSize(new Dimension(200, 100));
         gbm.setValidateView(vView);
 
         boardPanel = new JPanel(new GridLayout(size + 1, size));
-        boardPanel.setPreferredSize(new Dimension(600, 600));
+        boardPanel.setPreferredSize(new Dimension(500, 500));
         for (int i = 0; i < gameComponents.length; i++) {
             boardPanel.add(gameComponents[i]);
         }
 
+        buttonPanel = new JPanel(new GridBagLayout());
         controller.saveButton(this);
         controller.backButton(this);
-        boardPanel.add(vBtnView);
-		boardPanel.add(saveButton);
-		boardPanel.add(backButton);
-        boardPanel.add(vView);
-        add(boardPanel);
+        buttonPanel.add(vBtnView);
+        buttonPanel.add(saveButton);
+        buttonPanel.add(backButton);
+
+        gc.fill = GridBagConstraints.BOTH;
+        gc.gridx = 0;
+        gc.gridy = 0;
+        gc.ipadx = 10;
+        gc.ipady = 5;
+        add(vView, gc);
+
+        gc.fill = GridBagConstraints.BOTH;
+        gc.gridx = 0;
+        gc.gridy = 1;
+        gc.ipadx = 10;
+        gc.ipady = 5;
+        add(boardPanel, gc);
+
+        gc.fill = GridBagConstraints.BOTH;
+        gc.gridx = 0;
+        gc.gridy = 2;
+        gc.ipadx = 10;
+        gc.ipady = 5;
+        add(buttonPanel, gc);
     }
 
     public void addSaveListener(ActionListener saveListener) {
@@ -172,11 +200,11 @@ public class BoardView extends JPanel {
         return controller;
     }
 
-    public GameBoardModel getGbm(){
+    public GameBoardModel getGbm() {
         return gbm;
     }
 
-    public void addBackListener(ActionListener backListener){
+    public void addBackListener(ActionListener backListener) {
         backButton.addActionListener(backListener);
     }
 

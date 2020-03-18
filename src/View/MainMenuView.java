@@ -81,7 +81,7 @@ public class MainMenuView extends JFrame {
 
         exitButton = new JButton("Exit");
         exitButton.setPreferredSize(new Dimension(90, 25));
-        background = new JLabel(new ImageIcon(ImageIO.read(new File("./View/darkbg.jpg"))));
+        background = new JLabel(new ImageIcon(ImageIO.read(new File("./src/View/darkbg.jpg"))));
        setContentPane(background);
 
         c.fill = GridBagConstraints.BOTH;

@@ -78,32 +78,32 @@ public class CellModel {
      */
 
     public String updateTraining(String str) {
-        String validationSentnce = "";
+        String validationSentence = "";
         if (isDigit(str)) {
             userNumber = Integer.parseInt(str);
             if (isSignleDigit(str)) {
                 if (isCorrectNumber(userNumber)) {
                     setCorrect(true);
                     setViewsTextValidate();
-                    validationSentnce = "Success at updating number and that number is Correct";
-                    return validationSentnce;
+                    validationSentence = "Success at updating number and that number is correct !";
+                    return validationSentence;
                 } else {
                     setCorrect(false);
                     setViewsTextValidate();
-                    validationSentnce = "Success at updating number but that number is InCorrect";
-                    return validationSentnce;
+                    validationSentence = "Success at updating number but that number is Incorrect !";
+                    return validationSentence;
                 }
             } else {
                 setCorrect(false);
                 setViewsTextValidate();
-                validationSentnce = "Number must be single digit";
-                return validationSentnce;
+                validationSentence = "Number must be single digit !";
+                return validationSentence;
             }
         } else {
             userNumber = 0;
             isCorrect = false;
             setViewsTextValidate();
-            return "Sorry not a number in between 1-9";
+            return "Sorry not a number in between 1-9 !";
         }
     }
 
