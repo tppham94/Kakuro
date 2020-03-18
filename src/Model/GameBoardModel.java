@@ -1,5 +1,6 @@
 /**
  * Author: Stefano Scalzo
+ * Modify by: Tan-Phat Pham
  * Game board model at any given time maintains the current state of the game. 
  * The GameBoardModel class is notified any time the user enters a new text or 
  * the user clicks the validateButtonView button. 
