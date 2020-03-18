@@ -59,13 +59,13 @@ public class GameController {
                     cv.getObserverList().update(number); //updates the cell model associated to the cell view
                     sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
         		}
-        	}
+        	
     		else if(!(number.equals(Integer.toString(cv.getObserverList().getUserNumber())))) {
                 cv.getObserverList().update(number); //updates the cell model associated to the cell view
                 sendToWordModel(cv.getObserverList()); //updates all word models associated to the cell model
         	}	
     	}
-
+    	}
     }
 
     /**
